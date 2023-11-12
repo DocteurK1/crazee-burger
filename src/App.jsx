@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import LoginForm from "./components/LoginForm";
+import LoginPage from "./components/pages/LoginPage";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Salut Fred
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+  // D’abord on définit les states de base (état, données, variable…)
+
+
+  // Comportements, les actions, la logique
+
+
+  // L’affichage, le render, via return
+
+  return (<>
+    <LoginPage />
+    <div>
+      <p>Test</p>
     </div>
+  </>
   );
 }
 
 export default App;
+
+
+// D’abord on définit les states de base (état, données, variable…)
+
+
+// Comportements, les actions, la logique
+
+
+// L’affichage, le render, via return
