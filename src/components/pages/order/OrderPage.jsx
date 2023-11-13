@@ -6,7 +6,7 @@ export default function OrderPage() {
   const navigate = useNavigate();
   const params = useParams();
   const userName = params.userName;
-  console.log("user id: ", userName);
+  console.log("User name: ", userName);
 
   // Comportements, les actions, la logique
   const handleClick = (event) => {
