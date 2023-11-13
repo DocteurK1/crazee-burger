@@ -10,7 +10,6 @@ function LoginForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // alert("Bonjour " + firstName);
     navigate("/order/" + firstName);
     setFirstName("");
   };

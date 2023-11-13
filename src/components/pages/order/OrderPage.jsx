@@ -5,8 +5,8 @@ export default function OrderPage() {
   // D’abord on définit les states de base (état, données, variable…)
   const navigate = useNavigate();
   const params = useParams();
-  const userId = params.userId;
-  console.log("user id: ", userId);
+  const userName = params.userName;
+  console.log("user id: ", userName);
 
   // Comportements, les actions, la logique
   const handleClick = (event) => {
@@ -17,7 +17,7 @@ export default function OrderPage() {
 
   return (
     <div>
-      <h1>Bonjour {userId}</h1>
+      <h1>Bonjour {userName}</h1>
       <button onClick={handleClick}>Déconnexion</button>
     </div>
   );

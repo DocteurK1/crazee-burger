@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function ErrorPage() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -16,6 +16,9 @@ export default function ErrorPage() {
     <div>
       <h1>Error Page</h1>
       <button onClick={handleClick}>Déconnexion</button>
+      {/* <Link to="/"> Exemple de link simple sans usenavigate avec react router
+        <button>Déconnexion</button>
+      </Link> */}
     </div>
   );
 }
