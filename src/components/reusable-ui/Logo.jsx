@@ -1,7 +1,5 @@
 import React from "react";
-import img from "../../assets/logo/logo-orange.png";
 import styled from "styled-components";
-import { theme } from "../../theme";
 
 export default function Logo() {
   // D’abord on définit les states de base (état, données, variable…)
