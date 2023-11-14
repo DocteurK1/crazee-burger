@@ -1,7 +1,7 @@
 import React from "react";
 import LoginForm from "./LoginForm";
 import styled from "styled-components";
-import Logo from "../../reusable-ui/logo";
+import Logo from "../../reusable-ui/Logo";
 
 function LoginPage() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -32,7 +32,7 @@ const LoginPageStyled = styled.div`
 
   ::before {
     content: "";
-    background: url("/images/LoginPageBG.jpg") rgba(0, 0, 0, 0.75);
+    background: url("/images/LoginPageBG.jpg") rgba(0, 0, 0, 0.7);
     background-size: cover;
     background-position: center;
     background-blend-mode: darken;
