@@ -56,8 +56,8 @@ function LoginForm() {
 }
 
 // Styling for the form
-const LoginFormStyled = styled.div`
-  background: green;
+const LoginFormStyled = styled.form`
+  /* background: green; */
   text-align: center;
   max-width: 500px;
   min-width: 400px;
