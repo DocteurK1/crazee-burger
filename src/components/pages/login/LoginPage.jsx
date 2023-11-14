@@ -1,7 +1,8 @@
 import React from "react";
 import LoginForm from "./LoginForm";
 import styled from "styled-components";
-import img from "C:/Users/fred_/Desktop/Crazee Burger/crazee-burger/src/components/pages/login/LoginPageBG.jpg";
+import img from "../../../assets/LoginPageBG.jpg";
+import Logo from "../../logo/Logo";
 
 function LoginPage() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -13,6 +14,7 @@ function LoginPage() {
   return (
     <>
       <LoginPageStyled>
+        <Logo />
         <LoginForm />
       </LoginPageStyled>
     </>
@@ -20,7 +22,7 @@ function LoginPage() {
 }
 
 // Ajout du style via Styled Components
-
+// Styling for the page background
 const LoginPageStyled = styled.div`
   opacity: 0.95;
   background: #000;
