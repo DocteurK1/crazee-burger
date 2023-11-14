@@ -1,8 +1,7 @@
 import React from "react";
 import LoginForm from "./LoginForm";
 import styled from "styled-components";
-import img from "../../../assets/LoginPageBG.jpg";
-import Logo from "../../logo/Logo";
+import Logo from "../../reusable-ui/Logo";
 
 function LoginPage() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -24,17 +23,27 @@ function LoginPage() {
 // Ajout du style via Styled Components
 // Styling for the page background
 const LoginPageStyled = styled.div`
-  opacity: 0.95;
-  background: #000;
-  mix-blend-mode: darken;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  //background-color: red;
-  height: 982px;
-  /* width: 100%; */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover; /* Resize the background image to cover the entire container */
-  background-image: url(${img});
+  // This is to put a background image full size
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  ::before {
+    content: "";
+    background: url("/images/LoginPageBG.jpg") rgba(0, 0, 0, 0.75);
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: darken;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+  }
 `;
 
 export default LoginPage;

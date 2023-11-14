@@ -30,17 +30,9 @@ function LoginForm() {
         action="submit"
         onSubmit={handleSubmit}
       >
-        <H1Styles>Bienvenue chez nous !</H1Styles>
-        <hr
-          style={{
-            color: "orange",
-            borderColor: "orange",
-            height: "10px",
-            width: "400px",
-          }}
-        />
-        <H2Styles>Connectez-vous</H2Styles>
-        <StyledInput
+        <h1>Bienvenue chez nous !</h1>
+        <h2>Connectez-vous</h2>
+        <input
           value={firstName}
           type="text"
           name="inputField"
@@ -49,66 +41,17 @@ function LoginForm() {
           placeholder="Entrez votre prénom"
           required
         />
-        <StyledButton>Accéder à mon espace</StyledButton>
+        <button>Accéder à mon espace</button>
       </LoginFormStyled>
     </>
   );
 }
 
-// Styling for H1
-const H1Styles = styled.p`
-  display: flex;
-  color: white;
-  padding-top: 250px;
-  flex-direction: column;
-  // justify-content: center;
-  align-items: center;
-  font-size: 48px;
-`;
-
-// Styling for H2
-const H2Styles = styled.p`
-  display: flex;
-  color: white;
-  flex-direction: column;
-  margin-top: auto;
-  // justify-content: center;
-  // align-items: center;
-  font-size: 36px;
-  color: white;
-`;
-
 // Styling for the form
-const LoginFormStyled = styled.form`
-  /* background: pink; */
-  height: 0px;
-  padding-top: 0px;
-  /* width: 50%; */
+const LoginFormStyled = styled.div`
+  background: green;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const StyledInput = styled.input`
-  width: 200px;
-  height: 53px;
-  color: ${theme.colors.primary};
-  /* background-color: ${theme.colors.primary}; */
-  padding: 18px 106px; /* Use spaces, not commas, to separate values */
-  border-radius: 5px;
-  border: 0px solid; /* Specify border style, e.g., solid */
-`;
-
-const StyledButton = styled.button`
-  width: 400px;
-  height: 53px;
-  color: white;
-  background-color: ${theme.colors.primary};
-  margin-top: 36px;
-  padding: 18px 106px; /* Use spaces, not commas, to separate values */
-  border-radius: 5px;
-  border: 0px solid; /* Specify border style, e.g., solid */
 `;
 
 export default LoginForm;
