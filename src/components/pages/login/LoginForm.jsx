@@ -3,24 +3,25 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { BsPersonCircle } from "react-icons/bs";
 import { IoChevronForward } from "react-icons/io5";
+import TextInput from "../../reusable-ui/TextInput";
 
-function LoginForm() {
+export default function LoginForm() {
   // D’abord on définit les states de base (état, données, variable…)
 
-  let [firstName, setFirstName] = useState("");
+  let [value, setValue] = useState("");
   const navigate = useNavigate();
 
   // Comportements, les actions, la logique
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigate("/order/" + firstName);
-    setFirstName("");
+    navigate("/order/" + value);
+    setValue("");
   };
 
-  const handleChange = (event) => {
-    setFirstName(event.target.value);
-    console.log("firstName value: ", firstName);
+  const onChange = (event) => {
+    setValue(event.target.value);
+    console.log("firstName value: ", value);
   };
 
   // L’affichage, le render, via return
@@ -31,21 +32,19 @@ function LoginForm() {
         action="submit"
         onSubmit={handleSubmit}
       >
-        <h1>Bienvenue chez nous !</h1>
-        <hr />
-        <h2>Connectez-vous</h2>
-        <div className="input-with-icon">
-          <BsPersonCircle className="icon" />
-          <input
-            value={firstName}
-            type="text"
-            name="inputField"
-            id="inputField"
-            onChange={handleChange}
-            placeholder="Entrez votre prénom"
-            required
-          />
+        <div>
+          <h1>Bienvenue chez nous !</h1>
+          <hr />
+          <h2>Connectez-vous</h2>
         </div>
+        <TextInput
+          value={value}
+          onChange={onChange}
+          placeholder={"Entrez votre prénom"}
+          required
+          Icon={<BsPersonCircle className="icon" />}
+        />
+
         <button className="button-with-icon">
           <span>Accéder à mon espace</span>
           <IoChevronForward className="icon" />
@@ -82,34 +81,6 @@ const LoginFormStyled = styled.form`
     color: white;
     margin: 20px 10px 10px;
     font-size: 35px;
-  }
-
-  // Style pour la div Input with icon
-  .input-with-icon {
-    background-color: white;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    padding: 18px 24px;
-    margin: 18px 0;
-
-    .icon {
-      color: #93a2b1;
-      font-size: 15px;
-      margin-right: 8px;
-    }
-
-    input {
-      border: none;
-      font-size: 15px;
-      color: #17161a;
-      /* width: 100%; */
-    }
-
-    &::placeholder {
-      background: yellow;
-      color: blue;
-    }
   }
 
   .button-with-icon {
@@ -158,4 +129,4 @@ const LoginFormStyled = styled.form`
   }
 `;
 
-export default LoginForm;
+// export default LoginForm;
