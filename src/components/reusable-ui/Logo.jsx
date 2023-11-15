@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { theme } from "../../theme";
 
 export default function Logo() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -33,10 +34,10 @@ const LogoStyled = styled.div`
   h1 {
     display: inline;
     text-align: center;
-    color: #ffa01b;
+    color: ${theme.colors.primary};
     font-size: 110px;
     line-height: 1em;
-    font-weight: 700;
+    font-weight: ${theme.fonts.weights.bold};
     text-transform: uppercase;
     letter-spacing: 1.5px;
     font-family: "Amatic SC", cursive;
@@ -47,6 +48,6 @@ const LogoStyled = styled.div`
     object-position: center;
     height: 200px;
     width: 260px;
-    margin: 0 5px;
+    margin: 0 ${theme.gridUnit / 2};
   }
 `;

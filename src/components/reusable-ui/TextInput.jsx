@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import { theme } from "../../theme";
 
 export default function TextInput({ value, onChange, Icon, ...extraProps }) {
   //   console.log("extraProps", extraProps.placeholder);
 
   return (
     <InputStyled>
-      {Icon}
+      {Icon && Icon}
       <input
         onChange={onChange}
         type="text"
@@ -18,28 +19,30 @@ export default function TextInput({ value, onChange, Icon, ...extraProps }) {
 const InputStyled = styled.div`
   // Style pour la div Input with icon
 
-  background-color: white;
-  border-radius: 5px;
+  background-color: ${theme.colors.white};
+  border-radius: ${theme.borderRadius.round};
   display: flex;
   align-items: center;
   padding: 18px 24px;
   margin: 18px 0;
 
   .icon {
-    color: #93a2b1;
-    font-size: 15px;
-    margin-right: 8px;
+    color: ${theme.colors.greySemiDark};
+    font-size: ${theme.fonts.size.P0};
+    margin-right: 10px;
   }
 
   input {
     border: none;
-    font-size: 15px;
-    color: #17161a;
-    /* width: 100%; */
-  }
+    font-size: ${theme.fonts.size.P0};
+    font-weight: ${theme.fonts.weights.semiBold};
+    color: ${theme.colors.dark};
+    width: 100%;
+    /* display: flex; */
 
-  &::placeholder {
-    background: yellow;
-    color: blue;
+    &::placeholder {
+      background: ${theme.colors.white};
+      color: ${theme.colors.greyMedium};
+    }
   }
 `;
