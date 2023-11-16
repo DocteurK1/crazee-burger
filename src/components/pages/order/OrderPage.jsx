@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
+// import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../../navbar/Navbar";
 import Main from "../../navbar/Main";
 
@@ -11,7 +11,7 @@ export default function OrderPage() {
   // const userName = params.userName;
   // console.log("User name: ", userName);
 
-  // Comportements, les actions, la logique
+  // // Comportements, les actions, la logique
 
   // const handleClick = (event) => {
   //   navigate("/");
