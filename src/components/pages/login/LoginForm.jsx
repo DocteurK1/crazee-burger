@@ -1,48 +1,97 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { BsPersonCircle } from "react-icons/bs";
+import { IoChevronForward } from "react-icons/io5";
+import TextInput from "../../reusable-ui/TextInput";
+import PrimaryButton from "../../reusable-ui/PrimaryButton";
+import { theme } from "../../../theme";
 
-function LoginForm() {
+export default function LoginForm() {
   // D’abord on définit les states de base (état, données, variable…)
 
-  let [firstName, setFirstName] = useState("");
+  let [value, setValue] = useState("");
   const navigate = useNavigate();
+
   // Comportements, les actions, la logique
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigate("/order/" + firstName);
-    setFirstName("");
+    navigate("/order/" + value);
+    setValue("");
   };
 
-  const handleChange = (event) => {
-    setFirstName(event.target.value);
-    console.log("firstName value: ", firstName);
+  const onChange = (event) => {
+    setValue(event.target.value);
+    console.log("firstName value: ", value);
   };
 
   // L’affichage, le render, via return
 
   return (
     <>
-      <form
+      <LoginFormStyled
         action="submit"
         onSubmit={handleSubmit}
       >
-        <h1>Bienvenue chez nous !</h1>
-        <br />
-        <h2>Connectez-vous</h2>
-        <input
-          value={firstName}
-          type="text"
-          name="inputField"
-          id="inputField"
-          onChange={handleChange}
-          placeholder="Entrez votre prénom"
+        <div>
+          <h1>Bienvenue chez nous !</h1>
+          <hr />
+          <h2>Connectez-vous</h2>
+        </div>
+        <TextInput
+          value={value}
+          onChange={onChange}
+          placeholder={"Entrez votre prénom"}
           required
+          Icon={<BsPersonCircle className="icon" />}
         />
-        <button>Accédez à votre espace</button>
-      </form>
+        <PrimaryButton
+          label={"Accéder à mon espace"}
+          Icon={<IoChevronForward className="icon" />}
+          // onSubmit={handleSubmit} -- L evenement viens du bas vers le haut, depuis le btn qui est ds le composant
+        />
+      </LoginFormStyled>
     </>
   );
 }
 
-export default LoginForm;
+// Styling for the form
+const LoginFormStyled = styled.form`
+  /* background: green; */
+  text-align: center;
+  max-width: 500px;
+  min-width: 400px;
+  margin: 0px auto;
+  padding: 0px ${theme.spacing.lg};
+  border-radius: ${theme.borderRadius.round};
+  font-family: "Amatic SC", cursive;
+  /* display: flex;
+  flex-direction: column; */
+
+  hr {
+    border: 1.5px solid ${theme.colors.loginLine};
+    margin-bottom: ${theme.gridUnit * 5}px;
+  }
+
+  h1 {
+    color: ${theme.colors.white};
+    font-size: 70px;
+  }
+
+  h2 {
+    color: ${theme.colors.white};
+    margin: 20px 10px 10px;
+    font-size: ${theme.fonts.size.P4};
+  }
+
+  .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: ${theme.fonts.size.P0};
+    margin-left: 10px;
+  }
+`;
+
+// export default LoginForm;
