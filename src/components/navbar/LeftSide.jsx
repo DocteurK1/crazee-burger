@@ -13,7 +13,9 @@ export default function LeftSide() {
     <>
       <StyledLeftSide>
         <StyledLogo>
-          <Logo />
+          <a href="/">
+            <Logo />
+          </a>
         </StyledLogo>
       </StyledLeftSide>
     </>
@@ -32,4 +34,11 @@ const StyledLeftSide = styled.div`
 const StyledLogo = styled.div`
   transform: scale(0.4);
   margin-left: -170px; /* Left margin of 20px */
+  color: white;
+  cursor: pointer;
+  position: relative;
+
+  a {
+    text-decoration: none;
+  }
 `;

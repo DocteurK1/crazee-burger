@@ -35,7 +35,7 @@ export default function RightSide() {
 }
 
 const StyledRightSide = styled.div`
-  /* background-color: white; */
+  /* background-color: red; */
   display: flex;
   flex-direction: column;
   margin-left: auto; /* Right-align the div */
@@ -45,6 +45,7 @@ const StyledRightSide = styled.div`
 
   h1 {
     color: ${theme.colors.white};
+    font-weight: ${theme.fonts.weights.regular};
     font-family: "Open sans", sans-serif;
     font-size: 16px;
     margin-top: 2px;
