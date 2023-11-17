@@ -2,6 +2,7 @@ import React from "react";
 import LeftSide from "./LeftSide";
 import RightSide from "./RightSide";
 import styled from "styled-components";
+import { theme } from "../../theme";
 
 export default function Navbar() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -11,23 +12,24 @@ export default function Navbar() {
   // L’affichage, le render, via return
   return (
     <>
-      <StyledNavbar>
+      <NavBarStyled>
         <LeftSide />
         <RightSide />
-      </StyledNavbar>
+      </NavBarStyled>
     </>
   );
 }
 
-const StyledNavbar = styled.div`
-  background-color: white;
+const NavBarStyled = styled.nav`
+  background: ${theme.colors.white};
   display: flex;
-  align-items: center;
-  /* transform: scale(2.5); */
-  overflow: hidden;
-  width: 1400px;
-  height: 100px;
+  width: 1360px;
+  height: 10vh;
   margin: auto;
   margin-top: 24px;
-  border-radius: 15px 15px 0px 0px;
+  border-top-right-radius: ${theme.borderRadius.extraRound};
+  border-top-left-radius: ${theme.borderRadius.extraRound};
+
+  justify-content: space-between;
+  padding: 0 20px;
 `;

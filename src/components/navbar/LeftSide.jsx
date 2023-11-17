@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Logo from "../reusable-ui/Logo";
+import { refreshPage } from "../../utils/window";
 
 export default function LeftSide() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -12,11 +13,10 @@ export default function LeftSide() {
   return (
     <>
       <StyledLeftSide>
-        <StyledLogo>
-          <a href="/">
-            <Logo />
-          </a>
-        </StyledLogo>
+        <Logo
+          className={"logo-order-page"}
+          onClick={refreshPage}
+        />
       </StyledLeftSide>
     </>
   );
@@ -29,16 +29,7 @@ const StyledLeftSide = styled.div`
   display: flex;
   align-items: center;
   /* justify-content: flex-start; */
-`;
-
-const StyledLogo = styled.div`
-  transform: scale(0.4);
-  margin-left: -170px; /* Left margin of 20px */
-  color: white;
-  cursor: pointer;
-  position: relative;
-
-  a {
-    text-decoration: none;
+  .logo-order-page {
+    cursor: pointer;
   }
 `;

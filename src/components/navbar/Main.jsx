@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { theme } from "../../theme";
 
 export default function Main() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -12,16 +13,15 @@ export default function Main() {
 }
 
 const StyledMain = styled.div`
-  /* background-color: white; */
-  /* display: flex; */
-  /* align-items: center; */
+  background: ${theme.colors.background_white};
+  flex: 1;
   margin: auto;
   padding: auto;
 
   width: 1400px;
   height: 834px;
 
-  background: #f5f5f7;
   box-shadow: 0px 8px 20px 8px rgba(0, 0, 0, 0.2) inset;
-  border-radius: 0px 0px 15px 15px;
+  border-bottom-right-radius: ${theme.borderRadius.extraRound};
+  border-bottom-left-radius: ${theme.borderRadius.extraRound};
 `;
