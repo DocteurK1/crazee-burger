@@ -2,17 +2,23 @@ import React from "react";
 import styled from "styled-components";
 import { theme } from "../../../../theme";
 
-export default function Card() {
+export default function Card({ id, imgUrl, title, price }) {
+  // const traceProps = (testProps) => {
+  //   console.log("Test Props:", testProps);
+  // };
+
+  // traceProps(testProps);
+
   return (
     <CardStyled>
       <img
         className="img"
-        src="/images/burger1.png"
+        src={imgUrl}
         alt=""
       />
-      <p className="CardTitle">Title card</p>
+      <p className="CardTitle">{title}</p>
       <div className="info-text">
-        <p className="CardDescription">5,60€</p>
+        <p className="CardDescription">{price}</p>
         <CardButtonStyled>
           <span>Ajouter</span>
         </CardButtonStyled>
