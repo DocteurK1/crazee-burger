@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 export default function Basket() {
-  return <BasketStyled>Basket</BasketStyled>;
+  return <BasketStyled></BasketStyled>;
 }
 
 const BasketStyled = styled.div`
-  background: red;
+  /* background: red; */
 `;

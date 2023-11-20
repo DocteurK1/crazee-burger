@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { theme } from "../../../../theme";
 
 export default function Card({ id, imgUrl, title, price }) {
-  // const traceProps = (testProps) => {
-  //   console.log("Test Props:", testProps);
-  // };
+  // D’abord on définit les states de base (état, données, variable…)
 
-  // traceProps(testProps);
+  // Comportements, les actions, la logique
+
+  // L’affichage, le render, via return
 
   return (
     <CardStyled>
@@ -28,6 +28,7 @@ export default function Card({ id, imgUrl, title, price }) {
 }
 
 const CardStyled = styled.div`
+  /* z-index: 5; */
   /* background: blue; */
   display: flex;
   width: 240px;

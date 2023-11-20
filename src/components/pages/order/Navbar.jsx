@@ -32,4 +32,8 @@ const NavBarStyled = styled.nav`
 
   justify-content: space-between;
   padding: 0 20px;
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 `;

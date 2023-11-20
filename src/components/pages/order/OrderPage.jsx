@@ -11,10 +11,6 @@ export default function OrderPage() {
 
   return (
     <>
-      {/* <div>
-        <h1>Bonjour {userName}</h1>
-        <button onClick={handleClick}>Déconnexion</button>
-      </div> */}
       <Navbar />
       <Main />
     </>
