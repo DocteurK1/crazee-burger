@@ -2,6 +2,7 @@ import React from "react";
 import LoginForm from "./LoginForm";
 import styled from "styled-components";
 import Logo from "../../reusable-ui/Logo";
+import { theme } from "../../../theme";
 
 function LoginPage() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -13,7 +14,7 @@ function LoginPage() {
   return (
     <>
       <LoginPageStyled>
-        <Logo />
+        <Logo className={"logo-login-page"} />
         <LoginForm />
       </LoginPageStyled>
     </>
@@ -43,6 +44,33 @@ const LoginPageStyled = styled.div`
     right: 0;
     bottom: 0;
     z-index: -1;
+  }
+
+  .logo-login-page {
+    /* object-fit: contain;
+    object-position: center; */
+    /* width: 240px; */
+    /* margin: 0 ${theme.gridUnit / 2}; */
+
+    h1 {
+      display: inline;
+      text-align: center;
+      color: ${theme.colors.primary};
+      font-size: 110px;
+      line-height: 1em;
+      font-weight: ${theme.fonts.weights.bold};
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-family: "Amatic SC", cursive;
+    }
+
+    img {
+      object-fit: contain;
+      object-position: center;
+      height: 200px;
+      width: 260px;
+      margin: 0 ${theme.gridUnit / 2};
+    }
   }
 `;
 
