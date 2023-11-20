@@ -2,7 +2,7 @@ import React from "react";
 import LeftSide from "./LeftSide";
 import RightSide from "./RightSide";
 import styled from "styled-components";
-import { theme } from "../../theme";
+import { theme } from "../../../theme";
 
 export default function Navbar() {
   // D’abord on définit les states de base (état, données, variable…)
