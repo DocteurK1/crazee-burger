@@ -7,7 +7,7 @@ import { truncateString } from "../../../../utils/truncateString.js";
 
 export default function Menu() {
   // D’abord on définit les states de base (état, données, variable…)
-  const menu2Length = fakeMenu2.length;
+  const cardNumberToDisplay = fakeMenu2.length;
 
   // Comportements, les actions, la logique
 
@@ -23,7 +23,7 @@ export default function Menu() {
   };
   // L’affichage, le render, via return
 
-  return <MenuStyled>{renderCards(fakeMenu2, menu2Length)}</MenuStyled>;
+  return <MenuStyled>{renderCards(fakeMenu2, cardNumberToDisplay)}</MenuStyled>;
 }
 
 const MenuStyled = styled.div`
