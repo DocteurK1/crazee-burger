@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { theme } from "../../../theme";
-import Basket from "./main/Basket";
-import Menu from "./main/Menu";
+import { theme } from "../../../../theme";
+import Basket from "./Basket";
+import Menu from "./Menu";
 
 export default function Main() {
   // D’abord on définit les states de base (état, données, variable…)
