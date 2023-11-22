@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import ToggleButton from "./ToggleButton";
 
 // import { Link } from "react-router-dom";
 import Profile from "./Profile";
@@ -14,7 +15,9 @@ export default function RightSide() {
   return (
     <>
       <RightSideStyled>
-        {/* <div className="admin-button">Admin Button</div> */}
+        <div className="admin-button">
+          <ToggleButton />
+        </div>
         <Profile />
       </RightSideStyled>
     </>
@@ -27,7 +30,7 @@ const RightSideStyled = styled.div`
   align-items: center;
   padding-right: 50px;
 
-  /* .admin-button {
-    background: green;
-  } */
+  .admin-button {
+    /* background: green; */
+  }
 `;
