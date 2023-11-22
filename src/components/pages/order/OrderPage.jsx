@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "./Navbar";
-import Main from "./Main";
+import Navbar from "./Navbar/Navbar";
+import Main from "./main/Main.jsx";
 
 export default function OrderPage() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -11,10 +11,6 @@ export default function OrderPage() {
 
   return (
     <>
-      {/* <div>
-        <h1>Bonjour {userName}</h1>
-        <button onClick={handleClick}>Déconnexion</button>
-      </div> */}
       <Navbar />
       <Main />
     </>
