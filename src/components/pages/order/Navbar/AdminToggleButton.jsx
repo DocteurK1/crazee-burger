@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { theme } from "../../../../theme";
+import DisplayToaster from "./DisplayToaster";
 
-export default function ToggleButton({
+export default function AdminToggleButton({
   isChecked,
   onToggle,
-  labelIfChecked = "DÉSACTIVER LE MODE ADMIN",
-  labelIfUnchecked = "ACTIVER LE MODE ADMIN",
+  labelIfChecked = "Fermer",
+  labelIfUnchecked = "Ouvrir",
 }) {
   return (
     <ToggleButtonStyled>
@@ -16,6 +17,7 @@ export default function ToggleButton({
         id="rounded"
         checked={isChecked}
         onChange={onToggle}
+        onClick={DisplayToaster}
       />
       <label
         htmlFor="rounded"
@@ -31,7 +33,7 @@ const ToggleButtonStyled = styled.div`
   /* border: 1px solid red; */
 
   display: flex;
-  margin-right: 10px;
+  margin-right: 50px;
   input[type="checkbox"] {
     // Hides the square box but keeps the core "toggle functionality"
     &.toggle {
