@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "./Navbar/Navbar";
-import Main from "./Main/Main";
+import Main from "./main/Main.jsx";
 
 export default function OrderPage() {
   // D’abord on définit les states de base (état, données, variable…)
