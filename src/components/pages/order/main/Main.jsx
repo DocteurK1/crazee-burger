@@ -12,15 +12,18 @@ export default function Main() {
   // L’affichage, le render, via return
 
   return (
-    <StyledMain>
-      <Basket />
-      <Menu />
-    </StyledMain>
+    <>
+      <StyledMain>
+        <Basket />
+        <Menu />
+      </StyledMain>
+    </>
   );
 }
 
 const StyledMain = styled.div`
   display: flex;
+  flex-direction: column;
   background: ${theme.colors.background_white};
   /* flex: 1; */
   margin: auto;

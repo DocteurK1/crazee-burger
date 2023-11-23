@@ -4,6 +4,7 @@ import Card from "./Card.jsx";
 import { fakeMenu2 } from "../../../../fakeData/fakeMenu.js";
 import { formatPrice } from "../../../../utils/maths.js";
 import { truncateString } from "../../../../utils/truncateString.js";
+import AdminContainer from "../admin/AdminContainer.jsx";
 
 export default function Menu() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -25,16 +26,19 @@ export default function Menu() {
   // L’affichage, le render, via return
 
   return (
-    <MenuStyled>
-      {menu.map((produit) => (
-        <Card
-          key={produit.id}
-          imgUrl={produit.imageSource}
-          title={truncateString(produit.title, 11)}
-          price={formatPrice(produit.price)}
-        />
-      ))}
-    </MenuStyled>
+    <>
+      <AdminContainer />
+      <MenuStyled>
+        {menu.map((produit) => (
+          <Card
+            key={produit.id}
+            imgUrl={produit.imageSource}
+            title={truncateString(produit.title, 11)}
+            price={formatPrice(produit.price)}
+          />
+        ))}
+      </MenuStyled>
+    </>
   );
 }
 

@@ -1,5 +1,12 @@
 import React from "react";
+import styled from "styled-components";
 
 export default function AdminTabs() {
-  return <div>AdminTabs</div>;
+  return <AdminTabsStyled>AdminTabs</AdminTabsStyled>;
 }
+
+const AdminTabsStyled = styled.div`
+  background: blue;
+  height: 44px;
+  width: 1400px;
+`;
