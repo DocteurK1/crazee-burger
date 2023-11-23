@@ -30,7 +30,7 @@ export default function ToggleButton({
 
 const ToggleButtonStyled = styled.div`
   /* border: 1px solid red; */
-
+  padding-right: 50px;
   display: flex;
   margin-right: 10px;
   input[type="checkbox"] {
