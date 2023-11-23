@@ -5,8 +5,8 @@ import { theme } from "../../../../theme";
 export default function ToggleButton({
   isChecked,
   onToggle,
-  labelIfChecked = "DÉSACTIVER LE MODE ADMIN",
-  labelIfUnchecked = "ACTIVER LE MODE ADMIN",
+  labelIfChecked = "Fermer",
+  labelIfUnchecked = "Ouvrir",
 }) {
   return (
     <ToggleButtonStyled>
@@ -16,6 +16,7 @@ export default function ToggleButton({
         id="rounded"
         checked={isChecked}
         onChange={onToggle}
+        // onClick={DisplayToaster}
       />
       <label
         htmlFor="rounded"
