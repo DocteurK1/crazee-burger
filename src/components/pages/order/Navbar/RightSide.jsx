@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import ToggleButton from "./ToggleButton";
-import "react-toastify/dist/ReactToastify.css";
 
 // import { Link } from "react-router-dom";
 import Profile from "./Profile";
-import { ToastContainer, toast } from "react-toastify";
-import { theme } from "../../../../theme";
+
+import { toast } from "react-toastify";
 
 export default function RightSide() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -44,10 +43,6 @@ export default function RightSide() {
           />
         </div>
         <Profile />
-        <ToastContainer
-          className="toaster"
-          bodyClassName="body-toast"
-        />
       </RightSideStyled>
     </>
   );
@@ -58,24 +53,6 @@ const RightSideStyled = styled.div`
   display: flex;
   align-items: center;
   padding-right: 50px;
-
-  .toaster {
-    max-width: 300px;
-  }
-
-  .Toastify__toast.Toastify__toast-theme--dark.Toastify__toast--info {
-    background: ${theme.colors.background_dark};
-  }
-
-  .body-toast {
-    .Toastify__toast-icon.Toastify--animate-icon.Toastify__zoom-enter {
-      margin-right: 20px;
-      margin-left: 5px;
-    }
-    div {
-      line-height: 1.3em;
-    }
-  }
 
   .admin-button {
     /* background: green; */
