@@ -14,7 +14,7 @@ export default function Card({ id, imgUrl, title, price }) {
       <img
         className="img"
         src={imgUrl}
-        alt=""
+        alt={title}
       />
       <p className="CardTitle">{title}</p>
       <div className="info-text">
