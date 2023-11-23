@@ -3,7 +3,6 @@ import LeftSide from "./LeftSide";
 import RightSide from "./RightSide";
 import styled from "styled-components";
 import { theme } from "../../../../theme";
-import { ToastContainer } from "react-toastify";
 
 export default function Navbar() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -17,7 +16,6 @@ export default function Navbar() {
         <LeftSide />
         <RightSide />
       </NavBarStyled>
-      <ToastContainer />
     </>
   );
 }

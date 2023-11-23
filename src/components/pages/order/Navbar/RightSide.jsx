@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import AdminToggleButton from "./AdminToggleButton";
+import ToggleButton from "./ToggleButton";
 
 // import { Link } from "react-router-dom";
 import Profile from "./Profile";
@@ -16,11 +16,7 @@ export default function RightSide() {
     <>
       <RightSideStyled>
         <div className="admin-button">
-          <AdminToggleButton
-            labelIfChecked={"DÉSACTIVER LE MODE ADMIN"}
-            labelIfUnchecked={"ACTIVER LE MODE ADMIN"}
-            // isChecked={true}
-          />
+          <ToggleButton />
         </div>
         <Profile />
       </RightSideStyled>
