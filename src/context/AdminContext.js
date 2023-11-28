@@ -1,6 +1,6 @@
-import React from "react";
+import { createContext } from "react";
 
-export default React.createContext({
-  adminPanelText: "Value initial",
-  setAdminPanelText: () => {},
+export default createContext({
+  tshirtColor: "",
+  setTshirtColor: () => {},
 });

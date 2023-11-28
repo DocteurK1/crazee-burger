@@ -6,18 +6,17 @@ import AdminContext from "../../../../context/AdminContext";
 
 export default function AdminContainer() {
   // D’abord on définit les states de base (état, données, variable…)
-  const [adminPanelText, setAdminPanelText] = useState("Test Admin Context 2");
-  const adminPanelTextValue = {
-    adminPanelText,
-    setAdminPanelText,
-  };
+
+  const [tshirtColor, setTshirtColor] = useState("Valeur de test");
+
+  const tshirtContextValue = { tshirtColor, setTshirtColor };
 
   // Comportements, les actions, la logique
 
   // L’affichage, le render, via return
   return (
     <>
-      <AdminContext.Provider value={{ adminPanelTextValue }}>
+      <AdminContext.Provider value={tshirtContextValue}>
         <AdminContainerStyled>
           {/* <span>AdminContainer</span> */}
           <AdminTabs />

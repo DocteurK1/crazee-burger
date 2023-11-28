@@ -6,9 +6,10 @@ export default function AdminPanel() {
   // D’abord on définit les states de base (état, données, variable…)
 
   const info = useContext(AdminContext);
-  console.log("Info :", info.adminPanelTextValue.adminPanelText);
+  // // info.setTshirtColor("Blabla");
+  // console.log("info : ", info.tshirtColor);
 
-  // Comportements, les actions, la logique
+  // // Comportements, les actions, la logique
 
   // L’affichage, le render, via return
   return (
@@ -16,7 +17,8 @@ export default function AdminPanel() {
       <br />
       <span>Blabla</span>
       <br />
-      <span>Info: {info.adminPanelTextValue.adminPanelText}</span>
+      <span>Info: {info.tshirtColor}</span>
+      {/* <button onClick={handleClick}>test Button</button> */}
     </AdminpanelStyled>
   );
 }

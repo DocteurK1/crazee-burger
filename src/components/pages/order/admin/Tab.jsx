@@ -1,14 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import AdminContext from "../../../../context/AdminContext";
 
-export default function Tab({ Icon, Title, Width }) {
+export default function Tab({ Icon, Title, Width, Id }) {
   // D’abord on définit les states de base (état, données, variable…)
 
-  const handleClick = () => {
-    console.log("Clic");
-  };
+  const info = useContext(AdminContext);
+  // info.setTshirtColor("Blabla");
+  console.log("info : ", info.tshirtColor);
 
   // Comportements, les actions, la logique
+
+  const handleClick = () => {
+    // console.log("Id : ", Id);
+    // info.setTshirtColor("Blabla 333");
+    if (Id === 1) {
+      info.setTshirtColor("Arrow Down");
+      console.log("Button 1");
+    }
+    if (Id === 2) {
+      info.setTshirtColor("Ajouter un produit");
+      console.log("Button 2");
+    }
+    if (Id === 3) {
+      info.setTshirtColor("Modifier un produit");
+      console.log("Button 3");
+    }
+  };
 
   // L’affichage, le render, via return
   return (

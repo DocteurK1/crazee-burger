@@ -12,16 +12,19 @@ export default function AdminTabs() {
         <Tab
           Icon={<FiChevronDown />}
           Width={"45px"}
+          Id={1}
         />
         <Tab
           Title={"Ajouter un produit"}
           Icon={<AiOutlinePlus />}
           Width={"210px"}
+          Id={2}
         />
         <Tab
           Title={"Modifier un produit"}
           Icon={<MdModeEditOutline />}
           Width={"210px"}
+          Id={3}
         />
       </AdminTabsStyled>
     </>
