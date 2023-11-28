@@ -1,12 +1,34 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import AdminContext from "../../../../context/AdminContext";
 
 export default function AdminPanel() {
-  return <AdminpanelStyled>AdminPanel</AdminpanelStyled>;
+  // D’abord on définit les states de base (état, données, variable…)
+
+  const info = useContext(AdminContext);
+  console.log("Info :", info.adminPanelTextValue.adminPanelText);
+
+  // Comportements, les actions, la logique
+
+  // L’affichage, le render, via return
+  return (
+    <AdminpanelStyled>
+      <br />
+      <span>Blabla</span>
+      <br />
+      <span>Info: {info.adminPanelTextValue.adminPanelText}</span>
+    </AdminpanelStyled>
+  );
 }
 
 const AdminpanelStyled = styled.div`
-  background: pink;
+  background: white;
   height: 250px;
   width: 1400px;
+
+  box-shadow: 0px -6px 8px -2px #0000001a;
+
+  border-style: solid;
+  border-color: green;
+  border-width: 2px;
 `;

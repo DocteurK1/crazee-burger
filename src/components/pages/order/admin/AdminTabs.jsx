@@ -9,15 +9,19 @@ export default function AdminTabs() {
   return (
     <>
       <AdminTabsStyled>
-        AdminTabs
-        <Tab Icon={<FiChevronDown />} />
+        <Tab
+          Icon={<FiChevronDown />}
+          Width={"45px"}
+        />
         <Tab
           Title={"Ajouter un produit"}
           Icon={<AiOutlinePlus />}
+          Width={"210px"}
         />
         <Tab
           Title={"Modifier un produit"}
           Icon={<MdModeEditOutline />}
+          Width={"210px"}
         />
       </AdminTabsStyled>
     </>
@@ -25,11 +29,17 @@ export default function AdminTabs() {
 }
 
 const AdminTabsStyled = styled.div`
-  background: blue;
+  /* background: lightgray; */
+
+  /* border-style: solid;
+  border-color: blue;
+  border-width: 2px; */
+
   height: 44px;
   width: 1400px;
   display: flex;
   justify-content: left;
+  margin-left: 50px;
 
   /* flex-direction: column; */
 `;
