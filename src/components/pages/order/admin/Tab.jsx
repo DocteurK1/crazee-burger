@@ -6,14 +6,11 @@ export default function Tab({ Icon, Title, Width, Id }) {
   // D’abord on définit les states de base (état, données, variable…)
 
   const info = useContext(AdminContext);
-  // info.setTshirtColor("Blabla");
-  console.log("info : ", info.tshirtColor);
+  // console.log("info : ", info.tshirtColor);
 
   // Comportements, les actions, la logique
 
   const handleClick = () => {
-    // console.log("Id : ", Id);
-    // info.setTshirtColor("Blabla 333");
     if (Id === 1) {
       info.setTshirtColor("Arrow Down");
       console.log("Button 1");

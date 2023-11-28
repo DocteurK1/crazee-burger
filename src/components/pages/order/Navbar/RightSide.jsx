@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import ToggleButton from "./ToggleButton";
-
-// import { Link } from "react-router-dom";
 import Profile from "./Profile";
-
 import { toast } from "react-toastify";
 
 export default function RightSide() {
@@ -27,7 +24,7 @@ export default function RightSide() {
         progress: undefined,
       });
     }
-    setIsModeAdmin(!isModeAdmin); // set isModeAdmin à son traire true/false
+    setIsModeAdmin(!isModeAdmin); // set isModeAdmin à son contraire true/false
   };
 
   // L’affichage, le render, via return
