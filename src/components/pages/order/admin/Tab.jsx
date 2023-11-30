@@ -5,22 +5,22 @@ import AdminContext from "../../../../context/AdminContext";
 export default function Tab({ Icon, Title, Width, Id }) {
   // D’abord on définit les states de base (état, données, variable…)
 
-  const info = useContext(AdminContext);
+  const currentAdminPanel = useContext(AdminContext);
   // console.log("info : ", info.tshirtColor);
 
   // Comportements, les actions, la logique
 
   const handleClick = () => {
     if (Id === 1) {
-      info.setTshirtColor("Arrow Down");
+      currentAdminPanel.setAdminPanelSelected("Arrow Down");
       console.log("Button 1");
     }
     if (Id === 2) {
-      info.setTshirtColor("Ajouter un produit");
+      currentAdminPanel.setAdminPanelSelected("Ajouter un produit");
       console.log("Button 2");
     }
     if (Id === 3) {
-      info.setTshirtColor("Modifier un produit");
+      currentAdminPanel.setAdminPanelSelected("Modifier un produit");
       console.log("Button 3");
     }
   };

@@ -7,9 +7,9 @@ import AdminContext from "../../../../context/AdminContext";
 export default function AdminContainer() {
   // D’abord on définit les states de base (état, données, variable…)
 
-  const [tshirtColor, setTshirtColor] = useState("Valeur de test");
+  const [adminPanelSelected, setAdminPanelSelected] = useState("Initial Value");
 
-  const tshirtContextValue = { tshirtColor, setTshirtColor };
+  const tshirtContextValue = { adminPanelSelected, setAdminPanelSelected };
 
   // Comportements, les actions, la logique
 

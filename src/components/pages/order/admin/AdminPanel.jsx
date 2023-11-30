@@ -5,7 +5,7 @@ import AdminContext from "../../../../context/AdminContext";
 export default function AdminPanel() {
   // D’abord on définit les states de base (état, données, variable…)
 
-  const info = useContext(AdminContext);
+  const currentAdminPanel = useContext(AdminContext);
   // // info.setTshirtColor("Blabla");
   // console.log("info : ", info.tshirtColor);
 
@@ -17,7 +17,7 @@ export default function AdminPanel() {
       <br />
       <span>Blabla</span>
       <br />
-      <span>Info: {info.tshirtColor}</span>
+      <span>Admin Panel Selected: {currentAdminPanel.adminPanelSelected}</span>
       {/* <button onClick={handleClick}>test Button</button> */}
     </AdminpanelStyled>
   );
