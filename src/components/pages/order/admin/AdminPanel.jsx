@@ -6,8 +6,6 @@ export default function AdminPanel() {
   // D’abord on définit les states de base (état, données, variable…)
 
   const currentAdminPanel = useContext(AdminContext);
-  // // info.setTshirtColor("Blabla");
-  // console.log("info : ", info.tshirtColor);
 
   // // Comportements, les actions, la logique
 

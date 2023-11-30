@@ -5,8 +5,18 @@ import AdminTabs from "../admin/AdminTabs";
 import AdminContext from "../../../../context/AdminContext";
 
 export default function AdminContainer({ isModeAdmin }) {
-  const [adminPanelSelected, setAdminPanelSelected] = useState("");
-  const adminContextValue = { adminPanelSelected, setAdminPanelSelected };
+  const [adminPanelSelected, setAdminPanelSelected] =
+    useState("Ajouter un produit");
+
+  // State pour l'ID du bouton sélectionné, avec son setter associé; lié au context
+  const [activeTab, setActiveTab] = useState(2);
+
+  const adminContextValue = {
+    adminPanelSelected,
+    setAdminPanelSelected,
+    activeTab,
+    setActiveTab,
+  };
 
   return (
     <AdminContext.Provider value={adminContextValue}>

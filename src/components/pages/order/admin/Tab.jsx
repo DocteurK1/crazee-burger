@@ -8,6 +8,9 @@ export default function Tab({ Icon, Title, Width, Id }) {
   const currentAdminPanel = useContext(AdminContext);
   // console.log("info : ", info.tshirtColor);
 
+  const activeTab = currentAdminPanel.activeTab;
+  console.log("activeTab ", activeTab);
+
   // Comportements, les actions, la logique
 
   const handleClick = () => {
@@ -17,19 +20,19 @@ export default function Tab({ Icon, Title, Width, Id }) {
     }
     if (Id === 2) {
       currentAdminPanel.setAdminPanelSelected("Ajouter un produit");
-      console.log("Button 2");
     }
     if (Id === 3) {
       currentAdminPanel.setAdminPanelSelected("Modifier un produit");
-      console.log("Button 3");
     }
+    currentAdminPanel.setActiveTab(Id);
   };
 
   // L’affichage, le render, via return
   return (
     <TabStyled
-      Width={Width}
+      width={Width}
       onClick={handleClick}
+      isActive={activeTab === Id}
     >
       {Icon}
       <span>{Title}</span>
@@ -38,8 +41,10 @@ export default function Tab({ Icon, Title, Width, Id }) {
 }
 
 const TabStyled = styled.button`
-  background: white;
+  background: ${(props) => (props.isActive ? "black" : "white")};
+  color: ${(props) => (props.isActive ? "white" : "black")};
   /* border-style: solid; */
+
   width: ${(props) => props.Width};
   padding-left: 5px;
   margin-left: 0 px;
