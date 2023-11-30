@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ToggleButton from "./ToggleButton";
 import Profile from "./Profile";
 import { toast } from "react-toastify";
+import AdminContainer from "../admin/AdminContainer";
 
 export default function RightSide() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -13,7 +14,6 @@ export default function RightSide() {
   const displayToastNotification = () => {
     if (!isModeAdmin) {
       toast.info("Mode admin activé", {
-        // icon: <FaUserSecret size={30} />,
         theme: "dark",
         position: "bottom-right",
         autoClose: 5000,
@@ -40,6 +40,7 @@ export default function RightSide() {
           />
         </div>
         <Profile />
+        <AdminContainer isModeAdmin={isModeAdmin} />
       </RightSideStyled>
     </>
   );
