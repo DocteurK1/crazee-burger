@@ -30,10 +30,7 @@ export default function LoginForm() {
 
   return (
     <>
-      <LoginFormStyled
-        action="submit"
-        onSubmit={handleSubmit}
-      >
+      <LoginFormStyled action="submit" onSubmit={handleSubmit}>
         <div>
           <h1>Bienvenue chez nous !</h1>
           <hr />
@@ -89,7 +86,7 @@ const LoginFormStyled = styled.form`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: ${theme.fonts.size.P0};
+    font-size: ${theme.fonts.size.SM};
     margin-left: 10px;
   }
 `;

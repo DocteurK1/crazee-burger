@@ -7,11 +7,7 @@ export default function TextInput({ value, onChange, Icon, ...extraProps }) {
   return (
     <InputStyled>
       {Icon && Icon}
-      <input
-        onChange={onChange}
-        type="text"
-        {...extraProps}
-      />
+      <input onChange={onChange} type="text" {...extraProps} />
     </InputStyled>
   );
 }
@@ -28,13 +24,13 @@ const InputStyled = styled.div`
 
   .icon {
     color: ${theme.colors.greySemiDark};
-    font-size: ${theme.fonts.size.P0};
+    font-size: ${theme.fonts.size.SM};
     margin-right: 10px;
   }
 
   input {
     border: none;
-    font-size: ${theme.fonts.size.P0};
+    font-size: ${theme.fonts.size.SM};
     font-weight: ${theme.fonts.weights.semiBold};
     color: ${theme.colors.dark};
     width: 100%;
