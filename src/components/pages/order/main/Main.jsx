@@ -22,7 +22,7 @@ export default function Main() {
 }
 
 const StyledMain = styled.div`
-  border: 5px solid purple;
+  /* border: 5px solid purple; */
 
   display: flex;
   flex-direction: row;

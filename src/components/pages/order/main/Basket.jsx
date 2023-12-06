@@ -8,7 +8,7 @@ export default function Basket() {
 const BasketStyled = styled.div`
   /* background: red; */
   height: 100%;
-  border: 3px solid red;
+  /* border: 3px solid red; */
   width: 350px; // When open should be 350px
   /* background: red; */
 `;

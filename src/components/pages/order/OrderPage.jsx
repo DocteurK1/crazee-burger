@@ -20,7 +20,7 @@ export default function OrderPage() {
 }
 
 const OrderPageStyled = styled.div`
-  border: 3px solid green;
+  /* border: 3px solid green; */
 
   /* background: ${theme.colors.primary};
   height: 100vh;

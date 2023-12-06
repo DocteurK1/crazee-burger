@@ -29,11 +29,7 @@ export default function Tab({ Icon, Title, Width, Id }) {
 
   // L’affichage, le render, via return
   return (
-    <TabStyled
-      width={Width}
-      onClick={handleClick}
-      isActive={activeTab === Id}
-    >
+    <TabStyled width={Width} onClick={handleClick} isActive={activeTab === Id}>
       {Icon}
       <span>{Title}</span>
     </TabStyled>

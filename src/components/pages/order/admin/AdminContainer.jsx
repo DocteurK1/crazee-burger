@@ -3,6 +3,7 @@ import styled from "styled-components";
 import AdminPanel from "../admin/AdminPanel";
 import AdminTabs from "../admin/AdminTabs";
 import AdminContext from "../../../../context/AdminContext";
+import { theme } from "../../../../theme";
 
 export default function AdminContainer({ isModeAdmin }) {
   const [adminPanelSelected, setAdminPanelSelected] =
@@ -31,14 +32,16 @@ export default function AdminContainer({ isModeAdmin }) {
 }
 
 const AdminContainerStyled = styled.div`
-  border: 3px solid blue;
+  /* border: 3px solid blue; */
 
   height: 299px;
   width: 1400px;
   position: fixed;
-  margin-bottom: 45px;
-  bottom: 0;
+  margin-top: 1510px;
+  /* bottom: 0; */
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
+  border-bottom-right-radius: ${theme.borderRadius.extraRound};
+  border-bottom-left-radius: ${theme.borderRadius.extraRound};
 `;

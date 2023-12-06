@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import AdminContext from "../../../../context/AdminContext";
+import { theme } from "../../../../theme";
 
 export default function AdminPanel() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -26,9 +27,10 @@ const AdminpanelStyled = styled.div`
   height: 250px;
   width: 1400px;
 
+  /* box-shadow: 0px 6px 8px -2px rgba(0, 0, 0, 0.2); */
   box-shadow: 0px -6px 8px -2px #0000001a;
 
-  border-style: solid;
-  border-color: green;
-  border-width: 2px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  /* z-index: 100; */
 `;
