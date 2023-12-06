@@ -22,8 +22,10 @@ export default function Main() {
 }
 
 const StyledMain = styled.div`
+  border: 5px solid purple;
+
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   background: ${theme.colors.background_white};
   /* flex: 1; */
   margin: auto;

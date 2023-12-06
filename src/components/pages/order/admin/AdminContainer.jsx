@@ -31,6 +31,8 @@ export default function AdminContainer({ isModeAdmin }) {
 }
 
 const AdminContainerStyled = styled.div`
+  border: 3px solid blue;
+
   height: 299px;
   width: 1400px;
   position: fixed;

@@ -11,11 +11,7 @@ export default function Card({ id, imgUrl, title, price }) {
 
   return (
     <CardStyled>
-      <img
-        className="img"
-        src={imgUrl}
-        alt={title}
-      />
+      <img className="img" src={imgUrl} alt={title} />
       <p className="CardTitle">{title}</p>
       <div className="info-text">
         <p className="CardDescription">{price}</p>
