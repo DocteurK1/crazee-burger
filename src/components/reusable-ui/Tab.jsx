@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { theme } from "../../theme";
 
-export default function Tab({ Icon, onClick, className }) {
+export default function Tab({ label, Icon, onClick, className }) {
   // State
 
   // Comportements
@@ -11,6 +11,7 @@ export default function Tab({ Icon, onClick, className }) {
   return (
     <TabStyled onClick={onClick} className={className}>
       <div className="icon">{Icon}</div>
+      {label && <span className="label">{label}</span>}
     </TabStyled>
   );
 }
@@ -53,5 +54,9 @@ const TabStyled = styled.button`
 
   .icon {
     display: flex;
+  }
+
+  .label {
+    margin-left: 13px;
   }
 `;
