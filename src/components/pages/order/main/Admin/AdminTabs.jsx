@@ -2,37 +2,31 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import Tab from "../../../../reusable-ui/Tab";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
-import { AiOutlinePlus } from "react-icons/ai";
-import { MdModeEditOutline } from "react-icons/md";
 import { theme } from "../../../../../theme";
 import OrderContext from "../../../../../context/OrderContext";
+import { getTabsConfig } from "./getTabsConfig";
 
 export default function AdminTabs() {
   // State
+
+  // On importe le context avec useContext. Et pas besoin de stocker tout ce qui est dans le context dans la variable dans ce composant, on prend les juste et leur setter nécessaires.
   const {
     isCollapsed,
     setIsCollapsed,
-    isAddSelected,
-    setIsAddSelected,
-    isEditSelected,
-    setIsEditSelected,
+    currentTabSelected,
+    setCurrentTabSelected,
   } = useContext(OrderContext);
 
   // Comportements
 
   const selectTab = (tabSelected) => {
-    setIsCollapsed(false);
-
-    if (tabSelected === "add") {
-      setIsAddSelected(true);
-      setIsEditSelected(false);
-    }
-
-    if (tabSelected === "edit") {
-      setIsEditSelected(true);
-      setIsAddSelected(false);
-    }
+    // Il suffit de changer le state et tout le render dérrière est auto. On retire le composant adminPanel, du coup les boutons se retrouvent en bas. Pas besoin d'update leur position etc...
+    setIsCollapsed(false); // Si le panel est fermé, lorsqu on clic sur un des boutons, dans tout les cas on l'ouvre.
+    setCurrentTabSelected(tabSelected);
   };
+
+  // Là j'importe mon fichier de config et je stock currentTabsSelected
+  const tabs = getTabsConfig(currentTabSelected);
 
   // Affichage
 
@@ -44,7 +38,19 @@ export default function AdminTabs() {
         onClick={() => setIsCollapsed(!isCollapsed)}
         className={isCollapsed ? "is-active" : ""}
       />
-      <Tab
+
+      {tabs.map((tab) => {
+        return (
+          <Tab
+            label={tab.label}
+            Icon={tab.Icon}
+            onClick={() => selectTab(tab.index)}
+            className={tab.className}
+          />
+        );
+      })}
+
+      {/* <Tab
         label="Ajouter un produit"
         Icon={<AiOutlinePlus />}
         onClick={() => selectTab("add")}
@@ -55,7 +61,7 @@ export default function AdminTabs() {
         Icon={<MdModeEditOutline />}
         onClick={() => selectTab("edit")}
         className={isEditSelected ? "is-active" : ""}
-      />
+      /> */}
     </AdminTabsStyled>
   );
 }
