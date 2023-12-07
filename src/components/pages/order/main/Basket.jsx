@@ -11,4 +11,6 @@ const BasketStyled = styled.div`
   /* border: 3px solid red; */
   width: 350px; // When open should be 350px
   /* background: red; */
+  border: 2px solid red;
+  width: 350px;
 `;
