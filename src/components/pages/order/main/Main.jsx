@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { theme } from "../../../../theme";
 import Basket from "./Basket";
 import Menu from "./Menu";
+import Admin from "./Admin/Admin";
 
 export default function Main() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -16,7 +17,7 @@ export default function Main() {
       {/* <div className="basket">Basket</div> */}
       <div className="menu-and-admin">
         <Menu />
-        <div className="admin">Admin</div>
+        <Admin />
       </div>
     </StyledMain>
   );
@@ -51,16 +52,5 @@ const StyledMain = styled.div`
     display: grid;
     border-bottom-left-radius: ${theme.borderRadius.extraRound};
     border-bottom-right-radius: ${theme.borderRadius.extraRound};
-
-    .admin {
-      border: 2px solid green;
-      background: red;
-      height: 250px;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      /* width: 100%; */
-    }
   }
 `;

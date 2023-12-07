@@ -3,7 +3,6 @@ import styled from "styled-components";
 import ToggleButton from "./ToggleButton";
 import Profile from "./Profile";
 import { toast } from "react-toastify";
-import AdminContainer from "../admin/AdminContainer";
 
 export default function RightSide() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -40,7 +39,6 @@ export default function RightSide() {
           />
         </div>
         <Profile />
-        <AdminContainer isModeAdmin={isModeAdmin} />
       </RightSideStyled>
     </>
   );
