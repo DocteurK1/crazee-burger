@@ -11,12 +11,14 @@ export default function AdminContainer({ isModeAdmin }) {
 
   // State pour l'ID du bouton sélectionné, avec son setter associé; lié au context
   const [activeTab, setActiveTab] = useState(2);
+  const isPanelOpen = true;
 
   const adminContextValue = {
     adminPanelSelected,
     setAdminPanelSelected,
     activeTab,
     setActiveTab,
+    isPanelOpen,
   };
 
   return (
@@ -32,7 +34,7 @@ export default function AdminContainer({ isModeAdmin }) {
 }
 
 const AdminContainerStyled = styled.div`
-  /* border: 3px solid blue; */
+  border: 3px solid blue;
 
   height: 299px;
   width: 1400px;

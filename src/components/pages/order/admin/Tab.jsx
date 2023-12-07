@@ -17,6 +17,9 @@ export default function Tab({ Icon, Title, Width, Id }) {
     if (Id === 1) {
       currentAdminPanel.setAdminPanelSelected("Arrow Down");
       console.log("Button 1");
+      console.log("is panel open : ", currentAdminPanel.isPanelOpen);
+      // currentAdminPanel.setIsPanelOpen((prevIsPanelOpen) => !prevIsPanelOpen);
+      // if (currentAdminPanel.isPanelOpen : currentAdminPanel.isPanelOpen = false);
     }
     if (Id === 2) {
       currentAdminPanel.setAdminPanelSelected("Ajouter un produit");
@@ -39,11 +42,14 @@ export default function Tab({ Icon, Title, Width, Id }) {
 const TabStyled = styled.button`
   background: ${(props) => (props.isActive ? "black" : "white")};
   color: ${(props) => (props.isActive ? "white" : "black")};
+
+  text-decoration: ${(props) => (props.isActive ? null : "underline")};
+
   /* border-style: solid; */
 
   width: ${(props) => props.Width};
-  padding-left: 5px;
-  margin-left: 0 px;
+  padding: 13px 23px 14px 23px;
+  /* margin-left: 0 px; */
   display: inline-flex;
   justify-content: center;
   align-items: center;

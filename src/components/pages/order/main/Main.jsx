@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { theme } from "../../../../theme";
 import Basket from "./Basket";
 import Menu from "./Menu";
+import AdminContainerStyled from "../admin/AdminContainer";
 
 export default function Main() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -22,7 +23,7 @@ export default function Main() {
 }
 
 const StyledMain = styled.div`
-  /* border: 5px solid purple; */
+  border: 3px solid purple;
 
   display: flex;
   flex-direction: row;

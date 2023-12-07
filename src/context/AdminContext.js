@@ -5,5 +5,5 @@ export default createContext({
   setAdminPanelSelected: () => {},
   activeTab: 2,
   setActiveTab: () => {},
-  isPanelOpen: false,
+  isPanelOpen: true,
 });
