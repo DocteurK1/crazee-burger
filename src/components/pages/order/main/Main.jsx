@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { theme } from "../../../../theme";
 import Basket from "./Basket";
 import Menu from "./Menu";
-import AdminContainerStyled from "../admin/AdminContainer";
 
 export default function Main() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -14,14 +13,16 @@ export default function Main() {
 
   return (
     <StyledMain>
-      <Basket />
-      <Menu />
+      {/* <div className="basket">Basket</div> */}
+      <div className="menu-and-admin">
+        <Menu />
+        <div className="admin">Admin</div>
+      </div>
     </StyledMain>
   );
 }
 
 const StyledMain = styled.div`
-  display: flex;
   background: ${theme.colors.background_white};
   flex: 1;
   margin: auto;
