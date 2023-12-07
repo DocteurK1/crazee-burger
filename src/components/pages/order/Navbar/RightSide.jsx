@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import ToggleButton from "./ToggleButton";
 import Profile from "./Profile";
 import { toast } from "react-toastify";
+import OrderContext from "../../../../context/OrderContext";
 
 export default function RightSide() {
   // D’abord on définit les states de base (état, données, variable…)
-  const [isModeAdmin, setIsModeAdmin] = useState(false);
+
+  const { isModeAdmin, setIsModeAdmin } = useContext(OrderContext);
 
   // Comportements, les actions, la logique
 

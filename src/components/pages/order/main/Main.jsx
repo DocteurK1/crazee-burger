@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { theme } from "../../../../theme";
 import Basket from "./Basket";
 import Menu from "./Menu";
 import Admin from "./Admin/Admin";
+import OrderContext from "../../../../context/OrderContext";
 
 export default function Main() {
   // D’abord on définit les states de base (état, données, variable…)
+
+  const { isModeAdmin, setIsModeAdmin } = useContext(OrderContext);
 
   // Comportements, les actions, la logique
 
@@ -17,7 +20,8 @@ export default function Main() {
       {/* <div className="basket">Basket</div> */}
       <div className="menu-and-admin">
         <Menu />
-        <Admin />
+        {isModeAdmin && <Admin />}
+        {/* Similaire à : {isModeAdmin ? <Admin /> : null}  */}
       </div>
     </StyledMain>
   );
