@@ -8,12 +8,21 @@ import OrderContext from "../../../context/OrderContext.js";
 export default function OrderPage() {
   // D’abord on définit les states de base (état, données, variable…)
   const [isModeAdmin, setIsModeAdmin] = useState(false);
+  const [isAddSelected, setIsAddSelected] = useState(true);
+  const [isEditSelected, setIsEditSelected] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   // // Comportements, les actions, la logique
 
   const orderContextValue = {
     isModeAdmin,
     setIsModeAdmin,
+    isCollapsed,
+    setIsCollapsed,
+    isAddSelected,
+    setIsAddSelected,
+    isEditSelected,
+    setIsEditSelected,
   };
 
   // L’affichage, le render, via return

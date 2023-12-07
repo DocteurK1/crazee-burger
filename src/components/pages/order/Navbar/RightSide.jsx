@@ -35,6 +35,7 @@ export default function RightSide() {
       <RightSideStyled>
         <div className="admin-button">
           <ToggleButton
+            isChecked={isModeAdmin}
             labelIfChecked=" Désactiver le mode admin"
             labelIfUnchecked="Activer le mode admin"
             onToggle={displayToastNotification}
