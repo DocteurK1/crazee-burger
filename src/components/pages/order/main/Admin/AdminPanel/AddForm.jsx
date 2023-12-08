@@ -4,7 +4,6 @@ import { FaHamburger } from "react-icons/fa";
 import AddFormInput from "../../../../../reusable-ui/AddFormInput.jsx";
 import { MdOutlineEuro } from "react-icons/md";
 import { BsFillCameraFill } from "react-icons/bs";
-import { theme } from "../../../../../../theme/index.js";
 
 export default function AddForm() {
   // State
@@ -41,7 +40,13 @@ export default function AddForm() {
 
   return (
     <AddFormStyled onSubmit={onSubmit}>
-      <div className="img-holder">Aucune image</div>
+      <div className="img-holder">
+        {productUrlValue !== "" ? (
+          <img src={productUrlValue} alt="Product" />
+        ) : (
+          <div>Aucune image</div>
+        )}
+      </div>
       <div className="text-input">
         <AddFormInput
           value={value}
@@ -85,22 +90,24 @@ const AddFormStyled = styled.form`
     margin-top: 30px;
     height: 120px;
     width: 215px;
-    border: 1px solid green;
 
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     color: #93a2b1;
     font-family: Open Sans;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: 24px; /* 150% */
-
     border-radius: 5px;
-    /* border: 1px solid #e4e5e9; */
     border: 1px solid black;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
   }
 
   .text-input {

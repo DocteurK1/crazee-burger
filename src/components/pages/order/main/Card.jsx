@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { theme } from "../../../../theme";
+import { TiDelete } from "react-icons/ti";
+import OrderContext from "../../../../context/OrderContext";
 
 export default function Card({ id, imgUrl, title, price }) {
   // D’abord on définit les states de base (état, données, variable…)
+  const { isModeAdmin } = useContext(OrderContext);
+  const isAdmin = isModeAdmin;
+
+  const checkAdmin = () => {
+    console.log("is admin: ", isAdmin);
+  };
+  checkAdmin();
 
   // Comportements, les actions, la logique
 
@@ -11,6 +20,11 @@ export default function Card({ id, imgUrl, title, price }) {
 
   return (
     <CardStyled>
+      {isAdmin && (
+        <div className="delete-div">
+          <TiDelete className="delete-button" />
+        </div>
+      )}
       <img className="img" src={imgUrl} alt={title} />
       <p className="CardTitle">{title}</p>
       <div className="info-text">
@@ -33,6 +47,31 @@ const CardStyled = styled.div`
   margin: 50px 20px 10px 20px;
   border-radius: ${theme.borderRadius.extraRound};
   box-shadow: -8px 8px 20px 0px rgb(0 0 0 / 20%);
+  position: relative;
+
+  .delete-div {
+    /* height: 50px;
+    width: 100%; */
+    /* border: 1px solid red; */
+    position: absolute;
+    right: 0;
+    /* margin-left: auto; */
+  }
+
+  .delete-button {
+    padding-top: 10px;
+    padding-right: 10px;
+    height: 30px;
+    width: 30px;
+    color: #ffa01b;
+    cursor: pointer;
+
+    :hover {
+      color: red;
+    }
+
+    /* border: 1px solid orange; */
+  }
 
   .info-text {
     display: flex;
