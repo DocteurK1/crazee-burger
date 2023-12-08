@@ -12,18 +12,6 @@ export default function Menu() {
 
   // Comportements, les actions, la logique
 
-  // const renderCards = (menu, productsNumberToDisplay) => {
-  //   return menu.map((produit) => (
-  //     <Card
-  //       key={produit.id}
-  //       imgUrl={produit.imageSource}
-  //       title={truncateString(produit.title, 11)}
-  //       price={formatPrice(produit.price)}
-  //     />
-  //   ));
-  // };
-  // L’affichage, le render, via return
-
   return (
     <MenuStyled>
       {menu.map((produit) => (
@@ -39,17 +27,19 @@ export default function Menu() {
 }
 
 const MenuStyled = styled.div`
+  border: 2px solid blue;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-template-rows: repeat(5, 1fr);
   grid-column-gap: 15px;
   grid-row-gap: 10px;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow-y: scroll;
 
-  /* background: red; */
-
-  height: 834px; /* Set a fixed height for the container */
-  overflow-y: auto;
-
-  /* z-index: 1; */
+  /* justify-content: space-evenly; */
+  justify-items: center;
+  /* align-content: space-evenly; */
+  /* align-items: center; */
 `;

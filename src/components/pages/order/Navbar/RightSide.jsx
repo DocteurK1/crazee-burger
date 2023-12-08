@@ -1,22 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import ToggleButton from "./ToggleButton";
-
-// import { Link } from "react-router-dom";
 import Profile from "./Profile";
-
 import { toast } from "react-toastify";
+import OrderContext from "../../../../context/OrderContext";
 
 export default function RightSide() {
   // D’abord on définit les states de base (état, données, variable…)
-  const [isModeAdmin, setIsModeAdmin] = useState(false);
+
+  const { isModeAdmin, setIsModeAdmin } = useContext(OrderContext);
 
   // Comportements, les actions, la logique
 
   const displayToastNotification = () => {
     if (!isModeAdmin) {
       toast.info("Mode admin activé", {
-        // icon: <FaUserSecret size={30} />,
         theme: "dark",
         position: "bottom-right",
         autoClose: 5000,
@@ -27,7 +25,7 @@ export default function RightSide() {
         progress: undefined,
       });
     }
-    setIsModeAdmin(!isModeAdmin); // set isModeAdmin à son traire true/false
+    setIsModeAdmin(!isModeAdmin); // set isModeAdmin à son contraire true/false
   };
 
   // L’affichage, le render, via return
@@ -37,6 +35,7 @@ export default function RightSide() {
       <RightSideStyled>
         <div className="admin-button">
           <ToggleButton
+            isChecked={isModeAdmin}
             labelIfChecked=" Désactiver le mode admin"
             labelIfUnchecked="Activer le mode admin"
             onToggle={displayToastNotification}
