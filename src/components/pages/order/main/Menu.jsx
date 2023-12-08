@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Card from "./Card.jsx";
-import { fakeMenu2 } from "../../../../fakeData/fakeMenu.js";
+import { fakeMenu } from "../../../../fakeData/fakeMenu.js";
 import { formatPrice } from "../../../../utils/maths.js";
 import { truncateString } from "../../../../utils/truncateString.js";
 
 export default function Menu() {
   // D’abord on définit les states de base (état, données, variable…)
 
-  const [menu, setMenu] = useState(fakeMenu2);
+  const [menu, setMenu] = useState(fakeMenu.LARGE);
 
   // Comportements, les actions, la logique
 
