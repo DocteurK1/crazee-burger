@@ -17,7 +17,9 @@ export default function Main() {
 
   return (
     <StyledMain>
-      {/* <div className="basket">Basket</div> */}
+      {/* <div className="basket">
+        <Basket />
+      </div> */}
       <div className="menu-and-admin">
         <Menu />
         {isModeAdmin && <Admin />}
@@ -43,7 +45,7 @@ const StyledMain = styled.div`
 
   display: grid;
   /* grid-template-columns: 25% 1fr; // A réactiver quand on se servira du basket */
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr; // A desactiver quand on se servira du basket
 
   .basket {
     /* background: pink; */
