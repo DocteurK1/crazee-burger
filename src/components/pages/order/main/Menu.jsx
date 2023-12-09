@@ -12,14 +12,23 @@ export default function Menu() {
 
   // Comportements, les actions, la logique
 
+  const handleDelete = (cardId) => {
+    // Filter out the card with the given ID and update the state
+    const updatedMenu = menu.filter((card) => card.id !== cardId);
+    setMenu(updatedMenu);
+  };
+
+  // Affichage
+
   return (
     <MenuStyled>
       {menu.map((produit) => (
         <Card
-          key={produit.id}
+          id={produit.id}
           imgUrl={produit.imageSource}
           title={truncateString(produit.title, 11)}
           price={formatPrice(produit.price)}
+          onDelete={handleDelete}
         />
       ))}
     </MenuStyled>

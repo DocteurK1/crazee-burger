@@ -7,6 +7,7 @@ import { BsFillCameraFill } from "react-icons/bs";
 
 export default function AddForm() {
   // State
+  const defaultImage = "/images/coming-soon.png";
   let [productNameValue, setProductNameValue] = useState("");
   let [productUrlValue, setProductUrlValue] = useState("");
   let [productPrice, setProductPrice] = useState("");
@@ -29,7 +30,8 @@ export default function AddForm() {
       setProductUrlValue(value);
     } else {
       console.log("Invalid URL");
-      setProductUrlValue("");
+      setProductUrlValue(defaultImage);
+      console.log("image url: ", productUrlValue);
     }
   };
 

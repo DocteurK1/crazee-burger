@@ -4,25 +4,23 @@ import { theme } from "../../../../theme";
 import { TiDelete } from "react-icons/ti";
 import OrderContext from "../../../../context/OrderContext";
 
-export default function Card({ id, imgUrl, title, price }) {
+export default function Card({ id, imgUrl, title, price, onDelete }) {
   // D’abord on définit les states de base (état, données, variable…)
   const { isModeAdmin } = useContext(OrderContext);
   const isAdmin = isModeAdmin;
 
-  const checkAdmin = () => {
-    console.log("is admin: ", isAdmin);
-  };
-  checkAdmin();
-
   // Comportements, les actions, la logique
-
+  const handleDelete = () => {
+    // Call the onDelete callback with the card ID
+    onDelete(id);
+  };
   // L’affichage, le render, via return
 
   return (
     <CardStyled>
       {isAdmin && (
         <div className="delete-div">
-          <TiDelete className="delete-button" />
+          <TiDelete className="delete-button" onClick={handleDelete} />
         </div>
       )}
       <img className="img" src={imgUrl} alt={title} />
