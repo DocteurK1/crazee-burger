@@ -7,7 +7,6 @@ import { BsFillCameraFill } from "react-icons/bs";
 
 export default function AddForm() {
   // State
-  let [value, setValue] = useState("");
   let [productNameValue, setProductNameValue] = useState("");
   let [productUrlValue, setProductUrlValue] = useState("");
   let [productPrice, setProductPrice] = useState("");
@@ -20,11 +19,21 @@ export default function AddForm() {
   };
 
   const onProductUrlChange = (event) => {
-    setProductUrlValue(event.target.value);
-    console.log("Product Url : ", productUrlValue);
+    const value = event.target.value;
+    console.log("Product Url:", value);
+
+    const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+
+    if (urlRegex.test(value)) {
+      console.log("Valid URL");
+      setProductUrlValue(value);
+    } else {
+      console.log("Invalid URL");
+      setProductUrlValue("");
+    }
   };
 
-  const onProductPriceeChange = (event) => {
+  const onProductPriceChange = (event) => {
     setProductPrice(event.target.value);
     console.log("Product Price : ", productPrice);
   };
@@ -49,13 +58,13 @@ export default function AddForm() {
       </div>
       <div className="text-input">
         <AddFormInput
-          value={value}
+          value={productNameValue}
           onChange={onProductNameChange}
           placeholder={"Produit (ex: Super Burger)"}
           Icon={<FaHamburger className="icon" />}
         />
         <AddFormInput
-          value={value}
+          value={productUrlValue}
           onChange={onProductUrlChange}
           placeholder={
             "Lien URL d'une image (ex: https://la-photo-de-mon-produit.png)"
@@ -63,8 +72,8 @@ export default function AddForm() {
           Icon={<BsFillCameraFill className="icon" />}
         />
         <AddFormInput
-          value={value}
-          onChange={onProductPriceeChange}
+          value={productPrice}
+          onChange={onProductPriceChange}
           placeholder={"Prix"}
           Icon={<MdOutlineEuro className="icon" />}
         />
