@@ -7,57 +7,37 @@ import { BsFillCameraFill } from "react-icons/bs";
 import OrderContext from "../../../../../../context/OrderContext.js";
 import { FiCheckCircle } from "react-icons/fi";
 
+const EMPTY_PRODUCT = {
+  id: "",
+  title: "",
+  imageSource: "",
+  price: 0,
+};
+
 export default function AddForm() {
   // State
-  const defaultImage = "/images/coming-soon.png";
-  let [productNameValue, setProductNameValue] = useState("");
-  let [productUrlValue, setProductUrlValue] = useState("");
-  let [productPrice, setProductPrice] = useState("");
   const { handleAddProduct } = useContext(OrderContext);
   let [showSuccess, setShowSuccess] = useState(false);
+  const [newProduct, setnewProduct] = useState(EMPTY_PRODUCT);
 
   // Comportements
 
-  const onProductNameChange = (event) => {
-    setProductNameValue(event.target.value);
-    console.log("Product Name : ", productNameValue);
-  };
-
-  const onProductUrlChange = (event) => {
-    const value = event.target.value;
-    console.log("Product Url:", value);
-
-    const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
-
-    if (urlRegex.test(value)) {
-      console.log("Valid URL");
-      setProductUrlValue(value);
-    } else {
-      console.log("Invalid URL");
-      setProductUrlValue(defaultImage);
-      console.log("image url: ", productUrlValue);
-    }
-  };
-
-  const onProductPriceChange = (event) => {
-    setProductPrice(event.target.value);
-    console.log("Product Price : ", productPrice);
+  const onFormChange = (event) => {
+    const newValue = event.target.value;
+    const inputName = event.target.name;
+    setnewProduct({ ...newProduct, [inputName]: newValue });
+    // console.log("newProduct", newProduct);
   };
 
   const onSubmit = (event) => {
     event.preventDefault();
-
-    console.log("Product Name : ", productNameValue);
-    console.log("Product Url : ", productUrlValue);
-    console.log("Product Price : ", productPrice);
-
-    const newProduct = {
-      id: new Date().getTime(),
-      title: productNameValue,
-      imageSource: productUrlValue ? productUrlValue : defaultImage,
-      price: productPrice,
+    const id = crypto.randomUUID();
+    const newProductToAdd = {
+      ...newProduct,
+      id,
     };
-    handleAddProduct(newProduct);
+    handleAddProduct(newProductToAdd);
+    setnewProduct(EMPTY_PRODUCT);
 
     // Set a flag to show the div
     setShowSuccess(true);
@@ -73,30 +53,33 @@ export default function AddForm() {
   return (
     <AddFormStyled onSubmit={onSubmit}>
       <div className="img-holder">
-        {productUrlValue !== "" ? (
-          <img src={productUrlValue} alt="Product" />
+        {newProduct.imageSource ? (
+          <img src={newProduct.imageSource} alt={newProduct.title} />
         ) : (
           <div>Aucune image</div>
         )}
       </div>
       <div className="text-input">
         <AddFormInput
-          value={productNameValue}
-          onChange={onProductNameChange}
+          name="title"
+          value={newProduct.title}
+          onChange={onFormChange}
           placeholder={"Produit (ex: Super Burger)"}
           Icon={<FaHamburger className="icon" />}
         />
         <AddFormInput
-          value={productUrlValue}
-          onChange={onProductUrlChange}
+          name="imageSource"
+          value={newProduct.imageSource}
+          onChange={onFormChange}
           placeholder={
             "Lien URL d'une image (ex: https://la-photo-de-mon-produit.png)"
           }
           Icon={<BsFillCameraFill className="icon" />}
         />
         <AddFormInput
-          value={productPrice}
-          onChange={onProductPriceChange}
+          name="price"
+          value={newProduct.price}
+          onChange={onFormChange}
           placeholder={"Prix"}
           Icon={<MdOutlineEuro className="icon" />}
         />

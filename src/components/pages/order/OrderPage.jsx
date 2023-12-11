@@ -21,7 +21,6 @@ export default function OrderPage() {
     console.log("test : ", newProduct);
     // Pour update un tableau, d'abord je le copie, je manipule la copie, puis j'envoi la copie au setter :
     // 1. Copie du tableau
-
     const menuCopy = [...menu];
 
     // 2. Manipulation de la copie du tableau

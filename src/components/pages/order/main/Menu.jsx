@@ -7,6 +7,8 @@ import OrderContext from "../../../../context/OrderContext.js";
 import { fakeMenu } from "../../../../fakeData/fakeMenu.js";
 import EmptyMenu from "./EmptyMenu.jsx";
 
+const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
+
 export default function Menu() {
   // D’abord on définit les states de base (état, données, variable…)
   const { menu, setMenu } = useContext(OrderContext);
@@ -32,13 +34,13 @@ export default function Menu() {
     <MenuStyled>
       {menu.length === 0 && <EmptyMenu resetMenu={resetMenu} />}
 
-      {menu.map((produit) => (
+      {menu.map(({ id, title, imageSource, price }) => (
         <Card
-          key={produit.id}
-          id={produit.id}
-          imgUrl={produit.imageSource}
-          title={truncateString(produit.title, 11)}
-          price={formatPrice(produit.price)}
+          key={id}
+          id={id}
+          imgUrl={imageSource ? imageSource : IMAGE_BY_DEFAULT}
+          title={truncateString(title, 11)}
+          price={formatPrice(price)}
           onDelete={handleDelete}
         />
       ))}
