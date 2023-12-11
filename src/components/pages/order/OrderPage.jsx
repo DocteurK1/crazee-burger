@@ -4,6 +4,7 @@ import Main from "./main/Main.jsx";
 import styled from "styled-components";
 import { theme } from "../../../theme/index.js";
 import OrderContext from "../../../context/OrderContext.js";
+import { fakeMenu } from "../../../fakeData/fakeMenu.js";
 
 export default function OrderPage() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -12,8 +13,23 @@ export default function OrderPage() {
   const [isEditSelected, setIsEditSelected] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [currentTabSelected, setCurrentTabSelected] = useState("add");
+  const [menu, setMenu] = useState(fakeMenu.LARGE);
 
   // // Comportements, les actions, la logique
+
+  const handleAddProduct = (newProduct) => {
+    console.log("test : ", newProduct);
+    // Pour update un tableau, d'abord je le copie, je manipule la copie, puis j'envoi la copie au setter :
+    // 1. Copie du tableau
+
+    const menuCopy = [...menu];
+
+    // 2. Manipulation de la copie du tableau
+    const menuUpdated = [newProduct, ...menuCopy];
+
+    // 3. Update du state via le setter
+    setMenu(menuUpdated);
+  };
 
   const orderContextValue = {
     isModeAdmin,
@@ -26,7 +42,18 @@ export default function OrderPage() {
     setIsEditSelected,
     currentTabSelected,
     setCurrentTabSelected,
+    menu,
+    setMenu,
+    handleAddProduct,
   };
+
+  // const newProduct = {
+  //   id: new Date().getTime(),
+  //   title: "New Product",
+  //   imageSource:
+  //     "https://assets.coingecko.com/coins/images/279/standard/ethereum.png?1696501628",
+  //   price: 2.5,
+  // };
 
   // L’affichage, le render, via return
 

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { FaHamburger } from "react-icons/fa";
 import AddFormInput from "../../../../../reusable-ui/AddFormInput.jsx";
 import { MdOutlineEuro } from "react-icons/md";
 import { BsFillCameraFill } from "react-icons/bs";
+import OrderContext from "../../../../../../context/OrderContext.js";
 
 export default function AddForm() {
   // State
@@ -11,6 +12,8 @@ export default function AddForm() {
   let [productNameValue, setProductNameValue] = useState("");
   let [productUrlValue, setProductUrlValue] = useState("");
   let [productPrice, setProductPrice] = useState("");
+
+  const { handleAddProduct } = useContext(OrderContext);
 
   // Comportements
 
@@ -42,9 +45,23 @@ export default function AddForm() {
 
   const onSubmit = (event) => {
     event.preventDefault();
+
     console.log("Product Name : ", productNameValue);
     console.log("Product Url : ", productUrlValue);
     console.log("Product Price : ", productPrice);
+
+    const newProduct = {
+      id: new Date().getTime(),
+      title: productNameValue,
+      imageSource: productUrlValue ? productUrlValue : defaultImage,
+      price: productPrice,
+    };
+    handleAddProduct(newProduct);
+
+    // Clear form values NOT working - dont know why ?
+    // setProductNameValue("");
+    // setProductUrlValue("");
+    // setProductPrice("");
   };
 
   // Affichage

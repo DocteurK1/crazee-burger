@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import Card from "./Card.jsx";
 import { fakeMenu } from "../../../../fakeData/fakeMenu.js";
 import { formatPrice } from "../../../../utils/maths.js";
 import { truncateString } from "../../../../utils/truncateString.js";
+import AddForm from "./Admin/AdminPanel/AddForm.jsx";
+import { MdTableRestaurant } from "react-icons/md";
+import OrderContext from "../../../../context/OrderContext.js";
 
 export default function Menu() {
   // D’abord on définit les states de base (état, données, variable…)
-
-  const [menu, setMenu] = useState(fakeMenu.LARGE);
+  const { menu, setMenu } = useContext(OrderContext);
 
   // Comportements, les actions, la logique
 
@@ -22,6 +24,7 @@ export default function Menu() {
 
   return (
     <MenuStyled>
+      {/* <AddForm onAddCard={handleAddCard} /> */}
       {menu.map((produit) => (
         <Card
           id={produit.id}
