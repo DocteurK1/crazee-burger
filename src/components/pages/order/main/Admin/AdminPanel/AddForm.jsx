@@ -13,9 +13,7 @@ export default function AddForm() {
   let [productNameValue, setProductNameValue] = useState("");
   let [productUrlValue, setProductUrlValue] = useState("");
   let [productPrice, setProductPrice] = useState("");
-
   const { handleAddProduct } = useContext(OrderContext);
-  // const setShowSuccess = false;
   let [showSuccess, setShowSuccess] = useState(false);
 
   // Comportements
