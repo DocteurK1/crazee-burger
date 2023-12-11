@@ -5,6 +5,7 @@ import AddFormInput from "../../../../../reusable-ui/AddFormInput.jsx";
 import { MdOutlineEuro } from "react-icons/md";
 import { BsFillCameraFill } from "react-icons/bs";
 import OrderContext from "../../../../../../context/OrderContext.js";
+import { FiCheckCircle } from "react-icons/fi";
 
 export default function AddForm() {
   // State
@@ -14,6 +15,8 @@ export default function AddForm() {
   let [productPrice, setProductPrice] = useState("");
 
   const { handleAddProduct } = useContext(OrderContext);
+  // const setShowSuccess = false;
+  let [showSuccess, setShowSuccess] = useState(false);
 
   // Comportements
 
@@ -58,10 +61,13 @@ export default function AddForm() {
     };
     handleAddProduct(newProduct);
 
-    // Clear form values NOT working - dont know why ?
-    // setProductNameValue("");
-    // setProductUrlValue("");
-    // setProductPrice("");
+    // Set a flag to show the div
+    setShowSuccess(true);
+
+    // Hide the div after 2 seconds
+    setTimeout(() => {
+      setShowSuccess(false);
+    }, 2000);
   };
 
   // Affichage
@@ -102,6 +108,11 @@ export default function AddForm() {
         <button className="submit-button" onClick={onSubmit}>
           Ajouter un nouveau produit au menu
         </button>
+        {showSuccess && (
+          <div className="success-message">
+            {<FiCheckCircle />} Ajouté avec succès !
+          </div>
+        )}
       </div>
     </AddFormStyled>
   );
@@ -166,5 +177,22 @@ const AddFormStyled = styled.form`
     line-height: normal;
 
     cursor: pointer;
+  }
+  .submit-button:hover {
+    background: #fff;
+    color: #60bd4f; /* Update this with the desired text color */
+  }
+
+  .success-message {
+    color: #60bd4f;
+    font-family: Open Sans;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 15px;
   }
 `;

@@ -146,6 +146,7 @@ const CardButtonStyled = styled.button`
   color: ${theme.colors.white};
   background-color: orange;
   border: 1px solid orange;
+  cursor: pointer;
 
   &:hover:not(:disabled) {
     background-color: ${theme.colors.white};

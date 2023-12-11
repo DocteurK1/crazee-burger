@@ -29,6 +29,8 @@ export default function OrderPage() {
 
     // 3. Update du state via le setter
     setMenu(menuUpdated);
+
+    console.log("Menu Length : ", menu.length);
   };
 
   const orderContextValue = {
@@ -46,14 +48,6 @@ export default function OrderPage() {
     setMenu,
     handleAddProduct,
   };
-
-  // const newProduct = {
-  //   id: new Date().getTime(),
-  //   title: "New Product",
-  //   imageSource:
-  //     "https://assets.coingecko.com/coins/images/279/standard/ethereum.png?1696501628",
-  //   price: 2.5,
-  // };
 
   // L’affichage, le render, via return
 
