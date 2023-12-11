@@ -23,7 +23,7 @@ export default function LoginForm() {
 
   const onChange = (event) => {
     setValue(event.target.value);
-    console.log("firstName value: ", value);
+    // console.log("firstName value: ", value);
   };
 
   // L’affichage, le render, via return

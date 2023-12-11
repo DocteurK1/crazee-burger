@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import OrderContext from "../../../../../../context/OrderContext";
+import OrderContext from "../../../../context/OrderContext";
 
 export default function EmptyMenu({ resetMenu }) {
   // State

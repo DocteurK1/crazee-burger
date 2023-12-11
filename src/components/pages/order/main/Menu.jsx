@@ -5,7 +5,7 @@ import { formatPrice } from "../../../../utils/maths.js";
 import { truncateString } from "../../../../utils/truncateString.js";
 import OrderContext from "../../../../context/OrderContext.js";
 import { fakeMenu } from "../../../../fakeData/fakeMenu.js";
-import EmptyMenu from "./Admin/AdminPanel/EmptyMenu.jsx";
+import EmptyMenu from "./EmptyMenu.jsx";
 
 export default function Menu() {
   // D’abord on définit les states de base (état, données, variable…)
