@@ -11,7 +11,8 @@ const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
 export default function Menu() {
   // D’abord on définit les states de base (état, données, variable…)
-  const { menu, setMenu } = useContext(OrderContext);
+  const { menu, setMenu, productToEdit, setProductToEdit } =
+    useContext(OrderContext);
   const [defaultMenu] = useState(fakeMenu.LARGE);
 
   // Comportements, les actions, la logique
@@ -28,6 +29,21 @@ export default function Menu() {
     setMenu(defaultMenu);
   };
 
+  const onCardSelect = (cardId) => {
+    // Find the selected card in the menu array
+    const selectedCard = menu.find((card) => card.id === cardId);
+
+    if (selectedCard) {
+      // Update the productToEdit state with the selected card's information
+      setProductToEdit({
+        title: selectedCard.title,
+        imageSource: selectedCard.imageSource,
+        price: selectedCard.price,
+      });
+      console.log("productToEdit", productToEdit);
+    }
+  };
+
   // Affichage
 
   return (
@@ -42,6 +58,7 @@ export default function Menu() {
           title={truncateString(title, 11)}
           price={formatPrice(price)}
           onDelete={handleDelete}
+          onCardSelect={onCardSelect}
         />
       ))}
     </MenuStyled>

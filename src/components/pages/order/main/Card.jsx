@@ -4,7 +4,14 @@ import { theme } from "../../../../theme";
 import { TiDelete } from "react-icons/ti";
 import OrderContext from "../../../../context/OrderContext";
 
-export default function Card({ id, imgUrl, title, price, onDelete }) {
+export default function Card({
+  id,
+  imgUrl,
+  title,
+  price,
+  onDelete,
+  onCardSelect,
+}) {
   // D’abord on définit les states de base (état, données, variable…)
   const { isModeAdmin } = useContext(OrderContext);
   const isAdmin = isModeAdmin;
@@ -14,22 +21,30 @@ export default function Card({ id, imgUrl, title, price, onDelete }) {
     // Call the onDelete callback with the card ID
     onDelete(id);
   };
+
+  const handleCardClick = (event) => {
+    // console.log("click: ", event.target.value);
+    onCardSelect(id);
+  };
+
   // L’affichage, le render, via return
 
   return (
-    <CardStyled>
-      {isAdmin && (
-        <div className="delete-div">
-          <TiDelete className="delete-button" onClick={handleDelete} />
+    <CardStyled onClick={handleCardClick}>
+      <div className="card">
+        {isAdmin && (
+          <div className="delete-div">
+            <TiDelete className="delete-button" onClick={handleDelete} />
+          </div>
+        )}
+        <img className="img" src={imgUrl} alt={title} />
+        <p className="CardTitle">{title}</p>
+        <div className="info-text">
+          <p className="CardDescription">{price}</p>
+          <CardButtonStyled>
+            <span>Ajouter</span>
+          </CardButtonStyled>
         </div>
-      )}
-      <img className="img" src={imgUrl} alt={title} />
-      <p className="CardTitle">{title}</p>
-      <div className="info-text">
-        <p className="CardDescription">{price}</p>
-        <CardButtonStyled>
-          <span>Ajouter</span>
-        </CardButtonStyled>
       </div>
     </CardStyled>
   );
@@ -47,13 +62,16 @@ const CardStyled = styled.div`
   box-shadow: -8px 8px 20px 0px rgb(0 0 0 / 20%);
   position: relative;
 
+  &:hover {
+    border-radius: 15px;
+    box-shadow: -8px 8px 20px 0px rgba(255, 160, 27, 0.7);
+    transform: scale(1.1);
+    transition-duration: 50ms;
+  }
+
   .delete-div {
-    /* height: 50px;
-    width: 100%; */
-    /* border: 1px solid red; */
     position: absolute;
     right: 0;
-    /* margin-left: auto; */
   }
 
   .delete-button {

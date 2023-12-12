@@ -14,6 +14,7 @@ export default function OrderPage() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [currentTabSelected, setCurrentTabSelected] = useState("add");
   const [menu, setMenu] = useState(fakeMenu.LARGE);
+  const [productToEdit, setProductToEdit] = useState();
 
   // // Comportements, les actions, la logique
 
@@ -46,6 +47,8 @@ export default function OrderPage() {
     menu,
     setMenu,
     handleAddProduct,
+    productToEdit,
+    setProductToEdit,
   };
 
   // L’affichage, le render, via return
