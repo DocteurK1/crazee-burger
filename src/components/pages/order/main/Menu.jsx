@@ -1,25 +1,47 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import Card from "./Card.jsx";
-import { fakeMenu2 } from "../../../../fakeData/fakeMenu.js";
 import { formatPrice } from "../../../../utils/maths.js";
 import { truncateString } from "../../../../utils/truncateString.js";
+import OrderContext from "../../../../context/OrderContext.js";
+import { fakeMenu } from "../../../../fakeData/fakeMenu.js";
+import EmptyMenu from "./EmptyMenu.jsx";
+
+const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
 export default function Menu() {
   // D’abord on définit les states de base (état, données, variable…)
-
-  const [menu, setMenu] = useState(fakeMenu2);
+  const { menu, setMenu } = useContext(OrderContext);
+  const [defaultMenu] = useState(fakeMenu.LARGE);
 
   // Comportements, les actions, la logique
 
+  const handleDelete = (cardId) => {
+    // Filter out the card with the given ID and update the state
+    const updatedMenu = menu.filter((card) => card.id !== cardId);
+    setMenu(updatedMenu);
+    console.log("Menu Length : ", menu.length);
+  };
+
+  const resetMenu = () => {
+    console.log("reset menu");
+    setMenu(defaultMenu);
+  };
+
+  // Affichage
+
   return (
     <MenuStyled>
-      {menu.map((produit) => (
+      {menu.length === 0 && <EmptyMenu resetMenu={resetMenu} />}
+
+      {menu.map(({ id, title, imageSource, price }) => (
         <Card
-          key={produit.id}
-          imgUrl={produit.imageSource}
-          title={truncateString(produit.title, 11)}
-          price={formatPrice(produit.price)}
+          key={id}
+          id={id}
+          imgUrl={imageSource ? imageSource : IMAGE_BY_DEFAULT}
+          title={truncateString(title, 11)}
+          price={formatPrice(price)}
+          onDelete={handleDelete}
         />
       ))}
     </MenuStyled>

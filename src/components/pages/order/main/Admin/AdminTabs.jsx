@@ -42,6 +42,7 @@ export default function AdminTabs() {
       {tabs.map((tab) => {
         return (
           <Tab
+            key={tab.index}
             label={tab.label}
             Icon={tab.Icon}
             onClick={() => selectTab(tab.index)}
@@ -49,19 +50,6 @@ export default function AdminTabs() {
           />
         );
       })}
-
-      {/* <Tab
-        label="Ajouter un produit"
-        Icon={<AiOutlinePlus />}
-        onClick={() => selectTab("add")}
-        className={isAddSelected ? "is-active" : ""}
-      />
-      <Tab
-        label="Modifier un produit"
-        Icon={<MdModeEditOutline />}
-        onClick={() => selectTab("edit")}
-        className={isEditSelected ? "is-active" : ""}
-      /> */}
     </AdminTabsStyled>
   );
 }
