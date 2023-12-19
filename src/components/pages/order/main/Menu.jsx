@@ -12,8 +12,15 @@ const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
 export default function Menu() {
   // D’abord on définit les states de base (état, données, variable…)
-  const { menu, setMenu, productToEdit, setProductToEdit, isModeAdmin } =
-    useContext(OrderContext);
+  const {
+    menu,
+    setMenu,
+    productToEdit,
+    setProductToEdit,
+    isModeAdmin,
+    setIsCollapsed,
+    setCurrentTabSelected,
+  } = useContext(OrderContext);
   const [defaultMenu] = useState(fakeMenu.LARGE);
 
   // Comportements, les actions, la logique
@@ -30,7 +37,10 @@ export default function Menu() {
     setMenu(defaultMenu);
   };
 
-  const onCardSelect = (cardId) => {
+  const onCardSelect = async (cardId) => {
+    // Si je fais ça et que la condition l'inqiue, alors le reste de la focntion n'est pas exécutée. (comme un if else en plus court)
+    if (!isModeAdmin) return;
+
     // Find the selected card in the menu array
     const selectedCard = menu.find((card) => card.id === cardId);
 
@@ -42,6 +52,12 @@ export default function Menu() {
         imageSource: selectedCard.imageSource,
         price: selectedCard.price,
       });
+
+      // await après avoir défini la function comme asynchrone avec async, veux dire que le reste du code s exécute juste quand celle ci est bien terminée
+      await setIsCollapsed(false);
+      await setCurrentTabSelected("edit");
+      // await titleEditRef.current.focus();
+
       console.log("productToEdit : ", productToEdit);
     }
   };
