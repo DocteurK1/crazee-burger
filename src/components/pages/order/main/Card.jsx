@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { theme } from "../../../../theme";
 import { TiDelete } from "react-icons/ti";
 import OrderContext from "../../../../context/OrderContext";
+// import { isStr } from "react-toastify/dist/utils";
 
 export default function Card({
   id,
@@ -11,6 +12,8 @@ export default function Card({
   price,
   onDelete,
   onCardSelect,
+  isHoverable,
+  isSelected,
 }) {
   // D’abord on définit les states de base (état, données, variable…)
   const { isModeAdmin } = useContext(OrderContext);
@@ -30,7 +33,11 @@ export default function Card({
   // L’affichage, le render, via return
 
   return (
-    <CardStyled onClick={handleCardClick}>
+    <CardStyled
+      onClick={handleCardClick}
+      isHoverable={isHoverable}
+      isSelected={isSelected}
+    >
       <div className="card">
         {isAdmin && (
           <div className="delete-div">
@@ -41,7 +48,7 @@ export default function Card({
         <p className="CardTitle">{title}</p>
         <div className="info-text">
           <p className="CardDescription">{price}</p>
-          <CardButtonStyled>
+          <CardButtonStyled className="primary-button">
             <span>Ajouter</span>
           </CardButtonStyled>
         </div>
@@ -51,8 +58,10 @@ export default function Card({
 }
 
 const CardStyled = styled.div`
-  /* z-index: 5; */
-  /* background: blue; */
+  ${(props) => props.isHoverable && hoverableStyle}
+
+  /* border: 2px solid red; */
+
   display: flex;
   width: 240px;
   height: 330px;
@@ -62,11 +71,9 @@ const CardStyled = styled.div`
   box-shadow: -8px 8px 20px 0px rgb(0 0 0 / 20%);
   position: relative;
 
-  &:hover {
-    border-radius: 15px;
-    box-shadow: -8px 8px 20px 0px rgba(255, 160, 27, 0.7);
-    transform: scale(1.1);
-    transition-duration: 50ms;
+  .card {
+    border-radius: ${theme.borderRadius.extraRound};
+    height: 330px;
   }
 
   .delete-div {
@@ -128,12 +135,8 @@ const CardStyled = styled.div`
   }
 
   .CardDescription {
-    /* display: flex;
-    justify-content: left;
-    align-items: center; */
     padding-top: 10px;
     margin-left: 30px;
-    /* display: inline; */
 
     text-align: left;
     color: ${theme.colors.primary};
@@ -142,6 +145,7 @@ const CardStyled = styled.div`
     font-weight: 400;
     letter-spacing: 1.5px;
   }
+  ${({ isHoverable, isSelected }) => isHoverable && isSelected && selectedStyle}
 `;
 
 const CardButtonStyled = styled.button`
@@ -182,5 +186,67 @@ const CardButtonStyled = styled.button`
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+  }
+`;
+
+const hoverableStyle = css`
+  &:hover {
+    transform: scale(1.05);
+    transition: ease-out0.4s;
+    box-shadow: -8px 8px 20px 0px rgba(255, 160, 27, 0.7);
+    cursor: pointer;
+  }
+`;
+
+const selectedStyle = css`
+  background: ${theme.colors.primary};
+  .primary-button {
+    color: ${theme.colors.primary};
+    background-color: ${theme.colors.white};
+    border: 1px solid ${theme.colors.white};
+    transition: all 200ms ease-out;
+    :hover {
+      color: ${theme.colors.white};
+      background-color: ${theme.colors.primary};
+      border: 1px solid ${theme.colors.white};
+      transition: all 200ms ease-out;
+    }
+    :active {
+      background-color: ${theme.colors.white};
+      color: ${theme.colors.primary};
+    }
+
+    &.is-disabled {
+      opacity: 50%;
+      cursor: not-allowed;
+      z-index: 2;
+    }
+
+    &.with-focus {
+      border: 1px solid white;
+      background-color: ${theme.colors.white};
+      color: ${theme.colors.primary};
+      :hover {
+        color: ${theme.colors.white};
+        background-color: ${theme.colors.primary};
+        border: 1px solid ${theme.colors.white};
+      }
+      :active {
+        background-color: ${theme.colors.white};
+        color: ${theme.colors.primary};
+      }
+    }
+  }
+
+  .delete-button {
+    color: ${theme.colors.white};
+
+    :active {
+      color: ${theme.colors.white};
+    }
+  }
+
+  .CardDescription {
+    color: ${theme.colors.white};
   }
 `;

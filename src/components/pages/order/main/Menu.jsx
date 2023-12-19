@@ -6,12 +6,13 @@ import { truncateString } from "../../../../utils/truncateString.js";
 import OrderContext from "../../../../context/OrderContext.js";
 import { fakeMenu } from "../../../../fakeData/fakeMenu.js";
 import EmptyMenu from "./EmptyMenu.jsx";
+import { checkIfProductisClicked } from "./helper.js";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
 export default function Menu() {
   // D’abord on définit les states de base (état, données, variable…)
-  const { menu, setMenu, productToEdit, setProductToEdit } =
+  const { menu, setMenu, productToEdit, setProductToEdit, isModeAdmin } =
     useContext(OrderContext);
   const [defaultMenu] = useState(fakeMenu.LARGE);
 
@@ -60,6 +61,8 @@ export default function Menu() {
           price={formatPrice(price)}
           onDelete={handleDelete}
           onCardSelect={onCardSelect}
+          isHoverable={isModeAdmin}
+          isSelected={checkIfProductisClicked(id, productToEdit.id)}
         />
       ))}
     </MenuStyled>

@@ -6,6 +6,7 @@ import { theme } from "../../../theme/index.js";
 import OrderContext from "../../../context/OrderContext.js";
 import { fakeMenu } from "../../../fakeData/fakeMenu.js";
 import { EMPTY_PRODUCT } from "../../../enums/product.js";
+import { deepClone } from "../../../utils/array.js";
 
 export default function OrderPage() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -36,7 +37,7 @@ export default function OrderPage() {
 
   const handleEdit = (productBeingEdited) => {
     //1. copy du state
-    const menuCopy = JSON.parse(JSON.stringify(menu));
+    const menuCopy = deepClone(menu);
 
     //2. manip de la copie du state
     const indexOfProductToEdit = menu.findIndex(

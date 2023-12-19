@@ -1,19 +1,16 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import OrderContext from "../../../../../../context/OrderContext";
 import styled from "styled-components";
 import { FaHamburger } from "react-icons/fa";
 import { BsFillCameraFill } from "react-icons/bs";
 import { MdOutlineEuro } from "react-icons/md";
 import AddFormInput from "../../../../../reusable-ui/AddFormInput";
-import { EMPTY_PRODUCT } from "../../../../../../enums/product";
-import { theme } from "../../../../../../theme";
 
 export default function EditForm() {
   // State
 
   const { productToEdit, setProductToEdit, handleEdit } =
     useContext(OrderContext);
-  const [productBeingEdited, setProductBeingEdited] = useState(EMPTY_PRODUCT);
 
   // Comportements
 
