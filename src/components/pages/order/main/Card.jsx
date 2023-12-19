@@ -20,7 +20,7 @@ export default function Card({
   const isAdmin = isModeAdmin;
 
   // Comportements, les actions, la logique
-  const handleDelete = () => {
+  const handleDelete = (event) => {
     // Call the onDelete callback with the card ID
     onDelete(id);
   };
@@ -41,7 +41,7 @@ export default function Card({
       <div className="card">
         {isAdmin && (
           <div className="delete-div">
-            <TiDelete className="delete-button" onClick={handleDelete} />
+            <TiDelete className="delete-button" onClick={onDelete} />
           </div>
         )}
         <img className="img" src={imgUrl} alt={title} />

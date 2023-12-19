@@ -46,6 +46,11 @@ export default function Menu() {
     }
   };
 
+  const handleCardDelete = (event, idProductToDelete) => {
+    event.stopPropagation();
+    handleDelete(idProductToDelete);
+  };
+
   // Affichage
 
   return (
@@ -59,10 +64,11 @@ export default function Menu() {
           imgUrl={imageSource ? imageSource : IMAGE_BY_DEFAULT}
           title={truncateString(title, 11)}
           price={formatPrice(price)}
-          onDelete={handleDelete}
+          onDelete={(event) => handleCardDelete(event, id)}
           onCardSelect={onCardSelect}
           isHoverable={isModeAdmin}
           isSelected={checkIfProductisClicked(id, productToEdit.id)}
+          // onCardDelete={{} => handleCardDelete(id)}
         />
       ))}
     </MenuStyled>
