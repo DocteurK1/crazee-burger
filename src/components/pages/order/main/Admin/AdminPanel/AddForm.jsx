@@ -6,13 +6,7 @@ import { MdOutlineEuro } from "react-icons/md";
 import { BsFillCameraFill } from "react-icons/bs";
 import OrderContext from "../../../../../../context/OrderContext.js";
 import { FiCheckCircle } from "react-icons/fi";
-
-const EMPTY_PRODUCT = {
-  id: "",
-  title: "",
-  imageSource: "",
-  price: 0,
-};
+import { EMPTY_PRODUCT } from "../../../../../../enums/product.js";
 
 export default function AddForm() {
   // State

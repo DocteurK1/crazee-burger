@@ -36,11 +36,12 @@ export default function Menu() {
     if (selectedCard) {
       // Update the productToEdit state with the selected card's information
       setProductToEdit({
+        id: selectedCard.id,
         title: selectedCard.title,
         imageSource: selectedCard.imageSource,
         price: selectedCard.price,
       });
-      console.log("productToEdit", productToEdit);
+      console.log("productToEdit : ", productToEdit);
     }
   };
 
