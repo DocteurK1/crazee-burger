@@ -7,6 +7,8 @@ export default function Basket() {
 
 const BasketStyled = styled.div`
   /* background: red; */
-  border: 2px solid red;
+  border: 1px solid red;
   width: 350px;
+  height: 100%;
+  /* background: grey; */
 `;

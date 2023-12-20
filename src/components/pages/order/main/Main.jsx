@@ -17,9 +17,9 @@ export default function Main() {
 
   return (
     <StyledMain>
-      {/* <div className="basket">
+      <div className="basket">
         <Basket />
-      </div> */}
+      </div>
       <div className="menu-and-admin">
         <Menu />
         {isModeAdmin && <Admin />}
@@ -37,19 +37,19 @@ const StyledMain = styled.div`
   width: 1400px;
   height: calc(95vh - 10vh);
 
-  border: 2px solid green;
+  /* border: 2px solid green; */
 
   box-shadow: 0px 8px 20px 8px rgba(0, 0, 0, 0.2) inset;
   border-bottom-right-radius: ${theme.borderRadius.extraRound};
   border-bottom-left-radius: ${theme.borderRadius.extraRound};
 
   display: grid;
-  /* grid-template-columns: 25% 1fr; // A réactiver quand on se servira du basket */
-  grid-template-columns: 1fr; // A desactiver quand on se servira du basket
+  grid-template-columns: 25% 1fr; // A réactiver quand on se servira du basket
+  //grid-template-columns: 1fr; // A desactiver quand on se servira du basket
 
   .basket {
     /* background: pink; */
-    border: 2px solid pink;
+    /* border: 2px solid pink; */
   }
 
   .menu-and-admin {
