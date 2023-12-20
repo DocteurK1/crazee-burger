@@ -5,6 +5,7 @@ import { FaHamburger } from "react-icons/fa";
 import { BsFillCameraFill } from "react-icons/bs";
 import { MdOutlineEuro } from "react-icons/md";
 import AddFormInput from "../../../../../reusable-ui/AddFormInput";
+import EditInfoMessage from "./EditInfoMessage";
 
 export default function EditForm() {
   // State
@@ -59,6 +60,7 @@ export default function EditForm() {
           placeholder={"Prix"}
           Icon={<MdOutlineEuro className="icon" />}
         />
+        <EditInfoMessage />
       </div>
     </AddFormStyled>
   );
