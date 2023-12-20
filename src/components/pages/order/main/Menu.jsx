@@ -7,6 +7,7 @@ import OrderContext from "../../../../context/OrderContext.js";
 import { fakeMenu } from "../../../../fakeData/fakeMenu.js";
 import EmptyMenu from "./EmptyMenu.jsx";
 import { checkIfProductisClicked } from "./helper.js";
+import { EMPTY_PRODUCT } from "../../../../enums/product.js";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
@@ -30,6 +31,9 @@ export default function Menu() {
     const updatedMenu = menu.filter((card) => card.id !== cardId);
     setMenu(updatedMenu);
     console.log("Menu Length : ", menu.length);
+
+    // This is to check if the product deleted is the one in the edit form, if it is, then setProductToEdit to empty, so it doesnt display the edit form anymore, as no product is selected.
+    cardId === productToEdit.id && setProductToEdit(EMPTY_PRODUCT);
   };
 
   const resetMenu = () => {

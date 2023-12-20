@@ -3,12 +3,14 @@ import styled from "styled-components";
 import { theme } from "../../../../../../theme";
 import OrderContext from "../../../../../../context/OrderContext";
 import { getTabSelected, getTabsConfig } from "../getTabsConfig";
+import { EMPTY_PRODUCT } from "../../../../../../enums/product";
 
 export default function AdminPanel() {
   // State
-  const { currentTabSelected } = useContext(OrderContext);
+  const { currentTabSelected, productToEdit } = useContext(OrderContext);
 
-  const tabs = getTabsConfig(currentTabSelected);
+  const hasAlreadyBeenClicked = productToEdit !== EMPTY_PRODUCT;
+  const tabs = getTabsConfig(hasAlreadyBeenClicked);
   const tabSelected = getTabSelected(tabs, currentTabSelected);
 
   // Comportement
