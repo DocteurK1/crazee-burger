@@ -5,6 +5,8 @@ import styled from "styled-components";
 import { theme } from "../../../theme/index.js";
 import OrderContext from "../../../context/OrderContext.js";
 import { fakeMenu } from "../../../fakeData/fakeMenu.js";
+import { EMPTY_PRODUCT } from "../../../enums/product.js";
+import { deepClone } from "../../../utils/array.js";
 
 export default function OrderPage() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -14,6 +16,7 @@ export default function OrderPage() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [currentTabSelected, setCurrentTabSelected] = useState("add");
   const [menu, setMenu] = useState(fakeMenu.LARGE);
+  const [productToEdit, setProductToEdit] = useState(EMPTY_PRODUCT);
 
   // // Comportements, les actions, la logique
 
@@ -32,6 +35,21 @@ export default function OrderPage() {
     console.log("Menu Length : ", menu.length);
   };
 
+  const handleEdit = (productBeingEdited) => {
+    //1. copy du state
+    const menuCopy = deepClone(menu);
+
+    //2. manip de la copie du state
+    const indexOfProductToEdit = menu.findIndex(
+      (product) => product.id === productBeingEdited.id
+    );
+
+    menuCopy[indexOfProductToEdit] = productBeingEdited;
+
+    //3. update du state
+    setMenu(menuCopy);
+  };
+
   const orderContextValue = {
     isModeAdmin,
     setIsModeAdmin,
@@ -46,6 +64,9 @@ export default function OrderPage() {
     menu,
     setMenu,
     handleAddProduct,
+    productToEdit,
+    setProductToEdit,
+    handleEdit,
   };
 
   // L’affichage, le render, via return

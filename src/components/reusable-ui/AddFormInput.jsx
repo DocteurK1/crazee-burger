@@ -7,7 +7,7 @@ export default function AddFormInput({ value, onChange, Icon, ...extraProps }) {
   return (
     <InputStyled>
       {Icon && Icon}
-      <input onChange={onChange} type="text" {...extraProps} />
+      <input value={value} onChange={onChange} type="text" {...extraProps} />
     </InputStyled>
   );
 }
@@ -45,7 +45,7 @@ const InputStyled = styled.div`
     width: 100%; */
     /* display: flex; */
     width: 600px;
-    color: #a7a8ad;
+    color: ${theme.colors.dark};
     background: #f5f5f7;
     font-family: Arial;
     font-size: 15px;
