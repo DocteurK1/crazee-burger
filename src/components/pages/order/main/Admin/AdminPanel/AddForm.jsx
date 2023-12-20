@@ -7,12 +7,13 @@ import { BsFillCameraFill } from "react-icons/bs";
 import OrderContext from "../../../../../../context/OrderContext.js";
 import { FiCheckCircle } from "react-icons/fi";
 import { EMPTY_PRODUCT } from "../../../../../../enums/product.js";
+import { useDisplaySuccessMessage } from "../../../../../../hooks/useDisplaySuccessMessage.js";
 
 export default function AddForm() {
   // State
   const { handleAddProduct } = useContext(OrderContext);
-  let [showSuccess, setShowSuccess] = useState(false);
   const [newProduct, setnewProduct] = useState(EMPTY_PRODUCT);
+  const { showSuccess, displaySuccessMessage } = useDisplaySuccessMessage(2000);
 
   // Comportements
 
@@ -33,14 +34,18 @@ export default function AddForm() {
     handleAddProduct(newProductToAdd);
     setnewProduct(EMPTY_PRODUCT);
 
-    // Set a flag to show the div
-    setShowSuccess(true);
-
-    // Hide the div after 2 seconds
-    setTimeout(() => {
-      setShowSuccess(false);
-    }, 2000);
+    // Ici j appel le custom hook
+    displaySuccessMessage();
   };
+
+  //   // Set a flag to show the div
+  //   setShowSuccess(true);
+
+  //   // Hide the div after 2 seconds
+  //   setTimeout(() => {
+  //     setShowSuccess(false);
+  //   }, 2000);
+  // };
 
   // Affichage
 

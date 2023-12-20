@@ -9,7 +9,7 @@ import OrderContext from "../../../../context/OrderContext";
 export default function Main() {
   // D’abord on définit les states de base (état, données, variable…)
 
-  const { isModeAdmin, setIsModeAdmin } = useContext(OrderContext);
+  const { isModeAdmin } = useContext(OrderContext);
 
   // Comportements, les actions, la logique
 

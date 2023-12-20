@@ -22,7 +22,6 @@ const BasketHeaderStyled = styled.div`
   align-items: center;
 
   color: ${theme.colors.primary};
-  color: #ffa01b;
   font-family: ${theme.fonts.family.stylish};
   font-size: ${theme.fonts.size.P4};
   font-weight: ${theme.fonts.weights.regular};
