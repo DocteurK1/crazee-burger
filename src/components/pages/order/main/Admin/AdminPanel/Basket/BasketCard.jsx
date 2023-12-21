@@ -2,15 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { theme } from "../../../../../../../theme";
 
-export default function BasketCard() {
+export default function BasketCard({ id, title, imgUrl, price }) {
   return (
     <BasketCardStyled>
-      <div className="img">Image</div>
+      <img className="img" src={imgUrl} alt={title} />
       <div className="productInfo">
-        <div className="name">Product Name</div>
-        <div className="price">Price</div>
+        <div className="name">{title}</div>
+        <div className="price">{price}</div>
       </div>
-      <div className="quantity">Quantity</div>
+      <div className="quantity">x 13</div>
     </BasketCardStyled>
   );
 }
@@ -26,37 +26,50 @@ const BasketCardStyled = styled.div`
   border-radius: 5px;
   background: ${theme.colors.white};
   box-shadow: -4px 4px 15px 0px rgba(0, 0, 0, 0.2);
+  position: relative;
+  padding: 8px 16px;
 
   .img {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid blue;
     width: 85px;
-    height: 100%;
+    height: 70px;
+    object-fit: contain;
+    object-position: center;
   }
 
   .productInfo {
-    /* display: flex; */
+    flex: 1;
     align-items: center;
     justify-content: center;
     width: 120px;
+    align-items: flex-start;
+    padding-left: 15px;
 
     .name {
-      border: 1px solid red;
       display: flex;
       height: 50%;
+      /* display: inline; */
+      padding-top: 5px;
 
-      justify-content: center;
-      align-items: center;
+      color: #17161a;
+      font-family: Amatic SC;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 32px;
     }
     .price {
-      border: 1px solid green;
       display: flex;
       height: 50%;
 
-      justify-content: center;
-      align-items: center;
+      color: #ffa01b;
+      font-family: Open Sans;
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
     }
   }
 
@@ -64,7 +77,14 @@ const BasketCardStyled = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid orange;
+
+    color: #ffa01b;
+    font-family: Open Sans;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
     width: 76px;
     height: 100%;
   }
