@@ -20,10 +20,6 @@ export default function Card({
   const isAdmin = isModeAdmin;
 
   // Comportements, les actions, la logique
-  const handleDelete = (event) => {
-    // Call the onDelete callback with the card ID
-    onDelete(id);
-  };
 
   const handleCardClick = (event) => {
     // console.log("click: ", event.target.value);

@@ -43,14 +43,15 @@ export default function BasketMain() {
           // onCardDelete={{} => handleCardDelete(id)}
         />
       ))}
-      {/* <BasketCard /> */}
-      <BasketEmpty />
+      {basketMenu.length === 0 && <BasketEmpty />}
     </BasketMainStyled>
   );
 }
 
 const BasketMainStyled = styled.div`
-  height: 100%;
+  height: 675px;
+  /* flex: 0; */
+  overflow: auto;
   border-radius: 0px 0px 0px 15px;
   background: #f5f5f7;
   box-shadow: ${theme.shadows.basket};
