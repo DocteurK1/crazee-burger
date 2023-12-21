@@ -18,6 +18,7 @@ export default function OrderPage() {
   const [menu, setMenu] = useState(fakeMenu.LARGE);
   const [productToEdit, setProductToEdit] = useState(EMPTY_PRODUCT);
   const [basketMenuReal, setBasketMenuReal] = useState([]);
+  const [total, setTotal] = useState();
 
   // // Comportements, les actions, la logique
 
@@ -70,6 +71,8 @@ export default function OrderPage() {
     handleEdit,
     basketMenuReal,
     setBasketMenuReal,
+    total,
+    setTotal,
   };
 
   // L’affichage, le render, via return

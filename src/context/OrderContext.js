@@ -20,4 +20,7 @@ export default createContext({
 
   basketMenuReal: [],
   setBasketMenuReal: () => {},
+
+  total: 0,
+  setTotal: () => {},
 });

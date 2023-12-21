@@ -10,6 +10,7 @@ import { checkIfProductisClicked } from "./helper.js";
 import { EMPTY_PRODUCT } from "../../../../enums/product.js";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
+let TOTAL_PRICE = 0;
 
 export default function Menu() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -22,6 +23,9 @@ export default function Menu() {
     setIsCollapsed,
     setCurrentTabSelected,
     setBasketMenuReal,
+    basketMenuReal,
+    total,
+    setTotal,
   } = useContext(OrderContext);
   const [defaultMenu] = useState(fakeMenu.LARGE);
 
@@ -77,11 +81,28 @@ export default function Menu() {
 
     const productToAddToBasket = menu.find((item) => item.id === id);
 
-    if (productToAddToBasket) {
-      console.log("Object found:", productToAddToBasket);
-      setBasketMenuReal((current) => [...current, productToAddToBasket]);
+    // if y'en a deja un, je change juste la qty, if y'en a a pas, j'en ajoute un.
+
+    const targetId = productToAddToBasket.id;
+    const itemWithSameId = basketMenuReal.find((item) => item.id === targetId);
+
+    if (itemWithSameId) {
+      // If an item with the same ID is found, do something
+      console.log("Item with the same ID found:", itemWithSameId);
     } else {
-      console.log("Object not found");
+      // If no item with the same ID is found, do something else
+      console.log("No item with the same ID found");
+      if (productToAddToBasket) {
+        console.log("Object found:", productToAddToBasket);
+        setBasketMenuReal((current) => [productToAddToBasket, ...current]);
+
+        // Gère le toal:
+        const productPrice = productToAddToBasket.price;
+        TOTAL_PRICE = TOTAL_PRICE + productPrice;
+        setTotal(formatPrice(TOTAL_PRICE));
+      } else {
+        console.log("Object not found");
+      }
     }
   };
 
