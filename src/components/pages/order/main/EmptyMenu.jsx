@@ -36,7 +36,7 @@ export default function EmptyMenu({ resetMenu }) {
 }
 
 const EmptyMenuStyled = styled.div`
-  border: 2px solid orange;
+  /* border: 2px solid orange; */
   width: 100%;
   grid-column: 1 / -1;
   height: 100vh;

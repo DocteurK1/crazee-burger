@@ -67,7 +67,7 @@ export default function EditForm() {
 }
 
 const AddFormStyled = styled.form`
-  border: 2px solid green;
+  /* border: 2px solid green; */
   /* background: pink; */
   height: 100%;
   display: flex;
