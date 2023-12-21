@@ -14,6 +14,7 @@ export default function Card({
   onCardSelect,
   isHoverable,
   isSelected,
+  onAddToBasket,
 }) {
   // D’abord on définit les states de base (état, données, variable…)
   const { isModeAdmin } = useContext(OrderContext);
@@ -24,6 +25,10 @@ export default function Card({
   const handleCardClick = (event) => {
     // console.log("click: ", event.target.value);
     onCardSelect(id);
+  };
+
+  const handleAddToBasketClick = () => {
+    onAddToBasket(id, title, price, imgUrl);
   };
 
   // L’affichage, le render, via return
@@ -44,7 +49,10 @@ export default function Card({
         <p className="CardTitle">{title}</p>
         <div className="info-text">
           <p className="CardDescription">{price}</p>
-          <CardButtonStyled className="primary-button">
+          <CardButtonStyled
+            className="primary-button"
+            onClick={handleAddToBasketClick}
+          >
             <span>Ajouter</span>
           </CardButtonStyled>
         </div>

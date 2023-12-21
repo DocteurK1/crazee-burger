@@ -17,4 +17,7 @@ export default createContext({
 
   productToEdit: {},
   setProductToEdit: () => {},
+
+  basketMenuReal: [],
+  setBasketMenuReal: () => {},
 });

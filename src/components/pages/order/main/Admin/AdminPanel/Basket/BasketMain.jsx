@@ -1,50 +1,37 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import BasketEmpty from "./BasketEmpty";
 import { theme } from "../../../../../../../theme";
 import BasketCard from "./BasketCard";
-import { fakeBasket } from "../../../../../../../fakeData/fakeBasket";
 import { formatPrice } from "../../../../../../../utils/maths";
 import { truncateString } from "../../../../../../../utils/truncateString";
+import OrderContext from "../../../../../../../context/OrderContext";
+
+const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
 export default function BasketMain() {
   // State
-  const [basketMenu, setBasketMenu] = useState(fakeBasket.LARGE);
+  // const [basketMenu, setBasketMenu] = useState(fakeBasket.LARGE);
+  const { basketMenuReal } = useContext(OrderContext);
 
-  // Behavior
-  const importBasketMenu = (basketMenu) => {
-    console.log("basketMenu", basketMenu);
-    // console.log("basketMenu title: ", basketMenu.title);
+  // Comportements
 
-    basketMenu.map(({ id, title, imageSource, price }) => {
-      // console.log("id", id);
-      // Additional logging or processing can be done here
-      return null; // Remember to return something if your map function has a return value
-    });
-  };
-
-  // Call importBasketMenu when the component renders (you might want to call it in an event handler or useEffect depending on your use case)
-  importBasketMenu(basketMenu);
-
-  // Display
+  // Affichage
   return (
     <BasketMainStyled>
-      {basketMenu.map(({ id, title, imageSource, price }) => (
+      {basketMenuReal.length === 0 && <BasketEmpty />}
+
+      {Array.from(basketMenuReal).map(({ id, title, imageSource, price }) => (
         <BasketCard
-          key={id}
-          id={id}
-          imgUrl={imageSource}
+          key={Math.floor(Math.random() * 1000) + 1}
+          id={Math.floor(Math.random() * 1000) + 1}
           title={truncateString(title, 11)}
           price={formatPrice(price)}
-          // onDelete={(event) => handleCardDelete(event, id)}
-          // onCardSelect={onCardSelect}
-          // isHoverable={isModeAdmin}
-          // isSelected={checkIfProductisClicked(id, productToEdit.id)}
-          // onCardDelete={{} => handleCardDelete(id)}
+          imgUrl={imageSource ? imageSource : IMAGE_BY_DEFAULT}
         />
       ))}
-      {basketMenu.length === 0 && <BasketEmpty />}
     </BasketMainStyled>
+    // <BasketEmpty />
   );
 }
 

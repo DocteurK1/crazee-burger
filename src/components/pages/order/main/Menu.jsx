@@ -21,6 +21,7 @@ export default function Menu() {
     isModeAdmin,
     setIsCollapsed,
     setCurrentTabSelected,
+    setBasketMenuReal,
   } = useContext(OrderContext);
   const [defaultMenu] = useState(fakeMenu.LARGE);
 
@@ -71,6 +72,19 @@ export default function Menu() {
     handleDelete(idProductToDelete);
   };
 
+  const onAddToBasket = (id, title, price, imgUrl) => {
+    console.log("id: ", id, title, price, imgUrl);
+
+    const productToAddToBasket = menu.find((item) => item.id === id);
+
+    if (productToAddToBasket) {
+      console.log("Object found:", productToAddToBasket);
+      setBasketMenuReal((current) => [...current, productToAddToBasket]);
+    } else {
+      console.log("Object not found");
+    }
+  };
+
   // Affichage
 
   return (
@@ -88,6 +102,7 @@ export default function Menu() {
           onCardSelect={onCardSelect}
           isHoverable={isModeAdmin}
           isSelected={checkIfProductisClicked(id, productToEdit.id)}
+          onAddToBasket={onAddToBasket}
           // onCardDelete={{} => handleCardDelete(id)}
         />
       ))}

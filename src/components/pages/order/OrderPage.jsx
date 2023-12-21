@@ -17,6 +17,7 @@ export default function OrderPage() {
   const [currentTabSelected, setCurrentTabSelected] = useState("add");
   const [menu, setMenu] = useState(fakeMenu.LARGE);
   const [productToEdit, setProductToEdit] = useState(EMPTY_PRODUCT);
+  const [basketMenuReal, setBasketMenuReal] = useState([]);
 
   // // Comportements, les actions, la logique
 
@@ -67,6 +68,8 @@ export default function OrderPage() {
     productToEdit,
     setProductToEdit,
     handleEdit,
+    basketMenuReal,
+    setBasketMenuReal,
   };
 
   // L’affichage, le render, via return
