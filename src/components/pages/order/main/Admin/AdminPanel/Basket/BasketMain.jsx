@@ -12,6 +12,7 @@ const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 export default function BasketMain() {
   // State
   // const [basketMenu, setBasketMenu] = useState(fakeBasket.LARGE);
+  // const [quantityOrdered2, setQuantityOrdered2] = useState(2);
   const { basketMenuReal } = useContext(OrderContext);
 
   // Comportements
@@ -21,15 +22,18 @@ export default function BasketMain() {
     <BasketMainStyled>
       {basketMenuReal.length === 0 && <BasketEmpty />}
 
-      {Array.from(basketMenuReal).map(({ id, title, imageSource, price }) => (
-        <BasketCard
-          key={Math.floor(Math.random() * 1000) + 1}
-          id={Math.floor(Math.random() * 1000) + 1}
-          title={truncateString(title, 11)}
-          price={formatPrice(price)}
-          imgUrl={imageSource ? imageSource : IMAGE_BY_DEFAULT}
-        />
-      ))}
+      {Array.from(basketMenuReal).map(
+        ({ id, title, imageSource, price, quantity }) => (
+          <BasketCard
+            key={Math.floor(Math.random() * 1000) + 1}
+            id={Math.floor(Math.random() * 1000) + 1}
+            title={truncateString(title, 11)}
+            price={formatPrice(price)}
+            imgUrl={imageSource ? imageSource : IMAGE_BY_DEFAULT}
+            quantity={quantity}
+          />
+        )
+      )}
     </BasketMainStyled>
     // <BasketEmpty />
   );

@@ -84,11 +84,13 @@ export default function Menu() {
     // if y'en a deja un, je change juste la qty, if y'en a a pas, j'en ajoute un.
 
     const targetId = productToAddToBasket.id;
-    const itemWithSameId = basketMenuReal.find((item) => item.id === targetId);
+    const isItemAlreadyInBasket = basketMenuReal.find(
+      (item) => item.id === targetId
+    );
 
-    if (itemWithSameId) {
+    if (isItemAlreadyInBasket) {
       // If an item with the same ID is found, do something
-      console.log("Item with the same ID found:", itemWithSameId);
+      console.log("Item with the same ID found:", isItemAlreadyInBasket);
     } else {
       // If no item with the same ID is found, do something else
       console.log("No item with the same ID found");
@@ -96,7 +98,7 @@ export default function Menu() {
         console.log("Object found:", productToAddToBasket);
         setBasketMenuReal((current) => [productToAddToBasket, ...current]);
 
-        // Gère le toal:
+        // Gère le total:
         const productPrice = productToAddToBasket.price;
         TOTAL_PRICE = TOTAL_PRICE + productPrice;
         setTotal(formatPrice(TOTAL_PRICE));

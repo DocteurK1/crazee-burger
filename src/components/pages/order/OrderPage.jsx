@@ -4,7 +4,7 @@ import Main from "./main/Main.jsx";
 import styled from "styled-components";
 import { theme } from "../../../theme/index.js";
 import OrderContext from "../../../context/OrderContext.js";
-import { fakeMenu } from "../../../fakeData/fakeMenu.js";
+import { fakeBasket, fakeMenu } from "../../../fakeData/fakeBasket.js";
 import { EMPTY_PRODUCT } from "../../../enums/product.js";
 import { deepClone } from "../../../utils/array.js";
 
@@ -15,12 +15,12 @@ export default function OrderPage() {
   const [isEditSelected, setIsEditSelected] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [currentTabSelected, setCurrentTabSelected] = useState("add");
-  const [menu, setMenu] = useState(fakeMenu.LARGE);
+  const [menu, setMenu] = useState(fakeBasket.LARGE);
   const [productToEdit, setProductToEdit] = useState(EMPTY_PRODUCT);
   const [basketMenuReal, setBasketMenuReal] = useState([]);
   const [total, setTotal] = useState();
 
-  // // Comportements, les actions, la logique
+  // Comportements, les actions, la logique
 
   const handleAddProduct = (newProduct) => {
     console.log("test : ", newProduct);
