@@ -2,7 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { theme } from "../../../../../../../theme";
 
-export default function BasketCard({ id, title, imgUrl, price, quantity }) {
+export default function BasketCard({
+  id,
+  title,
+  imgUrl,
+  price,
+  quantity,
+  onDelete,
+}) {
   return (
     <BasketCardStyled>
       <img className="img" src={imgUrl} alt={title} />
@@ -10,7 +17,9 @@ export default function BasketCard({ id, title, imgUrl, price, quantity }) {
         <div className="name">{title}</div>
         <div className="price">{price}</div>
       </div>
-      <button className="quantity">x {quantity}</button>
+      <button className="quantity" onClick={onDelete} id={id}>
+        x {quantity}
+      </button>
     </BasketCardStyled>
   );
 }

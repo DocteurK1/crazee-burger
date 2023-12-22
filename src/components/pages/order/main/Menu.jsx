@@ -37,6 +37,12 @@ export default function Menu() {
     setMenu(updatedMenu);
     console.log("Menu Length : ", menu.length);
 
+    // Delete Item from basket too
+    const updatedBasketMenu = basketMenuReal.filter(
+      (card) => card.id !== cardId
+    );
+    setBasketMenuReal(updatedBasketMenu);
+
     // This is to check if the product deleted is the one in the edit form, if it is, then setProductToEdit to empty, so it doesnt display the edit form anymore, as no product is selected.
     cardId === productToEdit.id && setProductToEdit(EMPTY_PRODUCT);
   };

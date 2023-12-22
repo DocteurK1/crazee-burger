@@ -8,12 +8,34 @@ import { truncateString } from "../../../../../../../utils/truncateString";
 import OrderContext from "../../../../../../../context/OrderContext";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
+let TOTAL_PRICE = 0;
 
 export default function BasketMain() {
   // State
-  // const [basketMenu, setBasketMenu] = useState(fakeBasket.LARGE);
-  // const [quantityOrdered2, setQuantityOrdered2] = useState(2);
-  const { basketMenuReal } = useContext(OrderContext);
+
+  const { basketMenuReal, setBasketMenuReal, total, setTotal } =
+    useContext(OrderContext);
+
+  const handleDelete = (cardId) => {
+    // Filter out the card with the given ID and update the state
+    const updatedMenu = basketMenuReal.filter((card) => card.id !== cardId);
+    console.log("basket menu: ", basketMenuReal[0].price);
+    // Gère le total:
+    const productPrice = basketMenuReal[0].price;
+    console.log("total 1: ", total, productPrice);
+
+    TOTAL_PRICE = total - productPrice;
+    setTotal(formatPrice(TOTAL_PRICE));
+
+    setBasketMenuReal(updatedMenu);
+    console.log("total 2: ", total, productPrice);
+  };
+
+  const handleCardDelete = (event, idProductToDelete) => {
+    // console.log("event", event.target.id);
+    event.stopPropagation();
+    handleDelete(idProductToDelete);
+  };
 
   // Comportements
 
@@ -26,11 +48,12 @@ export default function BasketMain() {
         ({ id, title, imageSource, price, quantity }) => (
           <BasketCard
             key={Math.floor(Math.random() * 1000) + 1}
-            id={Math.floor(Math.random() * 1000) + 1}
+            id={id}
             title={truncateString(title, 11)}
             price={formatPrice(price)}
             imgUrl={imageSource ? imageSource : IMAGE_BY_DEFAULT}
             quantity={quantity}
+            onDelete={(event) => handleCardDelete(event, id)}
           />
         )
       )}
