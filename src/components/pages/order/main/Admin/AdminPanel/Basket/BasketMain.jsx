@@ -13,21 +13,21 @@ let TOTAL_PRICE = 0;
 export default function BasketMain() {
   // State
 
-  const { basketMenuReal, setBasketMenuReal, total, setTotal } =
+  const { basketMenu, setBasketMenu, total, setTotal } =
     useContext(OrderContext);
 
   const handleDelete = (cardId) => {
     // Filter out the card with the given ID and update the state
-    const updatedMenu = basketMenuReal.filter((card) => card.id !== cardId);
-    console.log("basket menu: ", basketMenuReal[0].price);
+    const updatedMenu = basketMenu.filter((card) => card.id !== cardId);
+    console.log("basket menu: ", basketMenu[0].price);
     // Gère le total:
-    const productPrice = basketMenuReal[0].price;
+    const productPrice = basketMenu[0].price;
     console.log("total 1: ", total, productPrice);
 
     TOTAL_PRICE = total - productPrice;
     setTotal(formatPrice(TOTAL_PRICE));
 
-    setBasketMenuReal(updatedMenu);
+    setBasketMenu(updatedMenu);
     console.log("total 2: ", total, productPrice);
   };
 
@@ -42,9 +42,9 @@ export default function BasketMain() {
   // Affichage
   return (
     <BasketMainStyled>
-      {basketMenuReal.length === 0 && <BasketEmpty />}
+      {basketMenu.length === 0 && <BasketEmpty />}
 
-      {Array.from(basketMenuReal).map(
+      {Array.from(basketMenu).map(
         ({ id, title, imageSource, price, quantity }) => (
           <BasketCard
             key={Math.floor(Math.random() * 1000) + 1}

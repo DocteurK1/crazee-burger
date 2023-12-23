@@ -8,7 +8,7 @@ import { fakeMenu } from "../../../../fakeData/fakeMenu.js";
 import EmptyMenu from "./EmptyMenu.jsx";
 import { checkIfProductisClicked } from "./helper.js";
 import { EMPTY_PRODUCT } from "../../../../enums/product.js";
-import { deepClone, findInArray } from "../../../../utils/array.js";
+import { deepClone, findInArray, findIndex } from "../../../../utils/array.js";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 let TOTAL_PRICE = 0;
@@ -23,8 +23,8 @@ export default function Menu() {
     isModeAdmin,
     setIsCollapsed,
     setCurrentTabSelected,
-    setBasketMenuReal,
-    basketMenuReal,
+    setBasketMenu,
+    basketMenu,
     total,
     setTotal,
   } = useContext(OrderContext);
@@ -39,10 +39,8 @@ export default function Menu() {
     console.log("Menu Length : ", menu.length);
 
     // Delete Item from basket too
-    const updatedBasketMenu = basketMenuReal.filter(
-      (card) => card.id !== cardId
-    );
-    setBasketMenuReal(updatedBasketMenu);
+    const updatedBasketMenu = basketMenu.filter((card) => card.id !== cardId);
+    setBasketMenu(updatedBasketMenu);
 
     // This is to check if the product deleted is the one in the edit form, if it is, then setProductToEdit to empty, so it doesnt display the edit form anymore, as no product is selected.
     cardId === productToEdit.id && setProductToEdit(EMPTY_PRODUCT);
@@ -84,27 +82,26 @@ export default function Menu() {
   };
 
   const onAddToBasket = (id, title, price, imgUrl) => {
-    console.log("id: ", id, title, price, imgUrl);
-    const basketCopy = deepClone(basketMenuReal);
+    // console.log("id: ", id, title, price, imgUrl);
+    const basketCopy = deepClone(basketMenu);
 
     const productToAddToBasket = findInArray(id, menu);
 
     // if y'en a deja un, je change juste la qty, if y'en a a pas, j'en ajoute un.
 
     const targetId = productToAddToBasket.id;
-    const isItemAlreadyInBasket = findInArray(targetId, basketMenuReal);
+    const isItemAlreadyInBasket = findInArray(targetId, basketMenu);
 
     if (isItemAlreadyInBasket) {
       // If an item with the same ID is found, do something
       console.log("Item with the same ID found:", isItemAlreadyInBasket);
       // Retrouve l'index du produit déjà ajouté
-      const indexOfBasketProductToIncrement = basketMenuReal.findIndex(
-        (basketProduct) => basketProduct.id === targetId
-      );
+      const indexOfBasketProductToIncrement = findIndex(targetId, basketMenu);
+
       // Incrémente quantity de 1
       basketCopy[indexOfBasketProductToIncrement].quantity += 1;
 
-      setBasketMenuReal(basketCopy);
+      setBasketMenu(basketCopy);
     } else {
       // If no item with the same ID is found, do something else
       console.log("No item with the same ID found");
@@ -115,7 +112,7 @@ export default function Menu() {
           quantity: 1,
         };
         const basketUpdated = [newBasketProduct, ...basketCopy];
-        setBasketMenuReal(basketUpdated);
+        setBasketMenu(basketUpdated);
 
         // Gère le total:
         const productPrice = productToAddToBasket.price;

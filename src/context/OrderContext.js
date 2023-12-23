@@ -18,8 +18,8 @@ export default createContext({
   productToEdit: {},
   setProductToEdit: () => {},
 
-  basketMenuReal: [],
-  setBasketMenuReal: () => {},
+  basketMenu: [],
+  setBasketMenu: () => {},
 
   total: 0,
   setTotal: () => {},
