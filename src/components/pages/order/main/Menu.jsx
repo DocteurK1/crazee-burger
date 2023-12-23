@@ -8,7 +8,7 @@ import { fakeMenu } from "../../../../fakeData/fakeMenu.js";
 import EmptyMenu from "./EmptyMenu.jsx";
 import { checkIfProductisClicked } from "./helper.js";
 import { EMPTY_PRODUCT } from "../../../../enums/product.js";
-import { findInArray } from "../../../../utils/array.js";
+import { deepClone, findInArray } from "../../../../utils/array.js";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 let TOTAL_PRICE = 0;
@@ -85,8 +85,8 @@ export default function Menu() {
 
   const onAddToBasket = (id, title, price, imgUrl) => {
     console.log("id: ", id, title, price, imgUrl);
+    const basketCopy = deepClone(basketMenuReal);
 
-    // const productToAddToBasket = menu.find((item) => item.id === id);
     const productToAddToBasket = findInArray(id, menu);
 
     // if y'en a deja un, je change juste la qty, if y'en a a pas, j'en ajoute un.
@@ -97,12 +97,25 @@ export default function Menu() {
     if (isItemAlreadyInBasket) {
       // If an item with the same ID is found, do something
       console.log("Item with the same ID found:", isItemAlreadyInBasket);
+      // Retrouve l'index du produit déjà ajouté
+      const indexOfBasketProductToIncrement = basketMenuReal.findIndex(
+        (basketProduct) => basketProduct.id === targetId
+      );
+      // Incrémente quantity de 1
+      basketCopy[indexOfBasketProductToIncrement].quantity += 1;
+
+      setBasketMenuReal(basketCopy);
     } else {
       // If no item with the same ID is found, do something else
       console.log("No item with the same ID found");
       if (productToAddToBasket) {
         console.log("Object found:", productToAddToBasket);
-        setBasketMenuReal((current) => [productToAddToBasket, ...current]);
+        const newBasketProduct = {
+          ...productToAddToBasket,
+          quantity: 1,
+        };
+        const basketUpdated = [newBasketProduct, ...basketCopy];
+        setBasketMenuReal(basketUpdated);
 
         // Gère le total:
         const productPrice = productToAddToBasket.price;
