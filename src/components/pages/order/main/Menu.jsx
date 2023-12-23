@@ -8,6 +8,7 @@ import { fakeMenu } from "../../../../fakeData/fakeMenu.js";
 import EmptyMenu from "./EmptyMenu.jsx";
 import { checkIfProductisClicked } from "./helper.js";
 import { EMPTY_PRODUCT } from "../../../../enums/product.js";
+import { findInArray } from "../../../../utils/array.js";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 let TOTAL_PRICE = 0;
@@ -57,7 +58,7 @@ export default function Menu() {
     if (!isModeAdmin) return;
 
     // Find the selected card in the menu array
-    const selectedCard = menu.find((card) => card.id === cardId);
+    const selectedCard = findInArray(cardId, menu);
 
     if (selectedCard) {
       // Update the productToEdit state with the selected card's information
@@ -85,14 +86,13 @@ export default function Menu() {
   const onAddToBasket = (id, title, price, imgUrl) => {
     console.log("id: ", id, title, price, imgUrl);
 
-    const productToAddToBasket = menu.find((item) => item.id === id);
+    // const productToAddToBasket = menu.find((item) => item.id === id);
+    const productToAddToBasket = findInArray(id, menu);
 
     // if y'en a deja un, je change juste la qty, if y'en a a pas, j'en ajoute un.
 
     const targetId = productToAddToBasket.id;
-    const isItemAlreadyInBasket = basketMenuReal.find(
-      (item) => item.id === targetId
-    );
+    const isItemAlreadyInBasket = findInArray(targetId, basketMenuReal);
 
     if (isItemAlreadyInBasket) {
       // If an item with the same ID is found, do something
