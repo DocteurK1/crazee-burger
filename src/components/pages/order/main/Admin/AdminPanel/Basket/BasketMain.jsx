@@ -6,6 +6,7 @@ import BasketCard from "./BasketCard";
 import { formatPrice } from "../../../../../../../utils/maths";
 import { truncateString } from "../../../../../../../utils/truncateString";
 import OrderContext from "../../../../../../../context/OrderContext";
+import { filter } from "../../../../../../../utils/array";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
@@ -16,6 +17,7 @@ export default function BasketMain() {
 
   const handleDelete = (cardId) => {
     // Filter out the card with the given ID and update the state
+    // const updatedMenu = filter(cardId, basketMenu);
     const updatedMenu = basketMenu.filter((card) => card.id !== cardId);
     console.log("basket menu: ", basketMenu[0].price);
 

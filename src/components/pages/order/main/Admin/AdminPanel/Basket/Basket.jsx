@@ -10,10 +10,11 @@ export default function Basket() {
   const { basketMenu } = useContext(OrderContext);
 
   const sumToPay = basketMenu.reduce((total, basketProduct) => {
+    // if (isNaN(basketProduct.price)) return total;
+
     total += basketProduct.price * basketProduct.quantity;
     return total;
   }, 0);
-  console.log("sumToPay", sumToPay);
 
   return (
     <BasketStyled>
