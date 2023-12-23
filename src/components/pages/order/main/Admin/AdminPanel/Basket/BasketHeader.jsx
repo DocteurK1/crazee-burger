@@ -1,15 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import { theme } from "../../../../../../../theme";
-import OrderContext from "../../../../../../../context/OrderContext";
 
-export default function BasketHeader() {
-  const { total, setTotal } = useContext(OrderContext);
-
+export default function BasketHeader({ amountToPay }) {
   return (
     <BasketHeaderStyled>
       <div>Total</div>
-      <div>{!total ? "0,00€" : total}</div>
+      <div>{!amountToPay ? "0,00€" : amountToPay}</div>
     </BasketHeaderStyled>
   );
 }

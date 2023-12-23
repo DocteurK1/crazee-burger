@@ -8,27 +8,18 @@ import { truncateString } from "../../../../../../../utils/truncateString";
 import OrderContext from "../../../../../../../context/OrderContext";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
-let TOTAL_PRICE = 0;
 
 export default function BasketMain() {
   // State
 
-  const { basketMenu, setBasketMenu, total, setTotal } =
-    useContext(OrderContext);
+  const { basketMenu, setBasketMenu } = useContext(OrderContext);
 
   const handleDelete = (cardId) => {
     // Filter out the card with the given ID and update the state
     const updatedMenu = basketMenu.filter((card) => card.id !== cardId);
     console.log("basket menu: ", basketMenu[0].price);
-    // Gère le total:
-    const productPrice = basketMenu[0].price;
-    console.log("total 1: ", total, productPrice);
-
-    TOTAL_PRICE = total - productPrice;
-    setTotal(formatPrice(TOTAL_PRICE));
 
     setBasketMenu(updatedMenu);
-    console.log("total 2: ", total, productPrice);
   };
 
   const handleCardDelete = (event, idProductToDelete) => {

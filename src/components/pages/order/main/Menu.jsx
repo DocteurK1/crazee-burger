@@ -11,7 +11,6 @@ import { EMPTY_PRODUCT } from "../../../../enums/product.js";
 import { deepClone, findInArray, findIndex } from "../../../../utils/array.js";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
-let TOTAL_PRICE = 0;
 
 export default function Menu() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -25,8 +24,6 @@ export default function Menu() {
     setCurrentTabSelected,
     setBasketMenu,
     basketMenu,
-    total,
-    setTotal,
   } = useContext(OrderContext);
   const [defaultMenu] = useState(fakeMenu.LARGE);
 
@@ -113,11 +110,6 @@ export default function Menu() {
         };
         const basketUpdated = [newBasketProduct, ...basketCopy];
         setBasketMenu(basketUpdated);
-
-        // Gère le total:
-        const productPrice = productToAddToBasket.price;
-        TOTAL_PRICE = TOTAL_PRICE + productPrice;
-        setTotal(formatPrice(TOTAL_PRICE));
       } else {
         console.log("Object not found");
       }
