@@ -4,9 +4,9 @@ import Main from "./main/Main.jsx";
 import styled from "styled-components";
 import { theme } from "../../../theme/index.js";
 import OrderContext from "../../../context/OrderContext.js";
-import { fakeMenu } from "../../../fakeData/fakeMenu.js";
+import { fakeBasket, fakeMenu } from "../../../fakeData/fakeBasket.js";
 import { EMPTY_PRODUCT } from "../../../enums/product.js";
-import { deepClone } from "../../../utils/array.js";
+import { deepClone, findIndex } from "../../../utils/array.js";
 
 export default function OrderPage() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -15,10 +15,11 @@ export default function OrderPage() {
   const [isEditSelected, setIsEditSelected] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [currentTabSelected, setCurrentTabSelected] = useState("add");
-  const [menu, setMenu] = useState(fakeMenu.LARGE);
+  const [menu, setMenu] = useState(fakeBasket.LARGE);
   const [productToEdit, setProductToEdit] = useState(EMPTY_PRODUCT);
+  const [basketMenu, setBasketMenu] = useState([]);
 
-  // // Comportements, les actions, la logique
+  // Comportements, les actions, la logique
 
   const handleAddProduct = (newProduct) => {
     console.log("test : ", newProduct);
@@ -40,9 +41,10 @@ export default function OrderPage() {
     const menuCopy = deepClone(menu);
 
     //2. manip de la copie du state
-    const indexOfProductToEdit = menu.findIndex(
-      (product) => product.id === productBeingEdited.id
-    );
+    const indexOfProductToEdit = findIndex(productBeingEdited.id, menu);
+    // const indexOfProductToEdit = menu.findIndex(
+    //   (product) => product.id === productBeingEdited.id
+    // );
 
     menuCopy[indexOfProductToEdit] = productBeingEdited;
 
@@ -67,6 +69,8 @@ export default function OrderPage() {
     productToEdit,
     setProductToEdit,
     handleEdit,
+    basketMenu,
+    setBasketMenu,
   };
 
   // L’affichage, le render, via return

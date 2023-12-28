@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import BasketHeader from "./BasketHeader";
 import BasketMain from "./BasketMain";
 import BasketFooter from "./BasketFooter";
+import OrderContext from "../../../../../../../context/OrderContext";
+import { formatPrice } from "../../../../../../../utils/maths";
 
 export default function Basket() {
+  const { basketMenu } = useContext(OrderContext);
+
+  const sumToPay = basketMenu.reduce((total, basketProduct) => {
+    // if (isNaN(basketProduct.price)) return total;
+
+    total += basketProduct.price * basketProduct.quantity;
+    return total;
+  }, 0);
+
   return (
     <BasketStyled>
-      <BasketHeader />
+      <BasketHeader amountToPay={formatPrice(sumToPay)} />
       <BasketMain />
       <BasketFooter />
     </BasketStyled>

@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { theme } from "../../../../../../../theme";
 
-export default function BasketHeader() {
+export default function BasketHeader({ amountToPay }) {
   return (
     <BasketHeaderStyled>
       <div>Total</div>
-      <div>0,00 €</div>
+      <div>{!amountToPay ? "0,00€" : amountToPay}</div>
     </BasketHeaderStyled>
   );
 }

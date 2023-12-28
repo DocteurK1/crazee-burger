@@ -8,6 +8,7 @@ import { fakeMenu } from "../../../../fakeData/fakeMenu.js";
 import EmptyMenu from "./EmptyMenu.jsx";
 import { checkIfProductisClicked } from "./helper.js";
 import { EMPTY_PRODUCT } from "../../../../enums/product.js";
+import { deepClone, findInArray, findIndex } from "../../../../utils/array.js";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
@@ -21,6 +22,8 @@ export default function Menu() {
     isModeAdmin,
     setIsCollapsed,
     setCurrentTabSelected,
+    setBasketMenu,
+    basketMenu,
   } = useContext(OrderContext);
   const [defaultMenu] = useState(fakeMenu.LARGE);
 
@@ -31,6 +34,10 @@ export default function Menu() {
     const updatedMenu = menu.filter((card) => card.id !== cardId);
     setMenu(updatedMenu);
     console.log("Menu Length : ", menu.length);
+
+    // Delete Item from basket too
+    const updatedBasketMenu = basketMenu.filter((card) => card.id !== cardId);
+    setBasketMenu(updatedBasketMenu);
 
     // This is to check if the product deleted is the one in the edit form, if it is, then setProductToEdit to empty, so it doesnt display the edit form anymore, as no product is selected.
     cardId === productToEdit.id && setProductToEdit(EMPTY_PRODUCT);
@@ -46,7 +53,7 @@ export default function Menu() {
     if (!isModeAdmin) return;
 
     // Find the selected card in the menu array
-    const selectedCard = menu.find((card) => card.id === cardId);
+    const selectedCard = findInArray(cardId, menu);
 
     if (selectedCard) {
       // Update the productToEdit state with the selected card's information
@@ -71,6 +78,44 @@ export default function Menu() {
     handleDelete(idProductToDelete);
   };
 
+  const onAddToBasket = (id, title, price, imgUrl) => {
+    // console.log("id: ", id, title, price, imgUrl);
+    const basketCopy = deepClone(basketMenu);
+
+    const productToAddToBasket = findInArray(id, menu);
+
+    // if y'en a deja un, je change juste la qty, if y'en a a pas, j'en ajoute un.
+
+    const targetId = productToAddToBasket.id;
+    const isItemAlreadyInBasket = findInArray(targetId, basketMenu);
+
+    if (isItemAlreadyInBasket) {
+      // If an item with the same ID is found, do something
+      console.log("Item with the same ID found:", isItemAlreadyInBasket);
+      // Retrouve l'index du produit déjà ajouté
+      const indexOfBasketProductToIncrement = findIndex(targetId, basketMenu);
+
+      // Incrémente quantity de 1
+      basketCopy[indexOfBasketProductToIncrement].quantity += 1;
+
+      setBasketMenu(basketCopy);
+    } else {
+      // If no item with the same ID is found, do something else
+      console.log("No item with the same ID found");
+      if (productToAddToBasket) {
+        console.log("Object found:", productToAddToBasket);
+        const newBasketProduct = {
+          ...productToAddToBasket,
+          quantity: 1,
+        };
+        const basketUpdated = [newBasketProduct, ...basketCopy];
+        setBasketMenu(basketUpdated);
+      } else {
+        console.log("Object not found");
+      }
+    }
+  };
+
   // Affichage
 
   return (
@@ -88,6 +133,7 @@ export default function Menu() {
           onCardSelect={onCardSelect}
           isHoverable={isModeAdmin}
           isSelected={checkIfProductisClicked(id, productToEdit.id)}
+          onAddToBasket={onAddToBasket}
           // onCardDelete={{} => handleCardDelete(id)}
         />
       ))}
