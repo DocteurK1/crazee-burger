@@ -4,9 +4,9 @@ import Main from "./main/Main.jsx";
 import styled from "styled-components";
 import { theme } from "../../../theme/index.js";
 import OrderContext from "../../../context/OrderContext.js";
-import { fakeBasket, fakeMenu } from "../../../fakeData/fakeBasket.js";
+import { fakeBasket } from "../../../fakeData/fakeBasket.js";
 import { EMPTY_PRODUCT } from "../../../enums/product.js";
-import { deepClone, findIndex } from "../../../utils/array.js";
+import { deepClone, findIndexById } from "../../../utils/array.js";
 
 export default function OrderPage() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -41,8 +41,8 @@ export default function OrderPage() {
     const menuCopy = deepClone(menu);
 
     //2. manip de la copie du state
-    const indexOfProductToEdit = findIndex(productBeingEdited.id, menu);
-    // const indexOfProductToEdit = menu.findIndex(
+    const indexOfProductToEdit = findIndexById(productBeingEdited.id, menu);
+    // const indexOfProductToEdit = menu.findIndexById(
     //   (product) => product.id === productBeingEdited.id
     // );
 
