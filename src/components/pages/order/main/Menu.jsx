@@ -82,46 +82,77 @@ export default function Menu() {
     handleDelete(idProductToDelete);
   };
 
-  const onAddToBasket = (id, title, price, imgUrl) => {
-    // console.log("id: ", id, title, price, imgUrl);
+  const onAddToBasket = (id) => {
+    //1. copie du state (deepclone)
+
     const basketCopy = deepClone(basketMenu);
-
-    const productToAddToBasket = findObjectById(id, menu);
-
-    // if y'en a deja un, je change juste la qty, if y'en a a pas, j'en ajoute un.
-
-    const targetId = productToAddToBasket.id;
-    const isItemAlreadyInBasket = findObjectById(targetId, basketMenu);
-
-    if (isItemAlreadyInBasket) {
-      // If an item with the same ID is found, do something
-      console.log("Item with the same ID found:", isItemAlreadyInBasket);
-      // Retrouve l'index du produit déjà ajouté
-      const indexOfBasketProductToIncrement = findIndexById(
-        targetId,
-        basketMenu
-      );
-
-      // Incrémente quantity de 1
-      basketCopy[indexOfBasketProductToIncrement].quantity += 1;
-
-      setBasketMenu(basketCopy);
-    } else {
-      // If no item with the same ID is found, do something else
-      console.log("No item with the same ID found");
-      if (productToAddToBasket) {
-        console.log("Object found:", productToAddToBasket);
-        const newBasketProduct = {
-          ...productToAddToBasket,
-          quantity: 1,
-        };
-        const basketUpdated = [newBasketProduct, ...basketCopy];
-        setBasketMenu(basketUpdated);
-      } else {
-        console.log("Object not found");
-      }
+    const productAlreadyInBasket = findObjectById(id, basketCopy);
+    console.log("basketMenu", basketMenu);
+    if (productAlreadyInBasket) {
+      incrementProductAlreadyInBasket(id, basketCopy);
+      return;
     }
+    createNewBasketProduct(id, basketCopy, setBasketMenu);
   };
+
+  const incrementProductAlreadyInBasket = (id, basketCopy) => {
+    const indexOfBasketProductToIncrement = findIndexById(id, basketCopy);
+    basketCopy[indexOfBasketProductToIncrement].quantity += 1;
+    setBasketMenu(basketCopy);
+  };
+
+  const createNewBasketProduct = (id, basketCopy, setBasketMenu) => {
+    console.log("create", id);
+    const newBasketProduct = {
+      id: id,
+      quantity: 1,
+    };
+    const newBasket = [newBasketProduct, ...basketCopy];
+    setBasketMenu(newBasket);
+  };
+
+  // const onAddToBasket = (id, title, price, imgUrl) => {
+  //   // console.log("id: ", id, title, price, imgUrl);
+  //   const basketCopy = deepClone(basketMenu);
+
+  //   const productToAddToBasket = findObjectById(id, menu);
+  //   console.log("productToAddToBasket", productToAddToBasket);
+
+  //   // if y'en a deja un, je change juste la qty, if y'en a a pas, j'en ajoute un.
+
+  //   const targetId = productToAddToBasket.id;
+  //   console.log("targetId", targetId);
+  //   const isItemAlreadyInBasket = findObjectById(targetId, basketMenu);
+
+  //   if (isItemAlreadyInBasket) {
+  //     // If an item with the same ID is found, do something
+  //     console.log("Item with the same ID found:", isItemAlreadyInBasket);
+  //     // Retrouve l'index du produit déjà ajouté
+  //     const indexOfBasketProductToIncrement = findIndexById(
+  //       targetId,
+  //       basketMenu
+  //     );
+
+  //     // Incrémente quantity de 1
+  //     basketCopy[indexOfBasketProductToIncrement].quantity += 1;
+
+  //     setBasketMenu(basketCopy);
+  //   } else {
+  //     // If no item with the same ID is found, do something else
+  //     console.log("No item with the same ID found");
+  //     if (productToAddToBasket) {
+  //       console.log("Object found:", productToAddToBasket);
+  //       const newBasketProduct = {
+  //         ...productToAddToBasket,
+  //         quantity: 1,
+  //       };
+  //       const basketUpdated = [newBasketProduct, ...basketCopy];
+  //       setBasketMenu(basketUpdated);
+  //     } else {
+  //       console.log("Object not found");
+  //     }
+  //   }
+  // };
 
   // Affichage
 

@@ -5,19 +5,27 @@ import { theme } from "../../../../../../../theme";
 export default function BasketCard({
   id,
   title,
-  imgUrl,
+  imageSource,
   price,
   quantity,
   onDelete,
 }) {
   return (
     <BasketCardStyled>
-      <img className="img" src={imgUrl} alt={title} />
+      <img
+        className="img"
+        src={imageSource}
+        alt={title}
+      />
       <div className="productInfo">
         <div className="name">{title}</div>
         <div className="price">{price}</div>
       </div>
-      <button className="quantity" onClick={onDelete} id={id}>
+      <button
+        className="quantity"
+        onClick={onDelete}
+        id={id}
+      >
         x {quantity}
       </button>
     </BasketCardStyled>

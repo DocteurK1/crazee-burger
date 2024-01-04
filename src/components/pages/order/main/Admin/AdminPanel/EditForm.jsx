@@ -31,7 +31,10 @@ export default function EditForm() {
     <AddFormStyled>
       <div className="img-holder">
         {productToEdit.imageSource ? (
-          <img src={productToEdit.imageSource} alt={productToEdit.title} />
+          <img
+            src={productToEdit.imageSource}
+            alt={productToEdit.title}
+          />
         ) : (
           <div>Aucune image</div>
         )}

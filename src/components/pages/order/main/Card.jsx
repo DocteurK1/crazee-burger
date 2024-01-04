@@ -25,6 +25,7 @@ export default function Card({
   const handleCardClick = (event) => {
     // console.log("click: ", event.target.value);
     onCardSelect(id);
+    console.log("Id card", id);
   };
 
   const handleAddToBasketClick = () => {
@@ -42,10 +43,17 @@ export default function Card({
       <div className="card">
         {isAdmin && (
           <div className="delete-div">
-            <TiDelete className="delete-button" onClick={onDelete} />
+            <TiDelete
+              className="delete-button"
+              onClick={onDelete}
+            />
           </div>
         )}
-        <img className="img" src={imgUrl} alt={title} />
+        <img
+          className="img"
+          src={imgUrl}
+          alt={title}
+        />
         <p className="CardTitle">{title}</p>
         <div className="info-text">
           <p className="CardDescription">{price}</p>
