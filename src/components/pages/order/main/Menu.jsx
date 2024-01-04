@@ -8,7 +8,11 @@ import { fakeMenu } from "../../../../fakeData/fakeMenu.js";
 import EmptyMenu from "./EmptyMenu.jsx";
 import { checkIfProductisClicked } from "./helper.js";
 import { EMPTY_PRODUCT } from "../../../../enums/product.js";
-import { deepClone, findInArray, findIndex } from "../../../../utils/array.js";
+import {
+  deepClone,
+  findObjectById,
+  findIndexById,
+} from "../../../../utils/array.js";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
@@ -20,10 +24,9 @@ export default function Menu() {
     productToEdit,
     setProductToEdit,
     isModeAdmin,
-    setIsCollapsed,
-    setCurrentTabSelected,
     setBasketMenu,
     basketMenu,
+    handleProductSelected,
   } = useContext(OrderContext);
   const [defaultMenu] = useState(fakeMenu.LARGE);
 
@@ -48,29 +51,10 @@ export default function Menu() {
     setMenu(defaultMenu);
   };
 
-  const onCardSelect = async (cardId) => {
+  const onCardSelect = (cardId) => {
     // Si je fais ça et que la condition l'inqiue, alors le reste de la focntion n'est pas exécutée. (comme un if else en plus court)
     if (!isModeAdmin) return;
-
-    // Find the selected card in the menu array
-    const selectedCard = findInArray(cardId, menu);
-
-    if (selectedCard) {
-      // Update the productToEdit state with the selected card's information
-      setProductToEdit({
-        id: selectedCard.id,
-        title: selectedCard.title,
-        imageSource: selectedCard.imageSource,
-        price: selectedCard.price,
-      });
-
-      // await après avoir défini la function comme asynchrone avec async, veux dire que le reste du code s exécute juste quand celle ci est bien terminée
-      await setIsCollapsed(false);
-      await setCurrentTabSelected("edit");
-      // await titleEditRef.current.focus();
-
-      console.log("productToEdit : ", productToEdit);
-    }
+    handleProductSelected(cardId);
   };
 
   const handleCardDelete = (event, idProductToDelete) => {
@@ -78,42 +62,33 @@ export default function Menu() {
     handleDelete(idProductToDelete);
   };
 
-  const onAddToBasket = (id, title, price, imgUrl) => {
-    // console.log("id: ", id, title, price, imgUrl);
+  const onAddToBasket = (id) => {
+    //1. copie du state (deepclone)
+
     const basketCopy = deepClone(basketMenu);
-
-    const productToAddToBasket = findInArray(id, menu);
-
-    // if y'en a deja un, je change juste la qty, if y'en a a pas, j'en ajoute un.
-
-    const targetId = productToAddToBasket.id;
-    const isItemAlreadyInBasket = findInArray(targetId, basketMenu);
-
-    if (isItemAlreadyInBasket) {
-      // If an item with the same ID is found, do something
-      console.log("Item with the same ID found:", isItemAlreadyInBasket);
-      // Retrouve l'index du produit déjà ajouté
-      const indexOfBasketProductToIncrement = findIndex(targetId, basketMenu);
-
-      // Incrémente quantity de 1
-      basketCopy[indexOfBasketProductToIncrement].quantity += 1;
-
-      setBasketMenu(basketCopy);
-    } else {
-      // If no item with the same ID is found, do something else
-      console.log("No item with the same ID found");
-      if (productToAddToBasket) {
-        console.log("Object found:", productToAddToBasket);
-        const newBasketProduct = {
-          ...productToAddToBasket,
-          quantity: 1,
-        };
-        const basketUpdated = [newBasketProduct, ...basketCopy];
-        setBasketMenu(basketUpdated);
-      } else {
-        console.log("Object not found");
-      }
+    const productAlreadyInBasket = findObjectById(id, basketCopy);
+    console.log("basketMenu", basketMenu);
+    if (productAlreadyInBasket) {
+      incrementProductAlreadyInBasket(id, basketCopy);
+      return;
     }
+    createNewBasketProduct(id, basketCopy, setBasketMenu);
+  };
+
+  const incrementProductAlreadyInBasket = (id, basketCopy) => {
+    const indexOfBasketProductToIncrement = findIndexById(id, basketCopy);
+    basketCopy[indexOfBasketProductToIncrement].quantity += 1;
+    setBasketMenu(basketCopy);
+  };
+
+  const createNewBasketProduct = (id, basketCopy, setBasketMenu) => {
+    console.log("create", id);
+    const newBasketProduct = {
+      id: id,
+      quantity: 1,
+    };
+    const newBasket = [newBasketProduct, ...basketCopy];
+    setBasketMenu(newBasket);
   };
 
   // Affichage

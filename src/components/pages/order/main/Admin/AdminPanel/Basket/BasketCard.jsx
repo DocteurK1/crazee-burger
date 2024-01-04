@@ -1,23 +1,33 @@
 import React from "react";
 import styled from "styled-components";
 import { theme } from "../../../../../../../theme";
+import { formatPrice } from "../../../../../../../utils/maths";
 
 export default function BasketCard({
   id,
   title,
-  imgUrl,
+  imageSource,
   price,
   quantity,
   onDelete,
+  onClick,
 }) {
   return (
-    <BasketCardStyled>
-      <img className="img" src={imgUrl} alt={title} />
+    <BasketCardStyled onClick={onClick}>
+      <img
+        className="img"
+        src={imageSource}
+        alt={title}
+      />
       <div className="productInfo">
         <div className="name">{title}</div>
-        <div className="price">{price}</div>
+        <div className="price">{formatPrice(price)}</div>
       </div>
-      <button className="quantity" onClick={onDelete} id={id}>
+      <button
+        className="quantity"
+        onClick={onDelete}
+        id={id}
+      >
         x {quantity}
       </button>
     </BasketCardStyled>

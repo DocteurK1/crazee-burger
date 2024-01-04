@@ -3,17 +3,22 @@ import styled from "styled-components";
 import BasketEmpty from "./BasketEmpty";
 import { theme } from "../../../../../../../theme";
 import BasketCard from "./BasketCard";
-import { formatPrice } from "../../../../../../../utils/maths";
-import { truncateString } from "../../../../../../../utils/truncateString";
+
 import OrderContext from "../../../../../../../context/OrderContext";
-import { filter } from "../../../../../../../utils/array";
+import { findObjectById } from "../../../../../../../utils/array";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
 export default function BasketMain() {
   // State
 
-  const { basketMenu, setBasketMenu } = useContext(OrderContext);
+  const {
+    basketMenu,
+    setBasketMenu,
+    menu,
+    isModeAdmin,
+    handleProductSelected,
+  } = useContext(OrderContext);
 
   const handleDelete = (cardId) => {
     // Filter out the card with the given ID and update the state
@@ -30,30 +35,68 @@ export default function BasketMain() {
     handleDelete(idProductToDelete);
   };
 
+  const handleOnClick = (id) => {
+    if (!isModeAdmin) return;
+    handleProductSelected(id);
+  };
+
   // Comportements
 
   // Affichage
+
   return (
     <BasketMainStyled>
       {basketMenu.length === 0 && <BasketEmpty />}
-
-      {Array.from(basketMenu).map(
-        ({ id, title, imageSource, price, quantity }) => (
-          <BasketCard
-            key={Math.floor(Math.random() * 1000) + 1}
-            id={id}
-            title={truncateString(title, 11)}
-            price={formatPrice(price)}
-            imgUrl={imageSource ? imageSource : IMAGE_BY_DEFAULT}
-            quantity={quantity}
-            onDelete={(event) => handleCardDelete(event, id)}
-          />
-        )
-      )}
+      {basketMenu.map((basketProduct) => {
+        const menuProduct = findObjectById(basketProduct.id, menu);
+        console.log("menuProduct", menuProduct.imageSource);
+        return (
+          <div
+            className="basket-card"
+            key={basketProduct.id}
+          >
+            <BasketCard
+              {...menuProduct}
+              imageSource={
+                menuProduct.imageSource
+                  ? menuProduct.imageSource
+                  : IMAGE_BY_DEFAULT
+              }
+              quantity={basketProduct.quantity}
+              onDelete={(event) => handleCardDelete(event, basketProduct.id)}
+              isClickable={isModeAdmin}
+              onClick={(event) => handleOnClick(menuProduct.id)}
+              // onClick={isModeAdmin ? () => handleProductSelected(basketProduct.id) : null}
+              // isSelected={checkIfProductIsClicked(basketProduct.id, productSelected.id)}
+            />
+          </div>
+        );
+      })}
     </BasketMainStyled>
-    // <BasketEmpty />
   );
 }
+//   return (
+//     <BasketMainStyled>
+//       {basketMenu.length === 0 && <BasketEmpty />}
+
+//       {Array.from(basketMenu).map(
+//         ({ id, title, imageSource, price, quantity }) => (
+//           <BasketCard
+//             key={Math.floor(Math.random() * 1000) + 1}
+//             id={id}
+//             // title={truncateString(title, 11)}
+//             title={title}
+//             price={formatPrice(price)}
+//             imgUrl={imageSource ? imageSource : IMAGE_BY_DEFAULT}
+//             quantity={quantity}
+//             onDelete={(event) => handleCardDelete(event, id)}
+//           />
+//         )
+//       )}
+//     </BasketMainStyled>
+//     // <BasketEmpty />
+//   );
+// }
 
 const BasketMainStyled = styled.div`
   height: 675px;
