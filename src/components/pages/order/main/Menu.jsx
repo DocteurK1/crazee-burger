@@ -24,8 +24,6 @@ export default function Menu() {
     productToEdit,
     setProductToEdit,
     isModeAdmin,
-    setIsCollapsed,
-    setCurrentTabSelected,
     setBasketMenu,
     basketMenu,
     handleProductSelected,

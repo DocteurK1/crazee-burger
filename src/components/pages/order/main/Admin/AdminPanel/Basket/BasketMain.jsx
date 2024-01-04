@@ -3,8 +3,7 @@ import styled from "styled-components";
 import BasketEmpty from "./BasketEmpty";
 import { theme } from "../../../../../../../theme";
 import BasketCard from "./BasketCard";
-import { formatPrice } from "../../../../../../../utils/maths";
-import { truncateString } from "../../../../../../../utils/truncateString";
+
 import OrderContext from "../../../../../../../context/OrderContext";
 import { findObjectById } from "../../../../../../../utils/array";
 
