@@ -6,7 +6,11 @@ import { theme } from "../../../theme/index.js";
 import OrderContext from "../../../context/OrderContext.js";
 import { fakeBasket } from "../../../fakeData/fakeBasket.js";
 import { EMPTY_PRODUCT } from "../../../enums/product.js";
-import { deepClone, findIndexById } from "../../../utils/array.js";
+import {
+  deepClone,
+  findIndexById,
+  findObjectById,
+} from "../../../utils/array.js";
 
 export default function OrderPage() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -20,6 +24,28 @@ export default function OrderPage() {
   const [basketMenu, setBasketMenu] = useState([]);
 
   // Comportements, les actions, la logique
+
+  const handleProductSelected = async (cardId) => {
+    // Find the selected card in the menu array
+    const selectedCard = findObjectById(cardId, menu);
+
+    if (selectedCard) {
+      // Update the productToEdit state with the selected card's information
+      setProductToEdit({
+        id: selectedCard.id,
+        title: selectedCard.title,
+        imageSource: selectedCard.imageSource,
+        price: selectedCard.price,
+      });
+
+      // await après avoir défini la function comme asynchrone avec async, veux dire que le reste du code s exécute juste quand celle ci est bien terminée
+      await setIsCollapsed(false);
+      await setCurrentTabSelected("edit");
+      // await titleEditRef.current.focus();
+
+      console.log("productToEdit : ", productToEdit);
+    }
+  };
 
   const handleAddProduct = (newProduct) => {
     console.log("test : ", newProduct);
@@ -71,6 +97,7 @@ export default function OrderPage() {
     handleEdit,
     basketMenu,
     setBasketMenu,
+    handleProductSelected,
   };
 
   // L’affichage, le render, via return

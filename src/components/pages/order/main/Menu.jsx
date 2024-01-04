@@ -28,6 +28,7 @@ export default function Menu() {
     setCurrentTabSelected,
     setBasketMenu,
     basketMenu,
+    handleProductSelected,
   } = useContext(OrderContext);
   const [defaultMenu] = useState(fakeMenu.LARGE);
 
@@ -52,29 +53,10 @@ export default function Menu() {
     setMenu(defaultMenu);
   };
 
-  const onCardSelect = async (cardId) => {
+  const onCardSelect = (cardId) => {
     // Si je fais ça et que la condition l'inqiue, alors le reste de la focntion n'est pas exécutée. (comme un if else en plus court)
     if (!isModeAdmin) return;
-
-    // Find the selected card in the menu array
-    const selectedCard = findObjectById(cardId, menu);
-
-    if (selectedCard) {
-      // Update the productToEdit state with the selected card's information
-      setProductToEdit({
-        id: selectedCard.id,
-        title: selectedCard.title,
-        imageSource: selectedCard.imageSource,
-        price: selectedCard.price,
-      });
-
-      // await après avoir défini la function comme asynchrone avec async, veux dire que le reste du code s exécute juste quand celle ci est bien terminée
-      await setIsCollapsed(false);
-      await setCurrentTabSelected("edit");
-      // await titleEditRef.current.focus();
-
-      console.log("productToEdit : ", productToEdit);
-    }
+    handleProductSelected(cardId);
   };
 
   const handleCardDelete = (event, idProductToDelete) => {
@@ -110,49 +92,6 @@ export default function Menu() {
     const newBasket = [newBasketProduct, ...basketCopy];
     setBasketMenu(newBasket);
   };
-
-  // const onAddToBasket = (id, title, price, imgUrl) => {
-  //   // console.log("id: ", id, title, price, imgUrl);
-  //   const basketCopy = deepClone(basketMenu);
-
-  //   const productToAddToBasket = findObjectById(id, menu);
-  //   console.log("productToAddToBasket", productToAddToBasket);
-
-  //   // if y'en a deja un, je change juste la qty, if y'en a a pas, j'en ajoute un.
-
-  //   const targetId = productToAddToBasket.id;
-  //   console.log("targetId", targetId);
-  //   const isItemAlreadyInBasket = findObjectById(targetId, basketMenu);
-
-  //   if (isItemAlreadyInBasket) {
-  //     // If an item with the same ID is found, do something
-  //     console.log("Item with the same ID found:", isItemAlreadyInBasket);
-  //     // Retrouve l'index du produit déjà ajouté
-  //     const indexOfBasketProductToIncrement = findIndexById(
-  //       targetId,
-  //       basketMenu
-  //     );
-
-  //     // Incrémente quantity de 1
-  //     basketCopy[indexOfBasketProductToIncrement].quantity += 1;
-
-  //     setBasketMenu(basketCopy);
-  //   } else {
-  //     // If no item with the same ID is found, do something else
-  //     console.log("No item with the same ID found");
-  //     if (productToAddToBasket) {
-  //       console.log("Object found:", productToAddToBasket);
-  //       const newBasketProduct = {
-  //         ...productToAddToBasket,
-  //         quantity: 1,
-  //       };
-  //       const basketUpdated = [newBasketProduct, ...basketCopy];
-  //       setBasketMenu(basketUpdated);
-  //     } else {
-  //       console.log("Object not found");
-  //     }
-  //   }
-  // };
 
   // Affichage
 

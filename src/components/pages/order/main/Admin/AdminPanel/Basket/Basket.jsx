@@ -4,20 +4,15 @@ import BasketHeader from "./BasketHeader";
 import BasketMain from "./BasketMain";
 import BasketFooter from "./BasketFooter";
 import OrderContext from "../../../../../../../context/OrderContext";
-import { formatPrice } from "../../../../../../../utils/maths";
-import { findObjectById } from "../../../../../../../utils/array";
+import {
+  calculateSumToPay,
+  formatPrice,
+} from "../../../../../../../utils/maths";
 
 export default function Basket() {
   const { basketMenu, menu } = useContext(OrderContext);
 
-  const sumToPay = basketMenu.reduce((total, basketProduct) => {
-    // if (isNaN(basketProduct.price)) return total;
-    const menuProduct = findObjectById(basketProduct.id, menu);
-    total += menuProduct.price * basketProduct.quantity;
-    console.log("basketProduct.price", basketProduct);
-    // console.log("basketProduct.quantity", basketProduct.quantity);
-    return total;
-  }, 0);
+  const sumToPay = calculateSumToPay(basketMenu, menu);
 
   return (
     <BasketStyled>

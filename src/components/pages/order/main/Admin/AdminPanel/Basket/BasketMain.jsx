@@ -13,8 +13,13 @@ const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 export default function BasketMain() {
   // State
 
-  const { basketMenu, setBasketMenu, menu, isModeAdmin } =
-    useContext(OrderContext);
+  const {
+    basketMenu,
+    setBasketMenu,
+    menu,
+    isModeAdmin,
+    handleProductSelected,
+  } = useContext(OrderContext);
 
   const handleDelete = (cardId) => {
     // Filter out the card with the given ID and update the state
@@ -31,12 +36,18 @@ export default function BasketMain() {
     handleDelete(idProductToDelete);
   };
 
+  const handleOnClick = (id) => {
+    if (!isModeAdmin) return;
+    handleProductSelected(id);
+  };
+
   // Comportements
 
   // Affichage
 
   return (
     <BasketMainStyled>
+      {basketMenu.length === 0 && <BasketEmpty />}
       {basketMenu.map((basketProduct) => {
         const menuProduct = findObjectById(basketProduct.id, menu);
         console.log("menuProduct", menuProduct.imageSource);
@@ -55,6 +66,7 @@ export default function BasketMain() {
               quantity={basketProduct.quantity}
               onDelete={(event) => handleCardDelete(event, basketProduct.id)}
               isClickable={isModeAdmin}
+              onClick={(event) => handleOnClick(menuProduct.id)}
               // onClick={isModeAdmin ? () => handleProductSelected(basketProduct.id) : null}
               // isSelected={checkIfProductIsClicked(basketProduct.id, productSelected.id)}
             />
