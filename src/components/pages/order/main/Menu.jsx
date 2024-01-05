@@ -36,7 +36,6 @@ export default function Menu() {
     // Filter out the card with the given ID and update the state
     const updatedMenu = menu.filter((card) => card.id !== cardId);
     setMenu(updatedMenu);
-    console.log("Menu Length : ", menu.length);
 
     // Delete Item from basket too
     const updatedBasketMenu = basketMenu.filter((card) => card.id !== cardId);
@@ -47,7 +46,6 @@ export default function Menu() {
   };
 
   const resetMenu = () => {
-    console.log("reset menu");
     setMenu(defaultMenu);
   };
 
@@ -67,7 +65,6 @@ export default function Menu() {
 
     const basketCopy = deepClone(basketMenu);
     const productAlreadyInBasket = findObjectById(id, basketCopy);
-    console.log("basketMenu", basketMenu);
     if (productAlreadyInBasket) {
       incrementProductAlreadyInBasket(id, basketCopy);
       return;
@@ -82,7 +79,6 @@ export default function Menu() {
   };
 
   const createNewBasketProduct = (id, basketCopy, setBasketMenu) => {
-    console.log("create", id);
     const newBasketProduct = {
       id: id,
       quantity: 1,

@@ -6,6 +6,7 @@ import { IoChevronForward } from "react-icons/io5";
 import TextInput from "../../reusable-ui/TextInput";
 import PrimaryButton from "../../reusable-ui/PrimaryButton";
 import { theme } from "../../../theme";
+import { createUser } from "../../../api/user";
 
 export default function LoginForm() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -18,6 +19,7 @@ export default function LoginForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     navigate("/order/" + value);
+    createUser(value);
     setValue("");
   };
 
@@ -30,7 +32,10 @@ export default function LoginForm() {
 
   return (
     <>
-      <LoginFormStyled action="submit" onSubmit={handleSubmit}>
+      <LoginFormStyled
+        action="submit"
+        onSubmit={handleSubmit}
+      >
         <div>
           <h1>Bienvenue chez nous !</h1>
           <hr />

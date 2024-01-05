@@ -24,13 +24,11 @@ export default function BasketMain() {
     // Filter out the card with the given ID and update the state
     // const updatedMenu = filter(cardId, basketMenu);
     const updatedMenu = basketMenu.filter((card) => card.id !== cardId);
-    console.log("basket menu: ", basketMenu[0].price);
 
     setBasketMenu(updatedMenu);
   };
 
   const handleCardDelete = (event, idProductToDelete) => {
-    // console.log("event", event.target.id);
     event.stopPropagation();
     handleDelete(idProductToDelete);
   };
@@ -49,7 +47,7 @@ export default function BasketMain() {
       {basketMenu.length === 0 && <BasketEmpty />}
       {basketMenu.map((basketProduct) => {
         const menuProduct = findObjectById(basketProduct.id, menu);
-        console.log("menuProduct", menuProduct.imageSource);
+
         return (
           <div
             className="basket-card"

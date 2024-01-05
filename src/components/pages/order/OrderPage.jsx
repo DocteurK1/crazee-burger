@@ -25,6 +25,7 @@ export default function OrderPage() {
   const [basketMenu, setBasketMenu] = useState([]);
 
   // Comportements, les actions, la logique
+  // Appel getUser pour
   getUser("Alex");
 
   const handleProductSelected = async (cardId) => {
@@ -43,14 +44,10 @@ export default function OrderPage() {
       // await après avoir défini la function comme asynchrone avec async, veux dire que le reste du code s exécute juste quand celle ci est bien terminée
       await setIsCollapsed(false);
       await setCurrentTabSelected("edit");
-      // await titleEditRef.current.focus();
-
-      console.log("productToEdit : ", productToEdit);
     }
   };
 
   const handleAddProduct = (newProduct) => {
-    console.log("test : ", newProduct);
     // Pour update un tableau, d'abord je le copie, je manipule la copie, puis j'envoi la copie au setter :
     // 1. Copie du tableau
     const menuCopy = [...menu];
@@ -60,8 +57,6 @@ export default function OrderPage() {
 
     // 3. Update du state via le setter
     setMenu(menuUpdated);
-
-    console.log("Menu Length : ", menu.length);
   };
 
   const handleEdit = (productBeingEdited) => {

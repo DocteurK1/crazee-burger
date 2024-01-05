@@ -7,7 +7,6 @@ export default function Profile() {
   // D’abord on définit les states de base (état, données, variable…)
   const params = useParams();
   const userName = params.userName;
-  // console.log("User name: ", userName);
 
   // Comportements, les actions, la logique
 

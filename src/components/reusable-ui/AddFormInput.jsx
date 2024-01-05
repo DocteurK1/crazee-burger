@@ -2,12 +2,15 @@ import styled from "styled-components";
 import { theme } from "../../theme";
 
 export default function AddFormInput({ value, onChange, Icon, ...extraProps }) {
-  //   console.log("extraProps", extraProps.placeholder);
-
   return (
     <InputStyled>
       {Icon && Icon}
-      <input value={value} onChange={onChange} type="text" {...extraProps} />
+      <input
+        value={value}
+        onChange={onChange}
+        type="text"
+        {...extraProps}
+      />
     </InputStyled>
   );
 }

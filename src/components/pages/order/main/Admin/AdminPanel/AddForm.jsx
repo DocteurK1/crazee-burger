@@ -21,7 +21,6 @@ export default function AddForm() {
     const newValue = event.target.value;
     const inputName = event.target.name;
     setnewProduct({ ...newProduct, [inputName]: newValue });
-    // console.log("newProduct", newProduct);
   };
 
   const onSubmit = (event) => {
@@ -53,7 +52,10 @@ export default function AddForm() {
     <AddFormStyled onSubmit={onSubmit}>
       <div className="img-holder">
         {newProduct.imageSource ? (
-          <img src={newProduct.imageSource} alt={newProduct.title} />
+          <img
+            src={newProduct.imageSource}
+            alt={newProduct.title}
+          />
         ) : (
           <div>Aucune image</div>
         )}
@@ -85,7 +87,10 @@ export default function AddForm() {
 
         {/* TO FIX: Refresh lorsque je submit ?! */}
 
-        <button className="submit-button" onClick={onSubmit}>
+        <button
+          className="submit-button"
+          onClick={onSubmit}
+        >
           Ajouter un nouveau produit au menu
         </button>
         {showSuccess && (
