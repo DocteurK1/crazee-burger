@@ -6,11 +6,11 @@ import { IoChevronForward } from "react-icons/io5";
 import TextInput from "../../reusable-ui/TextInput";
 import PrimaryButton from "../../reusable-ui/PrimaryButton";
 import { theme } from "../../../theme";
-import { createUser } from "../../../api/user";
+import { useUserLogic } from "../../../api/useUserLogic";
 
 export default function LoginForm() {
   // D’abord on définit les states de base (état, données, variable…)
-
+  const { getUser, createUser } = useUserLogic("exampleUserName");
   let [value, setValue] = useState("");
   const navigate = useNavigate();
 
@@ -19,7 +19,8 @@ export default function LoginForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     navigate("/order/" + value);
-    createUser(value);
+    // createUser(value);
+    getUser(value);
     setValue("");
   };
 

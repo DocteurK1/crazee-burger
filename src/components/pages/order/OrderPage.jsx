@@ -11,7 +11,6 @@ import {
   findIndexById,
   findObjectById,
 } from "../../../utils/array.js";
-import { getUser } from "../../../api/user.js";
 
 export default function OrderPage() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -26,7 +25,7 @@ export default function OrderPage() {
 
   // Comportements, les actions, la logique
   // Appel getUser pour
-  getUser("Alex");
+  // getUser("Alex");
 
   const handleProductSelected = async (cardId) => {
     // Find the selected card in the menu array
