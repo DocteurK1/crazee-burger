@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar/Navbar";
 import Main from "./main/Main.jsx";
 import styled from "styled-components";
@@ -11,6 +11,8 @@ import {
   findIndexById,
   findObjectById,
 } from "../../../utils/array.js";
+import { getMenu, syncBothMenus } from "../../../api/product.js";
+import { useParams } from "react-router-dom";
 
 export default function OrderPage() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -26,6 +28,9 @@ export default function OrderPage() {
   // Comportements, les actions, la logique
   // Appel getUser pour
   // getUser("Alex");
+
+  const params = useParams();
+  const userName = params.userName;
 
   const handleProductSelected = async (cardId) => {
     // Find the selected card in the menu array
@@ -56,6 +61,7 @@ export default function OrderPage() {
 
     // 3. Update du state via le setter
     setMenu(menuUpdated);
+    syncBothMenus(userName, menuUpdated);
   };
 
   const handleEdit = (productBeingEdited) => {
@@ -73,6 +79,16 @@ export default function OrderPage() {
     //3. update du state
     setMenu(menuCopy);
   };
+
+  const initialiseMenu = async () => {
+    const menuReceived = await getMenu(userName);
+    setMenu(menuReceived);
+    console.log("menuReceived", menuReceived);
+  };
+
+  useEffect(() => {
+    initialiseMenu();
+  }, []);
 
   const orderContextValue = {
     isModeAdmin,

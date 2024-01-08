@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { BsPersonCircle } from "react-icons/bs";
@@ -7,26 +7,30 @@ import TextInput from "../../reusable-ui/TextInput";
 import PrimaryButton from "../../reusable-ui/PrimaryButton";
 import { theme } from "../../../theme";
 import { useUserLogic } from "../../../api/useUserLogic";
+import OrderContext from "../../../context/OrderContext";
+import { syncBothMenus } from "../../../api/product";
 
 export default function LoginForm() {
   // D’abord on définit les states de base (état, données, variable…)
   const { getUser, createUser } = useUserLogic("exampleUserName");
-  let [value, setValue] = useState("");
+  // let [username, setUsername] = useState("");
   const navigate = useNavigate();
+
+  const [username, setUsername] = useState("");
 
   // Comportements, les actions, la logique
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigate("/order/" + value);
+    navigate("/order/" + username);
     // createUser(value);
-    getUser(value);
-    setValue("");
+    // getUser(username);
+    setUsername("");
   };
 
   const onChange = (event) => {
-    setValue(event.target.value);
-    // console.log("firstName value: ", value);
+    setUsername(event.target.value);
+    console.log("firstName value: ", username);
   };
 
   // L’affichage, le render, via return
@@ -43,7 +47,7 @@ export default function LoginForm() {
           <h2>Connectez-vous</h2>
         </div>
         <TextInput
-          value={value}
+          value={username}
           onChange={onChange}
           placeholder={"Entrez votre prénom"}
           required

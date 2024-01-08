@@ -13,6 +13,8 @@ import {
   findObjectById,
   findIndexById,
 } from "../../../../utils/array.js";
+import { syncBothMenus } from "../../../../api/product.js";
+import { useParams } from "react-router-dom";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
@@ -30,6 +32,9 @@ export default function Menu() {
   } = useContext(OrderContext);
   const [defaultMenu] = useState(fakeMenu.LARGE);
 
+  const params = useParams();
+  const userName = params.userName;
+
   // Comportements, les actions, la logique
 
   const handleDelete = (cardId) => {
@@ -40,6 +45,8 @@ export default function Menu() {
     // Delete Item from basket too
     const updatedBasketMenu = basketMenu.filter((card) => card.id !== cardId);
     setBasketMenu(updatedBasketMenu);
+
+    syncBothMenus(userName, updatedMenu);
 
     // This is to check if the product deleted is the one in the edit form, if it is, then setProductToEdit to empty, so it doesnt display the edit form anymore, as no product is selected.
     cardId === productToEdit.id && setProductToEdit(EMPTY_PRODUCT);
