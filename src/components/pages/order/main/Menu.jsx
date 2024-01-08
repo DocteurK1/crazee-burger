@@ -55,6 +55,7 @@ export default function Menu() {
 
   const resetMenu = () => {
     setMenu(defaultMenu);
+    syncBothMenus(userName, defaultMenu);
   };
 
   const onCardSelect = (cardId) => {

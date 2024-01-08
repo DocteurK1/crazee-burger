@@ -78,6 +78,7 @@ export default function OrderPage() {
 
     //3. update du state
     setMenu(menuCopy);
+    syncBothMenus(userName, menuCopy);
   };
 
   const initialiseMenu = async () => {
