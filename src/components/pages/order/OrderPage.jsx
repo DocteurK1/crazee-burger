@@ -21,7 +21,7 @@ export default function OrderPage() {
   const [isEditSelected, setIsEditSelected] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [currentTabSelected, setCurrentTabSelected] = useState("add");
-  const [menu, setMenu] = useState(fakeBasket.LARGE);
+  const [menu, setMenu] = useState();
   const [productToEdit, setProductToEdit] = useState(EMPTY_PRODUCT);
   const [basketMenu, setBasketMenu] = useState([]);
 

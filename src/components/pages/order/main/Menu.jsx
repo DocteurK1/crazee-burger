@@ -15,6 +15,7 @@ import {
 } from "../../../../utils/array.js";
 import { syncBothMenus } from "../../../../api/product.js";
 import { useParams } from "react-router-dom";
+import Loader from "../Loader.js";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
@@ -95,6 +96,8 @@ export default function Menu() {
   };
 
   // Affichage
+
+  if (menu === undefined) return <Loader />;
 
   return (
     <MenuStyled>
