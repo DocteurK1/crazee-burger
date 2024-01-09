@@ -14,6 +14,7 @@ import {
 import { getMenu, syncBothMenus } from "../../../api/product.js";
 import { useParams } from "react-router-dom";
 import { getLocalStorage } from "../../../utils/window.js";
+import { useInitUserSessions } from "../../../hooks/useInitUserSession.js";
 
 export default function OrderPage() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -82,25 +83,28 @@ export default function OrderPage() {
     syncBothMenus(userName, menuCopy);
   };
 
-  const initialiseMenu = async () => {
-    const menuReceived = await getMenu(userName);
-    setMenu(menuReceived);
-    console.log("menuReceived", menuReceived);
-  };
+  // const initialiseMenu = async () => {
+  //   const menuReceived = await getMenu(userName);
+  //   setMenu(menuReceived);
+  //   console.log("menuReceived", menuReceived);
+  // };
 
-  useEffect(() => {
-    initialiseMenu();
-  }, []);
+  // const initialiseBasket = () => {
+  //   const basketReceived = getLocalStorage(userName);
+  //   console.log("basketReceived", basketReceived);
+  //   setBasketMenu(basketReceived);
+  // };
 
-  const initialiseBasket = () => {
-    const basketReceived = getLocalStorage(userName);
-    console.log("basketReceived", basketReceived);
-    setBasketMenu(basketReceived);
-  };
+  // const initialiseUserSession = async () => {
+  //   await initialiseMenu();
+  //   initialiseBasket();
+  // };
 
-  useEffect(() => {
-    initialiseBasket();
-  }, []);
+  // useEffect(() => {
+  //   initialiseUserSession();
+  // }, []);
+
+  useInitUserSessions(userName, setBasketMenu, setMenu, basketMenu);
 
   const orderContextValue = {
     isModeAdmin,

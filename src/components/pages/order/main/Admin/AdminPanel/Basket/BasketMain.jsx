@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import BasketEmpty from "./BasketEmpty";
 import { theme } from "../../../../../../../theme";
@@ -6,6 +6,9 @@ import BasketCard from "./BasketCard";
 
 import OrderContext from "../../../../../../../context/OrderContext";
 import { findObjectById } from "../../../../../../../utils/array";
+import { setLocalStorage } from "../../../../../../../utils/window";
+import { useParams } from "react-router-dom";
+import { fakeBasket } from "../../../../../../../fakeData/fakeBasket";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
@@ -20,12 +23,16 @@ export default function BasketMain() {
     handleProductSelected,
   } = useContext(OrderContext);
 
+  const params = useParams();
+  const userName = params.userName;
+
   const handleDelete = (cardId) => {
     // Filter out the card with the given ID and update the state
     // const updatedMenu = filter(cardId, basketMenu);
-    const updatedMenu = basketMenu.filter((card) => card.id !== cardId);
+    const updatedBasketMenu = basketMenu.filter((card) => card.id !== cardId);
 
-    setBasketMenu(updatedMenu);
+    setBasketMenu(updatedBasketMenu);
+    setLocalStorage(userName, updatedBasketMenu);
   };
 
   const handleCardDelete = (event, idProductToDelete) => {
@@ -42,9 +49,20 @@ export default function BasketMain() {
 
   // Affichage
 
+  // if (!basketMenu) return console.log("basketMenu", basketMenu);
+
+  // const checkBasket = () => {
+  //   if (!basketMenu) {
+  //     setBasketMenu(fakeBasket.LARGE);
+  //     console.log("basketMenu ici", basketMenu);
+  //   }
+  // };
+
+  // checkBasket();
+
   return (
     <BasketMainStyled>
-      {basketMenu.length === 0 && <BasketEmpty />}
+      {basketMenu === 0 && <BasketEmpty />}
       {basketMenu.map((basketProduct) => {
         const menuProduct = findObjectById(basketProduct.id, menu);
 

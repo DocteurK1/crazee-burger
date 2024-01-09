@@ -10,6 +10,8 @@ import OrderContext from "../../../../../../../context/OrderContext";
 export default function BasketHeader({ amountToPay }) {
   const { basketMenu, menu } = useContext(OrderContext);
 
+  // if (!basketMenu) return <span>Test</span>;
+
   const sumToPay = calculateSumToPay(basketMenu, menu);
 
   return (

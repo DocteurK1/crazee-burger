@@ -49,6 +49,7 @@ export default function Menu() {
     setBasketMenu(updatedBasketMenu);
 
     syncBothMenus(userName, updatedMenu);
+    setLocalStorage(userName, updatedBasketMenu);
 
     // This is to check if the product deleted is the one in the edit form, if it is, then setProductToEdit to empty, so it doesnt display the edit form anymore, as no product is selected.
     cardId === productToEdit.id && setProductToEdit(EMPTY_PRODUCT);
