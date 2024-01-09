@@ -16,6 +16,7 @@ import {
 import { syncBothMenus } from "../../../../api/product.js";
 import { useParams } from "react-router-dom";
 import Loader from "../Loader.js";
+import { setLocalStorage } from "../../../../utils/window.js";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
@@ -85,6 +86,7 @@ export default function Menu() {
     const indexOfBasketProductToIncrement = findIndexById(id, basketCopy);
     basketCopy[indexOfBasketProductToIncrement].quantity += 1;
     setBasketMenu(basketCopy);
+    setLocalStorage(userName, basketCopy);
   };
 
   const createNewBasketProduct = (id, basketCopy, setBasketMenu) => {
@@ -94,6 +96,7 @@ export default function Menu() {
     };
     const newBasket = [newBasketProduct, ...basketCopy];
     setBasketMenu(newBasket);
+    setLocalStorage(userName, newBasket);
   };
 
   // Affichage
