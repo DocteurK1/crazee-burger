@@ -8,13 +8,14 @@ import {
   calculateSumToPay,
   formatPrice,
 } from "../../../../../../../utils/maths";
+import BasketLoading from "./BasketLoading";
 
 export default function Basket() {
   const { menu } = useContext(OrderContext);
 
   // const sumToPay = calculateSumToPay(basketMenu, menu);
 
-  if (menu === undefined) return <span>Chargement...</span>;
+  if (menu === undefined) return <BasketLoading />;
 
   return (
     <BasketStyled>
