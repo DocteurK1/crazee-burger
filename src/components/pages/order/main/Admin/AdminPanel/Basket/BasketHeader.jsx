@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { theme } from "../../../../../../../theme";
+import {
+  calculateSumToPay,
+  formatPrice,
+} from "../../../../../../../utils/maths";
+import OrderContext from "../../../../../../../context/OrderContext";
 
 export default function BasketHeader({ amountToPay }) {
+  const { basketMenu, menu } = useContext(OrderContext);
+
+  const sumToPay = calculateSumToPay(basketMenu, menu);
+
   return (
     <BasketHeaderStyled>
       <div>Total</div>
-      <div>{!amountToPay ? "0,00€" : amountToPay}</div>
+      <div>{!sumToPay ? "0,00€" : formatPrice(sumToPay)}</div>
     </BasketHeaderStyled>
   );
 }

@@ -13,6 +13,7 @@ import {
 } from "../../../utils/array.js";
 import { getMenu, syncBothMenus } from "../../../api/product.js";
 import { useParams } from "react-router-dom";
+import { getLocalStorage } from "../../../utils/window.js";
 
 export default function OrderPage() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -21,7 +22,7 @@ export default function OrderPage() {
   const [isEditSelected, setIsEditSelected] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [currentTabSelected, setCurrentTabSelected] = useState("add");
-  const [menu, setMenu] = useState();
+  const [menu, setMenu] = useState(undefined);
   const [productToEdit, setProductToEdit] = useState(EMPTY_PRODUCT);
   const [basketMenu, setBasketMenu] = useState([]);
 
@@ -89,6 +90,16 @@ export default function OrderPage() {
 
   useEffect(() => {
     initialiseMenu();
+  }, []);
+
+  const initialiseBasket = () => {
+    const basketReceived = getLocalStorage(userName);
+    console.log("basketReceived", basketReceived);
+    setBasketMenu(basketReceived);
+  };
+
+  useEffect(() => {
+    initialiseBasket();
   }, []);
 
   const orderContextValue = {

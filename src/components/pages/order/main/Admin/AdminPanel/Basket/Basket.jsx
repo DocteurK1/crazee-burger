@@ -10,13 +10,16 @@ import {
 } from "../../../../../../../utils/maths";
 
 export default function Basket() {
-  const { basketMenu, menu } = useContext(OrderContext);
+  const { menu } = useContext(OrderContext);
 
-  const sumToPay = calculateSumToPay(basketMenu, menu);
+  // const sumToPay = calculateSumToPay(basketMenu, menu);
+
+  if (menu === undefined) return <span>Chargement...</span>;
 
   return (
     <BasketStyled>
-      <BasketHeader amountToPay={formatPrice(sumToPay)} />
+      <BasketHeader />
+      {/* <BasketHeader amountToPay={formatPrice(sumToPay)} /> */}
       <BasketMain />
       <BasketFooter />
     </BasketStyled>
