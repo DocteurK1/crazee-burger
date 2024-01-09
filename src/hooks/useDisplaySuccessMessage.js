@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const useDisplaySuccessMessage = (displayTime = 5000) => {
+export const useDisplaySuccessMessage = (displayTime = 2000) => {
   // State
   const [showSuccess, setShowSuccess] = useState(false);
 
