@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { theme } from "../../../../../../../theme";
+import CasinoEffect from "../../../../../../reusable-ui/CasinoEffect";
 
 export default function BasketHeader({ amountToPay }) {
   return (
     <BasketHeaderStyled>
       <div>Total</div>
-      <div>{!amountToPay ? "0,00€" : amountToPay}</div>
+      <div>{!amountToPay ? "0,00€" : <CasinoEffect count={amountToPay} />}</div>
     </BasketHeaderStyled>
   );
 }
