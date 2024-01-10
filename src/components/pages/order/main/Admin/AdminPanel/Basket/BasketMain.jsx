@@ -73,28 +73,8 @@ export default function BasketMain() {
     </BasketMainStyled>
   );
 }
-//   return (
-//     <BasketMainStyled>
-//       {basketMenu.length === 0 && <BasketEmpty />}
 
-//       {Array.from(basketMenu).map(
-//         ({ id, title, imageSource, price, quantity }) => (
-//           <BasketCard
-//             key={Math.floor(Math.random() * 1000) + 1}
-//             id={id}
-//             // title={truncateString(title, 11)}
-//             title={title}
-//             price={formatPrice(price)}
-//             imgUrl={imageSource ? imageSource : IMAGE_BY_DEFAULT}
-//             quantity={quantity}
-//             onDelete={(event) => handleCardDelete(event, id)}
-//           />
-//         )
-//       )}
-//     </BasketMainStyled>
-//     // <BasketEmpty />
-//   );
-// }
+//
 
 const BasketMainStyled = styled.div`
   height: 675px;
@@ -107,4 +87,90 @@ const BasketMainStyled = styled.div`
   flex-direction: column;
   align-items: center;
   /* overflow: hidden; */
+
+  /* .abricot-appear {
+    .pomme {
+      transform: translateX(100px);
+      opacity: 0%;
+    }
+  }
+  .abricot-appear-active {
+    .pomme {
+      transition: 0.5s;
+      transform: translateX(0px);
+      opacity: 100%;
+    }
+  }
+
+  .abricot-enter {
+    .pomme {
+      transform: translateX(100px);
+      opacity: 0%;
+    }
+  }
+  .abricot-enter-active {
+    .pomme {
+      transition: 0.5s;
+      transform: translateX(0px);
+      opacity: 100%;
+    }
+  }
+
+  .abricot-exit {
+    .pomme {
+      transform: translateX(0px);
+      opacity: 100%;
+    }
+  }
+  .abricot-exit-active {
+    .pomme {
+      transform: translateX(-100px);
+      opacity: 0%;
+      transition: 0.5s;
+    }
+  } */
 `;
+
+// return (
+//   <BasketMainStyled>
+//     <TransitionGroup>
+//       {basketMenu.length === 0 && <BasketEmpty />}
+//       {basketMenu.map((basketProduct) => {
+//         const menuProduct = findObjectById(basketProduct.id, menu);
+
+//         return (
+//           <CSSTransition
+//             appear={true}
+//             classNames={"abricot"}
+//             key={basketProduct.id}
+//             timeout={500}
+//           >
+//             <div
+//               className="basket-card"
+//               key={basketProduct.id}
+//             >
+//               <BasketCard
+//                 {...menuProduct}
+//                 imageSource={
+//                   menuProduct.imageSource
+//                     ? menuProduct.imageSource
+//                     : IMAGE_BY_DEFAULT
+//                 }
+//                 quantity={basketProduct.quantity}
+//                 onDelete={(event) =>
+//                   handleCardDelete(event, basketProduct.id)
+//                 }
+//                 isClickable={isModeAdmin}
+//                 onClick={(event) => handleOnClick(menuProduct.id)}
+//                 className={"pomme"}
+//                 // onClick={isModeAdmin ? () => handleProductSelected(basketProduct.id) : null}
+//                 // isSelected={checkIfProductIsClicked(basketProduct.id, productSelected.id)}
+//               />
+//             </div>
+//           </CSSTransition>
+//         );
+//       })}
+//     </TransitionGroup>
+//   </BasketMainStyled>
+// );
+// }
