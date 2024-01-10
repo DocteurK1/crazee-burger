@@ -23,9 +23,7 @@ export default function Card({
   // Comportements, les actions, la logique
 
   const handleCardClick = (event) => {
-    // console.log("click: ", event.target.value);
     onCardSelect(id);
-    console.log("Id card", id);
   };
 
   const handleAddToBasketClick = () => {

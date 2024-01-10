@@ -2,12 +2,14 @@ import styled from "styled-components";
 import { theme } from "../../theme";
 
 export default function TextInput({ value, onChange, Icon, ...extraProps }) {
-  //   console.log("extraProps", extraProps.placeholder);
-
   return (
     <InputStyled>
       {Icon && Icon}
-      <input onChange={onChange} type="text" {...extraProps} />
+      <input
+        onChange={onChange}
+        type="text"
+        {...extraProps}
+      />
     </InputStyled>
   );
 }

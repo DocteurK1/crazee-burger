@@ -13,6 +13,9 @@ import {
   findObjectById,
   findIndexById,
 } from "../../../../utils/array.js";
+import { syncBothMenus } from "../../../../api/product.js";
+import { useParams } from "react-router-dom";
+import Loader from "../Loader.js";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
@@ -30,25 +33,29 @@ export default function Menu() {
   } = useContext(OrderContext);
   const [defaultMenu] = useState(fakeMenu.LARGE);
 
+  const params = useParams();
+  const userName = params.userName;
+
   // Comportements, les actions, la logique
 
   const handleDelete = (cardId) => {
     // Filter out the card with the given ID and update the state
     const updatedMenu = menu.filter((card) => card.id !== cardId);
     setMenu(updatedMenu);
-    console.log("Menu Length : ", menu.length);
 
     // Delete Item from basket too
     const updatedBasketMenu = basketMenu.filter((card) => card.id !== cardId);
     setBasketMenu(updatedBasketMenu);
+
+    syncBothMenus(userName, updatedMenu);
 
     // This is to check if the product deleted is the one in the edit form, if it is, then setProductToEdit to empty, so it doesnt display the edit form anymore, as no product is selected.
     cardId === productToEdit.id && setProductToEdit(EMPTY_PRODUCT);
   };
 
   const resetMenu = () => {
-    console.log("reset menu");
     setMenu(defaultMenu);
+    syncBothMenus(userName, defaultMenu);
   };
 
   const onCardSelect = (cardId) => {
@@ -67,7 +74,6 @@ export default function Menu() {
 
     const basketCopy = deepClone(basketMenu);
     const productAlreadyInBasket = findObjectById(id, basketCopy);
-    console.log("basketMenu", basketMenu);
     if (productAlreadyInBasket) {
       incrementProductAlreadyInBasket(id, basketCopy);
       return;
@@ -82,7 +88,6 @@ export default function Menu() {
   };
 
   const createNewBasketProduct = (id, basketCopy, setBasketMenu) => {
-    console.log("create", id);
     const newBasketProduct = {
       id: id,
       quantity: 1,
@@ -92,6 +97,8 @@ export default function Menu() {
   };
 
   // Affichage
+
+  if (menu === undefined) return <Loader />;
 
   return (
     <MenuStyled>

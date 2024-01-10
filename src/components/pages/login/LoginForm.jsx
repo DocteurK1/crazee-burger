@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { BsPersonCircle } from "react-icons/bs";
@@ -6,38 +6,48 @@ import { IoChevronForward } from "react-icons/io5";
 import TextInput from "../../reusable-ui/TextInput";
 import PrimaryButton from "../../reusable-ui/PrimaryButton";
 import { theme } from "../../../theme";
+import { useUserLogic } from "../../../api/useUserLogic";
+import OrderContext from "../../../context/OrderContext";
+import { syncBothMenus } from "../../../api/product";
 
 export default function LoginForm() {
   // D’abord on définit les states de base (état, données, variable…)
-
-  let [value, setValue] = useState("");
+  const { getUser, createUser } = useUserLogic("exampleUserName");
+  // let [username, setUsername] = useState("");
   const navigate = useNavigate();
+
+  const [username, setUsername] = useState("");
 
   // Comportements, les actions, la logique
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigate("/order/" + value);
-    setValue("");
+    navigate("/order/" + username);
+    // createUser(value);
+    // getUser(username);
+    setUsername("");
   };
 
   const onChange = (event) => {
-    setValue(event.target.value);
-    // console.log("firstName value: ", value);
+    setUsername(event.target.value);
+    console.log("firstName value: ", username);
   };
 
   // L’affichage, le render, via return
 
   return (
     <>
-      <LoginFormStyled action="submit" onSubmit={handleSubmit}>
+      <LoginFormStyled
+        action="submit"
+        onSubmit={handleSubmit}
+      >
         <div>
           <h1>Bienvenue chez nous !</h1>
           <hr />
           <h2>Connectez-vous</h2>
         </div>
         <TextInput
-          value={value}
+          value={username}
           onChange={onChange}
           placeholder={"Entrez votre prénom"}
           required

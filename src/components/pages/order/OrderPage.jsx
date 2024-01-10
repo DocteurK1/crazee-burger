@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar/Navbar";
 import Main from "./main/Main.jsx";
 import styled from "styled-components";
@@ -11,6 +11,8 @@ import {
   findIndexById,
   findObjectById,
 } from "../../../utils/array.js";
+import { getMenu, syncBothMenus } from "../../../api/product.js";
+import { useParams } from "react-router-dom";
 
 export default function OrderPage() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -19,11 +21,16 @@ export default function OrderPage() {
   const [isEditSelected, setIsEditSelected] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [currentTabSelected, setCurrentTabSelected] = useState("add");
-  const [menu, setMenu] = useState(fakeBasket.LARGE);
+  const [menu, setMenu] = useState();
   const [productToEdit, setProductToEdit] = useState(EMPTY_PRODUCT);
   const [basketMenu, setBasketMenu] = useState([]);
 
   // Comportements, les actions, la logique
+  // Appel getUser pour
+  // getUser("Alex");
+
+  const params = useParams();
+  const userName = params.userName;
 
   const handleProductSelected = async (cardId) => {
     // Find the selected card in the menu array
@@ -41,14 +48,10 @@ export default function OrderPage() {
       // await après avoir défini la function comme asynchrone avec async, veux dire que le reste du code s exécute juste quand celle ci est bien terminée
       await setIsCollapsed(false);
       await setCurrentTabSelected("edit");
-      // await titleEditRef.current.focus();
-
-      console.log("productToEdit : ", productToEdit);
     }
   };
 
   const handleAddProduct = (newProduct) => {
-    console.log("test : ", newProduct);
     // Pour update un tableau, d'abord je le copie, je manipule la copie, puis j'envoi la copie au setter :
     // 1. Copie du tableau
     const menuCopy = [...menu];
@@ -58,8 +61,7 @@ export default function OrderPage() {
 
     // 3. Update du state via le setter
     setMenu(menuUpdated);
-
-    console.log("Menu Length : ", menu.length);
+    syncBothMenus(userName, menuUpdated);
   };
 
   const handleEdit = (productBeingEdited) => {
@@ -76,7 +78,18 @@ export default function OrderPage() {
 
     //3. update du state
     setMenu(menuCopy);
+    syncBothMenus(userName, menuCopy);
   };
+
+  const initialiseMenu = async () => {
+    const menuReceived = await getMenu(userName);
+    setMenu(menuReceived);
+    console.log("menuReceived", menuReceived);
+  };
+
+  useEffect(() => {
+    initialiseMenu();
+  }, []);
 
   const orderContextValue = {
     isModeAdmin,
