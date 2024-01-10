@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import OrderContext from "../../../../../../context/OrderContext";
 import styled from "styled-components";
 import { FaHamburger } from "react-icons/fa";
@@ -6,12 +6,21 @@ import { BsFillCameraFill } from "react-icons/bs";
 import { MdOutlineEuro } from "react-icons/md";
 import AddFormInput from "../../../../../reusable-ui/AddFormInput";
 import EditInfoMessage from "./EditInfoMessage";
+import SavingMessage from "./SavingMessage";
+import { useDisplaySuccessMessage } from "../../../../../../hooks/useDisplaySuccessMessage";
 
 export default function EditForm() {
   // State
 
   const { productToEdit, setProductToEdit, handleEdit } =
     useContext(OrderContext);
+
+  const [valueOnFocusTitle, setValueOnFocusTitle] = useState();
+  const [valueOnFocusImg, setValueOnFocusImg] = useState();
+  const [valueOnFocusPrice, setValueOnFocusPrice] = useState();
+
+  const { showSuccess: isSaved, displaySuccessMessage } =
+    useDisplaySuccessMessage(2000);
 
   // Comportements
 
@@ -23,6 +32,42 @@ export default function EditForm() {
     };
     setProductToEdit(productBeingEdited); // Cette ligne update le formulaire
     handleEdit(productBeingEdited); // Cette ligne update le menu
+  };
+
+  const handleOnFocusTitle = (event) => {
+    const inputValueOnFocus = event.target.value;
+    setValueOnFocusTitle(inputValueOnFocus);
+  };
+
+  const handleOnFocusImg = (event) => {
+    const inputValueOnFocus = event.target.value;
+    setValueOnFocusImg(inputValueOnFocus);
+  };
+
+  const handleOnFocusPrice = (event) => {
+    const inputValueOnFocus = event.target.value;
+    setValueOnFocusPrice(inputValueOnFocus);
+  };
+
+  const handleOnBlurTitle = (event) => {
+    const valueOnBlur = event.target.value;
+    if (valueOnFocusTitle !== valueOnBlur) {
+      displaySuccessMessage();
+    }
+  };
+
+  const handleOnBlurImg = (event) => {
+    const valueOnBlur = event.target.value;
+    if (valueOnFocusImg !== valueOnBlur) {
+      displaySuccessMessage();
+    }
+  };
+
+  const handleOnBlurPrice = (event) => {
+    const valueOnBlur = event.target.value;
+    if (valueOnFocusPrice !== valueOnBlur) {
+      displaySuccessMessage();
+    }
   };
 
   // Affichage
@@ -46,11 +91,15 @@ export default function EditForm() {
           onChange={handleChange}
           placeholder={"Produit (ex: Super Burger)"}
           Icon={<FaHamburger className="icon" />}
+          onFocus={handleOnFocusTitle}
+          onBlur={handleOnBlurTitle}
         />
         <AddFormInput
           name="imageSource"
           value={productToEdit.imageSource}
           onChange={handleChange}
+          onFocus={handleOnFocusImg}
+          onBlur={handleOnBlurImg}
           placeholder={
             "Lien URL d'une image (ex: https://la-photo-de-mon-produit.png)"
           }
@@ -60,10 +109,12 @@ export default function EditForm() {
           name="price"
           value={productToEdit.price}
           onChange={handleChange}
+          onFocus={handleOnFocusPrice}
+          onBlur={handleOnBlurPrice}
           placeholder={"Prix"}
           Icon={<MdOutlineEuro className="icon" />}
         />
-        <EditInfoMessage />
+        {isSaved ? <SavingMessage /> : <EditInfoMessage />}
       </div>
     </AddFormStyled>
   );
