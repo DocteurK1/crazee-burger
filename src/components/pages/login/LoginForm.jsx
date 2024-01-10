@@ -26,6 +26,7 @@ export default function LoginForm() {
     // createUser(value);
     // getUser(username);
     setUsername("");
+    getUser(username);
   };
 
   const onChange = (event) => {

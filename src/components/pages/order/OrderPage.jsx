@@ -13,6 +13,7 @@ import {
 } from "../../../utils/array.js";
 import { getMenu, syncBothMenus } from "../../../api/product.js";
 import { useParams } from "react-router-dom";
+import { fakeMenu } from "../../../fakeData/fakeMenu.js";
 
 export default function OrderPage() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -82,9 +83,15 @@ export default function OrderPage() {
   };
 
   const initialiseMenu = async () => {
-    const menuReceived = await getMenu(userName);
-    setMenu(menuReceived);
+    const menuReceived = await getMenu(userName, setMenu);
+    if (menuReceived === undefined) {
+      setMenu(fakeMenu.LARGE);
+      return;
+    }
+    await setMenu(menuReceived);
     console.log("menuReceived", menuReceived);
+
+    // getMenu(userName);
   };
 
   useEffect(() => {
