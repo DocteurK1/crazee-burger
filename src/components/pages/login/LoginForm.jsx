@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { BsPersonCircle } from "react-icons/bs";
@@ -7,12 +7,10 @@ import TextInput from "../../reusable-ui/TextInput";
 import PrimaryButton from "../../reusable-ui/PrimaryButton";
 import { theme } from "../../../theme";
 import { useUserLogic } from "../../../api/useUserLogic";
-import OrderContext from "../../../context/OrderContext";
-import { syncBothMenus } from "../../../api/product";
 
 export default function LoginForm() {
   // D’abord on définit les states de base (état, données, variable…)
-  const { getUser, createUser } = useUserLogic("exampleUserName");
+  const { getUser } = useUserLogic("exampleUserName");
   // let [username, setUsername] = useState("");
   const navigate = useNavigate();
 

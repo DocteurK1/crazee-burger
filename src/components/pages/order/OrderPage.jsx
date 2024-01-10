@@ -4,7 +4,6 @@ import Main from "./main/Main.jsx";
 import styled from "styled-components";
 import { theme } from "../../../theme/index.js";
 import OrderContext from "../../../context/OrderContext.js";
-import { fakeBasket } from "../../../fakeData/fakeBasket.js";
 import { EMPTY_PRODUCT } from "../../../enums/product.js";
 import {
   deepClone,

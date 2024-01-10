@@ -1,7 +1,5 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "./firebase-config";
-import { useContext } from "react";
-import OrderContext from "../context/OrderContext";
 import { fakeMenu } from "../fakeData/fakeMenu";
 
 // const { setMenu, menu } = useContext(OrderContext);
