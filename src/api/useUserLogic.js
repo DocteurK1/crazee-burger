@@ -28,7 +28,7 @@ export const useUserLogic = (userName) => {
     const docRef = doc(db, "users", userName);
     const userData = {
       username: userName,
-      menu: fakeMenu.SMALL,
+      menu: fakeMenu.LARGE,
     };
     await setMenu(userData);
     console.log("menu", menu);
