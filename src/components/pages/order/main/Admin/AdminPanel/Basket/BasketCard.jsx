@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { theme } from "../../../../../../../theme";
 import { formatPrice } from "../../../../../../../utils/maths";
+import { fadeInFromRight } from "../../../../../../../theme/animations";
 
 export default function BasketCard({
   id,
@@ -97,7 +98,7 @@ const BasketCardStyled = styled.div`
   }
 
   .quantity {
-    /* background: blue; */
+    background: blue;
     display: flex;
     justify-content: center;
     align-items: center;

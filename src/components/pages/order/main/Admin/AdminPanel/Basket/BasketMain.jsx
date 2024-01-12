@@ -7,6 +7,7 @@ import BasketCard from "./BasketCard";
 import OrderContext from "../../../../../../../context/OrderContext";
 import { findObjectById } from "../../../../../../../utils/array";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { basketAnimation } from "../../../../../../../theme/animations";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
@@ -53,9 +54,9 @@ export default function BasketMain() {
           return (
             <CSSTransition
               appear={true}
-              classNames={"abricot"}
+              classNames={"animation-basket"}
               key={basketProduct.id}
-              timeout={500}
+              timeout={300}
             >
               <div
                 className="basket-card"
@@ -102,47 +103,7 @@ const BasketMainStyled = styled.div`
   align-items: center;
   /* overflow: hidden; */
 
-  .abricot-appear {
-    /* .pomme { */
-    transform: translateX(100px);
-    opacity: 0%;
-    /* } */
-  }
-  .abricot-appear-active {
-    /* .pomme { */
-    transition: 0.5s;
-    transform: translateX(0px);
-    opacity: 100%;
-    /* } */
-  }
-
-  .abricot-enter {
-    /* .pomme { */
-    transform: translateX(100px);
-    opacity: 0%;
-    /* } */
-  }
-  .abricot-enter-active {
-    /* .pomme { */
-    transition: 0.5s;
-    transform: translateX(0px);
-    opacity: 100%;
-    /* } */
-  }
-
-  .abricot-exit {
-    /* .pomme { */
-    transform: translateX(0px);
-    opacity: 100%;
-    /* } */
-  }
-  .abricot-exit-active {
-    /* .pomme { */
-    transform: translateX(-100px);
-    opacity: 0%;
-    transition: 0.5s;
-    /* } */
-  }
+  ${basketAnimation}
 `;
 
 // return (
