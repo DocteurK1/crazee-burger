@@ -9,6 +9,7 @@ export default function BasketEmpty() {
 const BasketEmptyStyled = styled.div`
   /* border: 2px solid blue; */
   display: flex;
+  flex: 1;
   align-items: center;
   justify-content: center;
   height: 100%;

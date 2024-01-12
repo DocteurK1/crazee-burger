@@ -6,6 +6,7 @@ import BasketCard from "./BasketCard";
 
 import OrderContext from "../../../../../../../context/OrderContext";
 import { findObjectById } from "../../../../../../../utils/array";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
@@ -45,31 +46,44 @@ export default function BasketMain() {
   return (
     <BasketMainStyled>
       {basketMenu.length === 0 && <BasketEmpty />}
-      {basketMenu.map((basketProduct) => {
-        const menuProduct = findObjectById(basketProduct.id, menu);
+      <TransitionGroup>
+        {basketMenu.map((basketProduct) => {
+          const menuProduct = findObjectById(basketProduct.id, menu);
 
-        return (
-          <div
-            className="basket-card"
-            key={basketProduct.id}
-          >
-            <BasketCard
-              {...menuProduct}
-              imageSource={
-                menuProduct.imageSource
-                  ? menuProduct.imageSource
-                  : IMAGE_BY_DEFAULT
-              }
-              quantity={basketProduct.quantity}
-              onDelete={(event) => handleCardDelete(event, basketProduct.id)}
-              isClickable={isModeAdmin}
-              onClick={(event) => handleOnClick(menuProduct.id)}
-              // onClick={isModeAdmin ? () => handleProductSelected(basketProduct.id) : null}
-              // isSelected={checkIfProductIsClicked(basketProduct.id, productSelected.id)}
-            />
-          </div>
-        );
-      })}
+          return (
+            <CSSTransition
+              appear={true}
+              classNames={"abricot"}
+              key={basketProduct.id}
+              timeout={500}
+            >
+              <div
+                className="basket-card"
+                // key={basketProduct.id}
+              >
+                <BasketCard
+                  className={"pomme"}
+                  {...menuProduct}
+                  imageSource={
+                    menuProduct.imageSource
+                      ? menuProduct.imageSource
+                      : IMAGE_BY_DEFAULT
+                  }
+                  quantity={basketProduct.quantity}
+                  onDelete={(event) =>
+                    handleCardDelete(event, basketProduct.id)
+                  }
+                  isClickable={isModeAdmin}
+                  onClick={(event) => handleOnClick(menuProduct.id)}
+                  // className={"pomme"}
+                  // onClick={isModeAdmin ? () => handleProductSelected(basketProduct.id) : null}
+                  // isSelected={checkIfProductIsClicked(basketProduct.id, productSelected.id)}
+                />
+              </div>
+            </CSSTransition>
+          );
+        })}
+      </TransitionGroup>
     </BasketMainStyled>
   );
 }
@@ -88,47 +102,47 @@ const BasketMainStyled = styled.div`
   align-items: center;
   /* overflow: hidden; */
 
-  /* .abricot-appear {
-    .pomme {
-      transform: translateX(100px);
-      opacity: 0%;
-    }
+  .abricot-appear {
+    /* .pomme { */
+    transform: translateX(100px);
+    opacity: 0%;
+    /* } */
   }
   .abricot-appear-active {
-    .pomme {
-      transition: 0.5s;
-      transform: translateX(0px);
-      opacity: 100%;
-    }
+    /* .pomme { */
+    transition: 0.5s;
+    transform: translateX(0px);
+    opacity: 100%;
+    /* } */
   }
 
   .abricot-enter {
-    .pomme {
-      transform: translateX(100px);
-      opacity: 0%;
-    }
+    /* .pomme { */
+    transform: translateX(100px);
+    opacity: 0%;
+    /* } */
   }
   .abricot-enter-active {
-    .pomme {
-      transition: 0.5s;
-      transform: translateX(0px);
-      opacity: 100%;
-    }
+    /* .pomme { */
+    transition: 0.5s;
+    transform: translateX(0px);
+    opacity: 100%;
+    /* } */
   }
 
   .abricot-exit {
-    .pomme {
-      transform: translateX(0px);
-      opacity: 100%;
-    }
+    /* .pomme { */
+    transform: translateX(0px);
+    opacity: 100%;
+    /* } */
   }
   .abricot-exit-active {
-    .pomme {
-      transform: translateX(-100px);
-      opacity: 0%;
-      transition: 0.5s;
-    }
-  } */
+    /* .pomme { */
+    transform: translateX(-100px);
+    opacity: 0%;
+    transition: 0.5s;
+    /* } */
+  }
 `;
 
 // return (

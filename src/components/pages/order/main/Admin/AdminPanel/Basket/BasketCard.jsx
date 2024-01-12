@@ -48,6 +48,7 @@ const BasketCardStyled = styled.div`
   position: relative;
   padding-left: 16px;
   padding-bottom: 8px;
+  /* border: 1px solid red; */
 
   .img {
     display: flex;
