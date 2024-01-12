@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { theme } from "../../../../../../../theme";
 import { formatPrice } from "../../../../../../../utils/maths";
 import { fadeInFromRight } from "../../../../../../../theme/animations";
+import CasinoEffect from "../../../../../../reusable-ui/CasinoEffect";
 
 export default function BasketCard({
   id,
@@ -29,7 +30,7 @@ export default function BasketCard({
         onClick={onDelete}
         id={id}
       >
-        x {quantity}
+        <CasinoEffect count={`x ${quantity}`} />
       </button>
     </BasketCardStyled>
   );
