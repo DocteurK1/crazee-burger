@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { theme } from "../../../../theme";
 import Basket from "./Admin/AdminPanel/Basket/Basket";
 import Menu from "./Menu";
 import Admin from "./Admin/Admin";
 import OrderContext from "../../../../context/OrderContext";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { adminAnimation } from "../../../../theme/animations";
 
 export default function Main() {
   // D’abord on définit les states de base (état, données, variable…)
@@ -22,7 +24,17 @@ export default function Main() {
       </div>
       <div className="menu-and-admin">
         <Menu />
-        {isModeAdmin && <Admin />}
+        {isModeAdmin && (
+          <TransitionGroup className="transition-group">
+            <CSSTransition
+              appear={true}
+              classNames="admin"
+              timeout={500}
+            >
+              <Admin />
+            </CSSTransition>
+          </TransitionGroup>
+        )}
         {/* Similaire à : {isModeAdmin ? <Admin /> : null}  */}
       </div>
     </StyledMain>
@@ -36,9 +48,6 @@ const StyledMain = styled.div`
 
   width: 1400px;
   height: calc(95vh - 10vh);
-
-  /* border: 2px solid green; */
-
   box-shadow: 0px 8px 20px 8px rgba(0, 0, 0, 0.2) inset;
   border-bottom-right-radius: ${theme.borderRadius.extraRound};
   border-bottom-left-radius: ${theme.borderRadius.extraRound};
@@ -47,11 +56,6 @@ const StyledMain = styled.div`
   grid-template-columns: 25% 1fr; // A réactiver quand on se servira du basket
   //grid-template-columns: 1fr; // A desactiver quand on se servira du basket
 
-  .basket {
-    /* background: pink; */
-    /* border: 2px solid pink; */
-  }
-
   .menu-and-admin {
     position: relative;
     overflow-y: hidden;
@@ -59,4 +63,16 @@ const StyledMain = styled.div`
     border-bottom-left-radius: ${theme.borderRadius.extraRound};
     border-bottom-right-radius: ${theme.borderRadius.extraRound};
   }
+
+  /* .admin-appear {
+    opacity: 0.1;
+    transform: translateY(100%);
+    &.admin-appear-active {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 500ms;
+    }
+  } */
+
+  ${adminAnimation}
 `;

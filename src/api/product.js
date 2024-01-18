@@ -1,7 +1,10 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "./firebase-config";
+import { fakeMenu } from "../fakeData/fakeMenu";
 
-export const syncBothMenus = (userId, menuUpdated) => {
+// const { setMenu, menu } = useContext(OrderContext);
+
+export const syncBothMenus = (userId, menuUpdated, setMenu) => {
   const cachette = doc(db, "users", userId);
 
   const nouritture = {
@@ -12,12 +15,17 @@ export const syncBothMenus = (userId, menuUpdated) => {
   setDoc(cachette, nouritture);
 };
 
-export const getMenu = async (userId) => {
+export const getMenu = async (userId, setMenu) => {
   const docRef = doc(db, "users", userId);
 
   const docSnapshot = await getDoc(docRef);
+
   if (docSnapshot.exists()) {
+    console.log("docSnapshot.data", docSnapshot.data);
     const { menu } = docSnapshot.data();
     return menu;
+  } else {
+    console.log("no spanshot");
+    setMenu(fakeMenu.LARGE);
   }
 };

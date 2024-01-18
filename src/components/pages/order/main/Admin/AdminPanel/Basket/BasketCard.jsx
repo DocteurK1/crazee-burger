@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { theme } from "../../../../../../../theme";
 import { formatPrice } from "../../../../../../../utils/maths";
+import { fadeInFromRight } from "../../../../../../../theme/animations";
+import CasinoEffect from "../../../../../../reusable-ui/CasinoEffect";
 
 export default function BasketCard({
   id,
@@ -28,7 +30,7 @@ export default function BasketCard({
         onClick={onDelete}
         id={id}
       >
-        x {quantity}
+        <CasinoEffect count={`x ${quantity}`} />
       </button>
     </BasketCardStyled>
   );
@@ -48,6 +50,7 @@ const BasketCardStyled = styled.div`
   position: relative;
   padding-left: 16px;
   padding-bottom: 8px;
+  /* border: 1px solid red; */
 
   .img {
     display: flex;
@@ -96,7 +99,7 @@ const BasketCardStyled = styled.div`
   }
 
   .quantity {
-    /* background: blue; */
+    background: blue;
     display: flex;
     justify-content: center;
     align-items: center;

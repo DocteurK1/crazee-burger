@@ -16,7 +16,7 @@ export const useUserLogic = (userName) => {
       const userMenu = userReceived.menu;
       console.log("L'user existe: ", userReceived);
       console.log("menu de l'utilisateur existant:", userMenu);
-      setMenu(fakeMenu.SMALL);
+      setMenu(userMenu);
       console.log("menu", menu);
     } else {
       console.log("l user n'existe pas, je créé l'user:", userName);
@@ -24,13 +24,14 @@ export const useUserLogic = (userName) => {
     }
   };
 
-  const createUser = (userName) => {
+  const createUser = async (userName) => {
     const docRef = doc(db, "users", userName);
     const userData = {
       username: userName,
-      menu: fakeMenu.SMALL,
+      menu: fakeMenu.LARGE,
     };
-
+    await setMenu(userData);
+    console.log("menu", menu);
     setDoc(docRef, userData);
   };
 

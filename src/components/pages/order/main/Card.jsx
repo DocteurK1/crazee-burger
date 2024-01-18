@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import { theme } from "../../../../theme";
 import { TiDelete } from "react-icons/ti";
 import OrderContext from "../../../../context/OrderContext";
+import { fadeInFromRight } from "../../../../theme/animations";
 // import { isStr } from "react-toastify/dist/utils";
 
 export default function Card({
@@ -98,6 +99,7 @@ const CardStyled = styled.div`
     width: 30px;
     color: #ffa01b;
     cursor: pointer;
+    animation: ${fadeInFromRight} ${theme.animations.speed.slow} ease-out;
 
     :hover {
       color: red;

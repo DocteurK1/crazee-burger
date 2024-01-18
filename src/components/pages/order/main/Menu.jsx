@@ -16,6 +16,8 @@ import {
 import { syncBothMenus } from "../../../../api/product.js";
 import { useParams } from "react-router-dom";
 import Loader from "../Loader.js";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { menuAnimation } from "../../../../theme/animations.js";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
@@ -101,25 +103,34 @@ export default function Menu() {
   if (menu === undefined) return <Loader />;
 
   return (
-    <MenuStyled>
+    <TransitionGroup
+      component={MenuStyled}
+      className="menu"
+    >
       {menu.length === 0 && <EmptyMenu resetMenu={resetMenu} />}
 
       {menu.map(({ id, title, imageSource, price }) => (
-        <Card
+        <CSSTransition
+          classNames={"menu-animation"}
           key={id}
-          id={id}
-          imgUrl={imageSource ? imageSource : IMAGE_BY_DEFAULT}
-          title={truncateString(title, 11)}
-          price={formatPrice(price)}
-          onDelete={(event) => handleCardDelete(event, id)}
-          onCardSelect={onCardSelect}
-          isHoverable={isModeAdmin}
-          isSelected={checkIfProductisClicked(id, productToEdit.id)}
-          onAddToBasket={onAddToBasket}
-          // onCardDelete={{} => handleCardDelete(id)}
-        />
+          timeout={300}
+        >
+          <Card
+            key={id}
+            id={id}
+            imgUrl={imageSource ? imageSource : IMAGE_BY_DEFAULT}
+            title={truncateString(title, 11)}
+            price={formatPrice(price)}
+            onDelete={(event) => handleCardDelete(event, id)}
+            onCardSelect={onCardSelect}
+            isHoverable={isModeAdmin}
+            isSelected={checkIfProductisClicked(id, productToEdit.id)}
+            onAddToBasket={onAddToBasket}
+            // onCardDelete={{} => handleCardDelete(id)}
+          />
+        </CSSTransition>
       ))}
-    </MenuStyled>
+    </TransitionGroup>
   );
 }
 
@@ -139,4 +150,5 @@ const MenuStyled = styled.div`
   justify-items: center;
   /* align-content: space-evenly; */
   /* align-items: center; */
+  ${menuAnimation}
 `;
