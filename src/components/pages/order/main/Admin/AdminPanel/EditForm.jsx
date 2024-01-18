@@ -20,7 +20,7 @@ export default function EditForm() {
   const [valueOnFocusPrice, setValueOnFocusPrice] = useState();
 
   const { showSuccess: isSaved, displaySuccessMessage } =
-    useDisplaySuccessMessage(2000);
+    useDisplaySuccessMessage();
 
   // Comportements
 
